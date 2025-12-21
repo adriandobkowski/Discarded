@@ -7,7 +7,9 @@ import { Status } from '../../../types';
   template: `
     <div>
       <img [src]="src()" alt="Profile Image" />
-      <div [attr.status]="status()"></div>
+      @if (status()) {
+        <div [attr.status]="status()"></div>
+      }
     </div>
   `,
   styleUrl: './profile-image.scss',
