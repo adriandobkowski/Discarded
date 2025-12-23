@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "alex_dev",
+      "status": "online",
+      "img": "https://i.pravatar.cc/150?img=1"
+    },
+    {
+      "id": "2",
+      "username": "sarah_code",
+      "status": "online",
+      "img": "https://i.pravatar.cc/150?img=2"
+    },
+    {
+      "id": "3",
+      "username": "john_builder",
+      "status": "busy",
+      "img": "https://i.pravatar.cc/150?img=3"
+    },
+    {
+      "id": "4",
+      "username": "emma_design",
+      "status": "offline",
+      "img": "https://i.pravatar.cc/150?img=4"
+    },
+    {
+      "id": "5",
+      "username": "mike_fullstack",
+      "status": "online",
+      "img": "https://i.pravatar.cc/150?img=5"
+    },
+    {
+      "id": "6",
+      "username": "lisa_backend",
+      "status": "busy",
+      "img": "https://i.pravatar.cc/150?img=6"
+    }
+  ],
+  "chats": [],
+  "channels": [],
+  "messages": []
+}
