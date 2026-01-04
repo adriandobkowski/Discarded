@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { signal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, House } from 'lucide-angular';
-
+import { LucideAngularModule, House, Plus, X, Camera } from 'lucide-angular';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 interface ChannelProps {
   id: string;
   img?: string;
@@ -13,10 +14,10 @@ interface ChannelProps {
 @Component({
   selector: 'app-channel-section',
   standalone: true,
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, LucideAngularModule, ReactiveFormsModule],
   template: `
     <section
-      class="w-16 h-full bg-slate-950 flex flex-col items-center gap-2 py-3 border-r border-slate-700 overflow-y-auto"
+      class="w-16 h-full fixed top-10  bg-slate-950 flex flex-col items-center gap-2 py-3 overflow-y-auto"
     >
       <a
         [routerLink]="['/']"
@@ -51,6 +52,41 @@ interface ChannelProps {
             </div>
           </a>
         }
+        <button
+          class="flex flex-col items-center justify-center w-12 h-12 rounded-full bg-slate-700 hover:bg-blue-600 transition-all cursor-pointer group"
+          (click)="createChannelClicked = !createChannelClicked"
+        >
+          <lucide-icon [img]="Plus" class="w-8 h-8 rounded-full object-cover" />
+        </button>
+
+        @if (createChannelClicked) {
+          <div class="modal-overlay">
+            <form [formGroup]="channelForm" class="modal-content">
+              <nav class="modal-header">
+                <h1 class="text-xl font-bold text-white">Personalise your own channel</h1>
+                <button type="button" (click)="createChannelClicked = false" class="modal-close">
+                  <lucide-icon [img]="X" class="w-5 h-5" />
+                </button>
+              </nav>
+              <div class="modal-body">
+                <div class="upload-section">
+                  <input type="file" id="file-input" class="hidden" />
+                  <label for="file-input" class="upload-label">
+                    <lucide-icon [img]="Camera" class="w-8 h-8" />
+                    <div>Upload Image</div>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label for="name" class="form-label">Server name</label>
+                  <input type="text" id="name" formControlName="name" class="form-input" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn-primary">Create</button>
+              </div>
+            </form>
+          </div>
+        }
       </div>
     </section>
   `,
@@ -58,5 +94,18 @@ interface ChannelProps {
 })
 export class ChannelSection {
   readonly House = House;
+  readonly Plus = Plus;
+  readonly X = X;
+  readonly Camera = Camera;
+
   channels = signal<ChannelProps[]>([]);
+
+  createChannelClicked: boolean = false;
+
+  channelForm = new FormGroup({
+    img: new FormControl<string | null>(null),
+    name: new FormControl<string>('', {
+      validators: [Validators.required],
+    }),
+  });
 }

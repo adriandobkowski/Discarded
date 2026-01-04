@@ -4,40 +4,137 @@
       "id": "1",
       "username": "alex_dev",
       "status": "online",
-      "img": "https://i.pravatar.cc/150?img=1"
+      "img": "https://i.pravatar.cc/150?img=1",
+      "createdAt": "2025-01-01T10:00:00Z"
     },
     {
       "id": "2",
       "username": "sarah_code",
       "status": "online",
-      "img": "https://i.pravatar.cc/150?img=2"
+      "img": "https://i.pravatar.cc/150?img=2",
+      "createdAt": "2025-01-02T11:30:00Z"
     },
     {
       "id": "3",
       "username": "john_builder",
       "status": "busy",
-      "img": "https://i.pravatar.cc/150?img=3"
+      "img": "https://i.pravatar.cc/150?img=3",
+      "createdAt": "2025-01-03T14:15:00Z"
     },
     {
       "id": "4",
       "username": "emma_design",
       "status": "offline",
-      "img": "https://i.pravatar.cc/150?img=4"
+      "img": "https://i.pravatar.cc/150?img=4",
+      "createdAt": "2025-01-04T09:45:00Z"
     },
     {
       "id": "5",
       "username": "mike_fullstack",
       "status": "online",
-      "img": "https://i.pravatar.cc/150?img=5"
+      "img": "https://i.pravatar.cc/150?img=5",
+      "createdAt": "2025-01-05T13:20:00Z"
     },
     {
       "id": "6",
       "username": "lisa_backend",
       "status": "busy",
-      "img": "https://i.pravatar.cc/150?img=6"
+      "img": "https://i.pravatar.cc/150?img=6",
+      "createdAt": "2025-01-06T16:00:00Z"
     }
   ],
-  "chats": [],
-  "channels": [],
-  "messages": []
+  "messages": [
+    {
+      "id": "msg1",
+      "userId": "1",
+      "message": "Hey, how's the project going?",
+      "createdAt": "2025-01-03T10:30:00Z"
+    },
+    {
+      "id": "msg2",
+      "userId": "2",
+      "message": "Going well! Just finished the API integration",
+      "createdAt": "2025-01-03T10:45:00Z"
+    },
+    {
+      "id": "msg3",
+      "userId": "1",
+      "message": "That's great! Ready for deployment?",
+      "createdAt": "2025-01-03T11:00:00Z"
+    },
+    {
+      "id": "msg4",
+      "userId": "3",
+      "message": "I'll start the testing phase tomorrow",
+      "createdAt": "2025-01-03T15:20:00Z"
+    },
+    {
+      "id": "msg5",
+      "userId": "5",
+      "message": "Don't forget about the database migration",
+      "createdAt": "2025-01-04T09:30:00Z"
+    }
+  ],
+  "chats": [
+    {
+      "id": "chat1",
+      "name": "General Discussion",
+      "messages": ["msg1", "msg2", "msg3"]
+    },
+    {
+      "id": "chat2",
+      "name": "Project Updates",
+      "messages": ["msg4", "msg5"]
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch1",
+      "name": "Development",
+      "img": "https://i.pravatar.cc/150?img=10",
+      "rooms": [
+        {
+          "name": "general",
+          "messages": ["msg1", "msg2", "msg3"]
+        },
+        {
+          "name": "announcements",
+          "messages": ["msg4"]
+        }
+      ],
+      "users": ["1", "2", "3", "5"]
+    },
+    {
+      "id": "ch2",
+      "name": "Design",
+      "img": "https://i.pravatar.cc/150?img=11",
+      "rooms": [
+        {
+          "name": "ui-ux",
+          "messages": []
+        },
+        {
+          "name": "assets",
+          "messages": []
+        }
+      ],
+      "users": ["4", "2"]
+    },
+    {
+      "id": "ch3",
+      "name": "Backend",
+      "img": "https://i.pravatar.cc/150?img=12",
+      "rooms": [
+        {
+          "name": "database",
+          "messages": ["msg5"]
+        },
+        {
+          "name": "api",
+          "messages": []
+        }
+      ],
+      "users": ["3", "5", "6"]
+    }
+  ]
 }

@@ -1,29 +1,38 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { LucideAngularModule, Inbox } from 'lucide-angular';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { LucideAngularModule, Inbox, ContactRound, Settings } from 'lucide-angular';
+import { map } from 'rxjs';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [RouterLink, LucideAngularModule],
   template: `
     <nav class="bg-slate-950 w-full h-12 flex items-center justify-between px-6">
-      <div class="flex items-center gap-4">
-        <img src="" alt="" class="w-10 h-10 rounded-full bg-slate-700" />
-        <div class="text-white font-semibold text-lg">test</div>
-      </div>
+      @if (!id()) {
+        <div class="flex flex-1 items-center gap-4 justify-center">
+          <lucide-icon [img]="ContactRound" class="w-10 h-10 text-white rounded-full" />
+          <div class="text-white font-semibold text-lg">Friends</div>
+        </div>
+      } @else {}
 
       <div class="relative">
         <button
           (click)="inboxActive = !inboxActive"
-          class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+          class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors font-medium relative group"
         >
           <lucide-icon [img]="Inbox" class="w-5 h-5" />
-          <span>Inbox</span>
           @if (friendRequests && friendRequests > 0) {
-            <span class="ml-2 px-2 py-1 bg-red-600 rounded-full text-xs font-bold">
+            <span class="ml-2 px-2 py-1 bg-red-600 rounded-full text-xs font-bold text-white">
               {{ friendRequests }}
             </span>
           }
+          <div
+            class="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block bg-slate-900 text-white text-sm px-2 py-1 rounded whitespace-nowrap border border-slate-600"
+          >
+            Inbox
+          </div>
         </button>
 
         @if (inboxActive) {
@@ -73,7 +82,12 @@ import { LucideAngularModule, Inbox } from 'lucide-angular';
 })
 export class Navbar {
   readonly Inbox = Inbox;
+  readonly ContactRound = ContactRound;
+  readonly Settings = Settings;
   activeElement: string = '';
   inboxActive: boolean = false;
   friendRequests: number | null = null;
+  private route = inject(ActivatedRoute);
+
+  id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
 }

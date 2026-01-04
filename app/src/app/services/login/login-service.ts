@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserProps } from '../../types';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { url } from '../../../api';
 
 interface LoginProps {
@@ -14,7 +14,7 @@ interface LoginProps {
 })
 export class LoginService {
   http = inject(HttpClient);
-  login(userInfo: LoginProps): Observable<HttpResponse<UserProps>> {
-    return this.http.post(`${url}/login`, { ...userInfo });
+  login(userInfo: LoginProps): Observable<UserProps> {
+    return this.http.post<UserProps>(`${url}/login`, { ...userInfo });
   }
 }
