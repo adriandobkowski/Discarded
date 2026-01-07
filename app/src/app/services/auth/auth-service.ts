@@ -41,6 +41,7 @@ export class AuthService {
               friends: [],
               channels: [],
               chats: [],
+              img: '',
               createdAt: new Date(),
             },
             {
@@ -57,11 +58,9 @@ export class AuthService {
   login(user: LoginProps): Observable<UserProps> {
     return this.http.post<LoginResponse>(`${url}/login`, user).pipe(
       tap((response) => {
-        console.log(response);
-        // if (body) {
-        //   console.log(body);
-        //   this.token.set(body.accessToken);
-        // }
+        if (response.accessToken) {
+          this.token.set(response.accessToken);
+        }
       }),
       switchMap(() => {
         return this.http.get<UserProps[]>(`${url}/users?email=${user.email}`);
@@ -71,14 +70,12 @@ export class AuthService {
           ...users[0],
           status: 'online',
         };
-
-        this.user.set(currentUser);
+        console.log(currentUser);
         return currentUser;
       }),
     );
   }
   logout() {
     this.token.set(null);
-    this.user.set(null);
   }
 }

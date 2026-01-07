@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ChannelSection } from '../../section/channel-section/channel-section';
 import { ChatSection } from '../../section/chat-section/chat-section';
 import { Navbar } from '../../navbar/navbar/navbar';
@@ -6,13 +6,13 @@ import { Message } from '../../main/message/message';
 import { ProfileFooter } from '../../footer/profile-footer/profile-footer';
 import { ChatNavbar } from '../../navbar/chat-navbar/chat-navbar';
 import { MessageFooter } from '../../footer/message-footer/message-footer';
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { ChannelAside } from '../../aside/channel-aside/channel-aside';
 import { ChatAside } from '../../aside/chat-aside/chat-aside';
 import { RootAside } from '../../aside/root-aside/root-aside';
-import { UserService } from '../../../services/user/user-service';
-import { UserProps } from '../../../types';
-
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs';
+import { AuthService } from '../../../services/auth/auth-service';
 @Component({
   selector: 'app-root-layout',
   imports: [
@@ -56,7 +56,7 @@ import { UserProps } from '../../../types';
         </div>
       </div>
       <div class="flex w-48">
-        <app-profile-footer />
+        <app-profile-footer [user]="user" />
       </div>
     </div>
   `,
@@ -64,8 +64,19 @@ import { UserProps } from '../../../types';
 })
 export class RootLayout {
   private router = inject(Router);
-  private userService = inject(UserService);
-  users: UserProps[] = [];
+  private authService = inject(AuthService);
+
+  user = this.authService.user()!;
+
+  routerUrl = toSignal(
+    this.router.events.pipe(
+      filter((e) => e instanceof NavigationEnd),
+      map(() => this.router.url),
+    ),
+    { initialValue: this.router.url },
+  );
+
+  currentRoute = computed(() => this.routerUrl());
 
   isChat(): boolean {
     return this.router.url.startsWith('/chats');

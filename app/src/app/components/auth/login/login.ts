@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth-service';
-import { LoginProps } from '../../../types';
-import { RouterLink } from '@angular/router';
+import { LoginProps, UserProps } from '../../../types';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -73,17 +73,15 @@ export class Login {
       validators: [Validators.required],
     }),
   });
+  private router = inject(Router);
   private authService = inject(AuthService);
-  // onSubmit(): void {
-  //   if (this.loginForm.valid) {
-  //     this.authService.login(this.loginForm.getRawValue() as LoginProps);
-  //   }
-  // }
+
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.getRawValue() as LoginProps).subscribe({
-        next: (res) => {
-          console.log('Zalogowano pomyślnie!', res);
+        next: (response: UserProps) => {
+          this.authService.user.set(response);
+          this.router.navigate(['/']);
         },
         error: (err) => {
           console.log(err);

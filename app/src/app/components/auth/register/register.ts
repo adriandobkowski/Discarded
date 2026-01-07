@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth-service';
 import { LoginProps, UserProps } from '../../../types';
 
@@ -85,14 +85,16 @@ export class Register {
     }),
   });
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.authService
         .register(this.registerForm.getRawValue() as UserProps & LoginProps)
         .subscribe({
-          next: (res) => {
-            console.log(res);
+          next: () => {
+            this.registerForm.reset();
+            this.router.navigate(['/login']);
           },
           error: (err) => {
             console.log(err);

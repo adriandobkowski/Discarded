@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { UserProps } from '../../../types';
 import {
@@ -19,13 +19,13 @@ import { RouterLink } from '@angular/router';
     <footer class="absolute left-0 bottom-0 bg-slate-900 border-t border-slate-700 z-50 p-4 w-64">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3 flex-1 min-w-0">
-          <!-- <app-profile-image [src]="user.img" /> -->
+          <app-profile-image [src]="user()?.img" [status]="user()?.status" />
           <div class="flex-1 min-w-0">
             <div class="font-semibold text-white text-sm truncate">
-              {{ user.username }}
+              {{ user()?.username }}
             </div>
             <div class="text-xs text-slate-400 truncate">
-              {{ user.status }}
+              {{ user()?.status }}
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export class ProfileFooter {
   readonly HeadphoneOff = HeadphoneOff;
   readonly MicOff = MicOff;
 
-  user!: UserProps;
+  user = input<UserProps>();
   microphoneActive: boolean = true;
   headphonesActive: boolean = true;
 }

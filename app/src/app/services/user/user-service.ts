@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
-import { UserProps } from '../../types';
+import { Status, UserProps } from '../../types';
 import { url } from '../../../api';
 @Injectable({
   providedIn: 'root',
@@ -13,10 +13,10 @@ export class UserService {
     return this.http.get<UserProps>(`${url}/${id}`, { observe: 'response' });
   }
 
-  findFriends(id: string): Observable<UserProps[]> {
+  findFriends(id: string, status: Status | null): Observable<UserProps[]> {
     return this.http.get<UserProps>(`${url}/users/${id}`).pipe(
       switchMap((user) =>
-        this.http.get<UserProps[]>(`${url}/users`, {
+        this.http.get<UserProps[]>(`${url}/users?${status ? 'status=' + status : ''}`, {
           params: { id: user.friends },
         }),
       ),
