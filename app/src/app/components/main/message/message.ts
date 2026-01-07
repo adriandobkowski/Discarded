@@ -27,11 +27,11 @@ import { MessageProps } from '../../../types';
           >
             <div class="flex gap-4">
               <div class="flex-shrink-0">
-                <app-profile-image [src]="message.user.img" />
+                <!-- <app-profile-image [src]="message.user.img" /> -->
               </div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-baseline gap-2 mb-1">
-                  <span class="font-semibold text-white text-sm">{{ message.user.username }}</span>
+                  <!-- <span class="font-semibold text-white text-sm">{{ message.user.username }}</span> -->
                   <span
                     class="text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity"
                   >

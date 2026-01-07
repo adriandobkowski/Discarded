@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
-import { signal } from '@angular/core';
 import { Status, UserProps } from '../../../types';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ContactRound, Plus } from 'lucide-angular';
@@ -82,7 +81,7 @@ export class ChatSection {
 
   isOpen = this.addFriendService.isOpen;
 
-  chats = signal<ChatProps[]>([]);
+  chats = input<ChatProps[]>([]);
 
   isArray = Array.isArray;
 }

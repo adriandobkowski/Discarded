@@ -3,6 +3,7 @@ import { Search as SearchIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-search',
+  standalone: true,
   imports: [LucideAngularModule],
   template: `
     <div class="relative px-2">

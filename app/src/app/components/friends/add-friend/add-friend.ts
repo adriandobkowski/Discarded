@@ -6,6 +6,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { AddFriendService } from '../../../services/friends/add-friend-service';
 @Component({
   selector: 'app-add-friend',
+  standalone: true,
   imports: [ProfileImage, LucideAngularModule],
   template: `
     <div class="modal-overlay">

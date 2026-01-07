@@ -9,6 +9,9 @@ import { MessageFooter } from '../../footer/message-footer/message-footer';
 import { Router, RouterOutlet } from '@angular/router';
 import { ChannelAside } from '../../aside/channel-aside/channel-aside';
 import { ChatAside } from '../../aside/chat-aside/chat-aside';
+import { RootAside } from '../../aside/root-aside/root-aside';
+import { UserService } from '../../../services/user/user-service';
+import { UserProps } from '../../../types';
 
 @Component({
   selector: 'app-root-layout',
@@ -23,6 +26,7 @@ import { ChatAside } from '../../aside/chat-aside/chat-aside';
     MessageFooter,
     ChannelAside,
     ChatAside,
+    RootAside,
   ],
   template: `
     <div class="w-screen h-screen flex flex-col bg-slate-900">
@@ -41,14 +45,15 @@ import { ChatAside } from '../../aside/chat-aside/chat-aside';
                 <app-message-footer />
               }
             </main>
+            @if (isChannel() && !isChat()) {
+              <app-channel-aside />
+            } @else if (isChat() && !isChannel()) {
+              <app-chat-aside />
+            } @else {
+              <app-root-aside />
+            }
           </div>
         </div>
-        @if (isChannel()) {
-          <app-channel-aside />
-        }
-        @if (isChat()) {
-          <app-chat-aside />
-        }
       </div>
       <div class="flex w-48">
         <app-profile-footer />
@@ -59,6 +64,9 @@ import { ChatAside } from '../../aside/chat-aside/chat-aside';
 })
 export class RootLayout {
   private router = inject(Router);
+  private userService = inject(UserService);
+  users: UserProps[] = [];
+
   isChat(): boolean {
     return this.router.url.startsWith('/chats');
   }

@@ -82,6 +82,7 @@ export class ProfileFooter {
   readonly Headphones = Headphones;
   readonly HeadphoneOff = HeadphoneOff;
   readonly MicOff = MicOff;
+
   user!: UserProps;
   microphoneActive: boolean = true;
   headphonesActive: boolean = true;
