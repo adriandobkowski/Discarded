@@ -4,8 +4,11 @@ export interface UserProps {
   id: string;
   img?: string;
   username: string;
+  email: string;
   status: Status;
   friends: string[];
+  chats: string[];
+  channels: string[];
   createdAt: Date;
 }
 export interface LoginProps {
@@ -23,12 +26,23 @@ export interface MessageProps {
   createdAt: Date;
 }
 export interface RoomProps {
+  id: string;
   name: string;
   messages: MessageProps[];
 }
 export interface ChannelProps {
+  id: string;
   img?: string;
   name: string;
-  rooms: RoomProps[];
+  rooms: string[];
   userIds: string[];
+}
+export interface ChatProps {
+  id: string;
+  userIds: string[];
+  messages: MessageProps[];
+}
+export interface ExtendedChatProps {
+  user: UserProps;
+  chatId: string;
 }

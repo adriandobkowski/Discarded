@@ -8,45 +8,8 @@
       "img": "https://randomuser.me/api/portraits/men/1.jpg",
       "status": "online",
       "friends": ["2", "3"],
-      "channels": [
-        {
-          "name": "General",
-          "rooms": [
-            {
-              "name": "announcements",
-              "messages": [
-                {
-                  "id": "msg1",
-                  "userId": "1",
-                  "message": "Welcome to the channel!",
-                  "createdAt": "2026-01-06T21:12:50.555Z"
-                }
-              ]
-            }
-          ],
-          "userIds": ["1", "2", "3"]
-        }
-      ],
-      "chats": [
-        {
-          "id": "chat1",
-          "userId": "2",
-          "messages": [
-            {
-              "id": "msg1",
-              "userId": "1",
-              "message": "Hey, how are you?",
-              "createdAt": "2026-01-06T22:00:00.000Z"
-            },
-            {
-              "id": "msg2",
-              "userId": "2",
-              "message": "I'm doing great!",
-              "createdAt": "2026-01-06T22:05:00.000Z"
-            }
-          ]
-        }
-      ],
+      "channels": ["1"],
+      "chats": ["chat1"],
       "createdAt": "2026-01-06T21:12:50.555Z"
     },
     {
@@ -57,71 +20,8 @@
       "img": "https://randomuser.me/api/portraits/men/2.jpg",
       "status": "online",
       "friends": ["1", "4"],
-      "channels": [
-        {
-          "name": "General",
-          "rooms": [
-            {
-              "name": "announcements",
-              "messages": []
-            }
-          ],
-          "userIds": ["1", "2", "3"]
-        },
-        {
-          "name": "Development",
-          "rooms": [
-            {
-              "name": "frontend",
-              "messages": [
-                {
-                  "id": "msg1",
-                  "userId": "2",
-                  "message": "Who's working on the UI?",
-                  "createdAt": "2026-01-07T10:30:00.000Z"
-                }
-              ]
-            },
-            {
-              "name": "backend",
-              "messages": []
-            }
-          ],
-          "userIds": ["2", "4"]
-        }
-      ],
-      "chats": [
-        {
-          "id": "chat1",
-          "userId": "1",
-          "messages": [
-            {
-              "id": "msg1",
-              "userId": "2",
-              "message": "Hey!",
-              "createdAt": "2026-01-06T22:05:00.000Z"
-            }
-          ]
-        },
-        {
-          "id": "chat2",
-          "userId": "4",
-          "messages": [
-            {
-              "id": "msg1",
-              "userId": "2",
-              "message": "Let's grab coffee?",
-              "createdAt": "2026-01-07T14:00:00.000Z"
-            },
-            {
-              "id": "msg2",
-              "userId": "4",
-              "message": "Sure! When?",
-              "createdAt": "2026-01-07T14:05:00.000Z"
-            }
-          ]
-        }
-      ],
+      "channels": ["1", "2"],
+      "chats": ["chat1", "chat2"],
       "createdAt": "2026-01-07T19:07:53.686Z"
     },
     {
@@ -132,18 +32,7 @@
       "username": "adi1234",
       "status": "offline",
       "friends": ["1"],
-      "channels": [
-        {
-          "name": "General",
-          "rooms": [
-            {
-              "name": "announcements",
-              "messages": []
-            }
-          ],
-          "userIds": ["1", "2", "3"]
-        }
-      ],
+      "channels": ["1"],
       "chats": [],
       "createdAt": "2026-01-07T19:19:14.432Z"
     },
@@ -152,46 +41,11 @@
       "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
       "id": 4,
       "img": "https://randomuser.me/api/portraits/men/3.jpg",
-      "username": "adi12345",
+      "username": "adi1234567",
       "status": "busy",
       "friends": ["2"],
-      "channels": [
-        {
-          "name": "Development",
-          "rooms": [
-            {
-              "name": "frontend",
-              "messages": []
-            },
-            {
-              "name": "backend",
-              "messages": [
-                {
-                  "id": "msg1",
-                  "userId": "4",
-                  "message": "API is ready for testing",
-                  "createdAt": "2026-01-07T13:00:00.000Z"
-                }
-              ]
-            }
-          ],
-          "userIds": ["2", "4"]
-        }
-      ],
-      "chats": [
-        {
-          "id": "chat1",
-          "userId": "2",
-          "messages": [
-            {
-              "id": "msg1",
-              "userId": "4",
-              "message": "Sure! Let's meet at 3 PM",
-              "createdAt": "2026-01-07T14:05:00.000Z"
-            }
-          ]
-        }
-      ],
+      "channels": ["2"],
+      "chats": ["chat1"],
       "createdAt": "2026-01-07T19:20:52.639Z"
     },
     {
@@ -202,39 +56,8 @@
       "username": "johndoe",
       "status": "online",
       "friends": ["6", "7"],
-      "channels": [
-        {
-          "name": "Marketing",
-          "rooms": [
-            {
-              "name": "campaigns",
-              "messages": [
-                {
-                  "id": "msg1",
-                  "userId": "5",
-                  "message": "New campaign launched!",
-                  "createdAt": "2026-01-07T08:00:00.000Z"
-                }
-              ]
-            }
-          ],
-          "userIds": ["5", "6"]
-        }
-      ],
-      "chats": [
-        {
-          "id": "chat1",
-          "userId": "6",
-          "messages": [
-            {
-              "id": "msg1",
-              "userId": "5",
-              "message": "Did you see the metrics?",
-              "createdAt": "2026-01-07T15:00:00.000Z"
-            }
-          ]
-        }
-      ],
+      "channels": ["3"],
+      "chats": ["chat1"],
       "createdAt": "2026-01-07T08:00:00.000Z"
     },
     {
@@ -245,32 +68,8 @@
       "username": "janesmith",
       "status": "online",
       "friends": ["5"],
-      "channels": [
-        {
-          "name": "Marketing",
-          "rooms": [
-            {
-              "name": "campaigns",
-              "messages": []
-            }
-          ],
-          "userIds": ["5", "6"]
-        }
-      ],
-      "chats": [
-        {
-          "id": "chat1",
-          "userId": "5",
-          "messages": [
-            {
-              "id": "msg1",
-              "userId": "6",
-              "message": "Yes! They're great",
-              "createdAt": "2026-01-07T15:05:00.000Z"
-            }
-          ]
-        }
-      ],
+      "channels": ["3"],
+      "chats": ["chat1"],
       "createdAt": "2026-01-07T09:00:00.000Z"
     },
     {
@@ -284,6 +83,117 @@
       "channels": [],
       "chats": [],
       "createdAt": "2026-01-07T10:00:00.000Z"
+    }
+  ],
+  "channels": [
+    {
+      "id": "1",
+      "name": "General",
+      "img": "https://randomuser.me/api/portraits/men/10.jpg",
+      "rooms": ["room1"],
+      "userIds": ["1", "2", "3"]
+    },
+    {
+      "id": "2",
+      "name": "Development",
+      "img": "https://randomuser.me/api/portraits/men/11.jpg",
+      "rooms": ["room2", "room3"],
+      "userIds": ["2", "4"]
+    },
+    {
+      "id": "3",
+      "name": "Marketing",
+      "img": "https://randomuser.me/api/portraits/women/10.jpg",
+      "rooms": ["room4"],
+      "userIds": ["5", "6"]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "room1",
+      "name": "announcements",
+      "messages": [
+        {
+          "id": "msg1",
+          "userId": "1",
+          "message": "Welcome to the channel!",
+          "createdAt": "2026-01-06T21:12:50.555Z"
+        }
+      ]
+    },
+    {
+      "id": "room2",
+      "name": "frontend",
+      "messages": [
+        {
+          "id": "msg1",
+          "userId": "2",
+          "message": "Who's working on the UI?",
+          "createdAt": "2026-01-07T10:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "room3",
+      "name": "backend",
+      "messages": [
+        {
+          "id": "msg1",
+          "userId": "4",
+          "message": "API is ready for testing",
+          "createdAt": "2026-01-07T13:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "room4",
+      "name": "campaigns",
+      "messages": [
+        {
+          "id": "msg1",
+          "userId": "5",
+          "message": "New campaign launched!",
+          "createdAt": "2026-01-07T08:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "chats": [
+    {
+      "id": "chat1",
+      "userIds": ["1", "2"],
+      "messages": [
+        {
+          "id": "msg1",
+          "userId": "1",
+          "message": "Hey, how are you?",
+          "createdAt": "2026-01-06T22:00:00.000Z"
+        },
+        {
+          "id": "msg2",
+          "userId": "2",
+          "message": "I'm doing great!",
+          "createdAt": "2026-01-06T22:05:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat2",
+      "userIds": ["2", "4"],
+      "messages": [
+        {
+          "id": "msg1",
+          "userId": "2",
+          "message": "Let's grab coffee?",
+          "createdAt": "2026-01-07T14:00:00.000Z"
+        },
+        {
+          "id": "msg2",
+          "userId": "4",
+          "message": "Sure! When?",
+          "createdAt": "2026-01-07T14:05:00.000Z"
+        }
+      ]
     }
   ]
 }

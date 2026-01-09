@@ -6,22 +6,35 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
   selector: 'app-root-aside',
   imports: [ProfileImage],
   template: `
-    <div class="flex flex-col gap-6 py-4">
-      <div>
-        <div class="text-slate-400 text-xs  tracking-wide font-semibold px-4 mb-3">
-          Active right now - {{ activeUsers().length }}
-        </div>
-        <div class="flex flex-col gap-2 px-2">
+    <div class="p-4 h-full">
+      <h2 class="text-xl font-extrabold text-white mb-6 px-2">Active Now</h2>
+
+      @if (activeUsers().length > 0) {
+        <div class="flex flex-col gap-2">
           @for (user of activeUsers(); track user.id) {
             <div
-              class="flex items-center gap-3 p-2 rounded hover:bg-slate-700/50 transition-colors cursor-pointer"
+              class="flex items-center gap-3 p-2 rounded hover:bg-[#35373C] transition-colors cursor-pointer group"
             >
-              <app-profile-image [src]="user.img" />
-              <div class="text-white text-sm truncate">{{ user.username }}</div>
+              <app-profile-image [src]="user.img" [status]="user.status" />
+              <div class="overflow-hidden">
+                <div class="text-gray-200 font-medium text-sm group-hover:text-gray-100 truncate">
+                  {{ user.username }}
+                </div>
+              </div>
             </div>
           }
         </div>
-      </div>
+      } @else {
+        <div
+          class="flex flex-col items-center text-center mt-8 p-6 border border-slate-700 rounded-lg mx-2"
+        >
+          <div class="font-bold text-white text-base mb-2">It's quiet for now...</div>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            When a friend starts an activity—like playing a game or voice chatting—we’ll show it
+            here!
+          </p>
+        </div>
+      }
     </div>
   `,
 

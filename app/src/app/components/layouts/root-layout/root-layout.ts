@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { ChannelSection } from '../../section/channel-section/channel-section';
 import { ChatSection } from '../../section/chat-section/chat-section';
 import { Navbar } from '../../navbar/navbar/navbar';
@@ -13,6 +13,9 @@ import { RootAside } from '../../aside/root-aside/root-aside';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth-service';
+import { UserService } from '../../../services/user/user-service';
+import { ChannelProps, ExtendedChatProps } from '../../../types';
+import { ChannelService } from '../../../services/channel/channel-service';
 @Component({
   selector: 'app-root-layout',
   imports: [
@@ -29,15 +32,15 @@ import { AuthService } from '../../../services/auth/auth-service';
     RootAside,
   ],
   template: `
-    <div class="w-screen h-screen flex flex-col bg-slate-900">
+    <div class="w-screen h-screen flex flex-col bg-[#313338] text-gray-100 font-sans">
       <app-navbar />
       <div class="flex flex-1">
-        <app-channel-section />
+        <app-channel-section [channels]="channels" />
         <div class="flex flex-col flex-1">
           <app-chat-navbar />
-          <div class="flex flex-1">
-            <app-chat-section />
-            <main class="flex flex-col  border-r border-slate-700 w-5xl h-full pl-64">
+          <div class="flex flex-1 overflow-hidden">
+            <app-chat-section [chattedWithFriends]="chattedWithFriends" />
+            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[#313338]">
               @if (!isChannel() && !isChat()) {
                 <router-outlet />
               } @else {
@@ -46,27 +49,35 @@ import { AuthService } from '../../../services/auth/auth-service';
               }
             </main>
             @if (isChannel() && !isChat()) {
-              <app-channel-aside />
+              <app-channel-aside class="w-60 flex-shrink-0 bg-[#2B2D31]" />
             } @else if (isChat() && !isChannel()) {
-              <app-chat-aside />
+              <app-chat-aside class="w-60 flex-shrink-0 bg-[#2B2D31]" />
             } @else {
-              <app-root-aside />
+              <app-root-aside
+                class="w-[360px] flex-shrink-0 bg-[#2B2D31] border-l border-[#26272D]"
+              />
             }
           </div>
         </div>
       </div>
-      <div class="flex w-48">
+      <div>
         <app-profile-footer [user]="user" />
       </div>
     </div>
   `,
   styleUrl: './root-layout.scss',
 })
-export class RootLayout {
+export class RootLayout implements OnInit {
   private router = inject(Router);
+
   private authService = inject(AuthService);
+  private userService = inject(UserService);
+  private channelService = inject(ChannelService);
 
   user = this.authService.user()!;
+
+  chattedWithFriends: ExtendedChatProps[] = [];
+  channels: ChannelProps[] = [];
 
   routerUrl = toSignal(
     this.router.events.pipe(
@@ -77,6 +88,25 @@ export class RootLayout {
   );
 
   currentRoute = computed(() => this.routerUrl());
+
+  ngOnInit(): void {
+    this.userService.findChattedWithUsers(this.user.id).subscribe({
+      next: (response: ExtendedChatProps[]) => {
+        this.chattedWithFriends = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.channelService.findAll(this.user.id).subscribe({
+      next: (response: ChannelProps[]) => {
+        this.channels = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   isChat(): boolean {
     return this.router.url.startsWith('/chats');

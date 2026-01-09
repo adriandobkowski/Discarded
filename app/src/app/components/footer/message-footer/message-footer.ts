@@ -7,21 +7,21 @@ import { LucideAngularModule, Plus } from 'lucide-angular';
   standalone: true,
   imports: [ReactiveFormsModule, LucideAngularModule],
   template: `
-    <form action="" class="px-2">
+    <form action="" class="px-4 pb-6 pt-2">
       <footer class="flex items-center">
-        <div
-          class="relative flex items-center bg-slate-800 border border-slate-700 rounded-lg w-full"
-        >
+        <div class="relative flex items-center bg-[#383A40] rounded-lg w-full">
           <label
-            class="px-4 py-2 text-slate-400 hover:text-white cursor-pointer transition-colors flex-shrink-0"
+            class="px-4 py-2.5 text-gray-400 hover:text-white cursor-pointer transition-colors flex-shrink-0"
           >
-            <lucide-icon [img]="Plus" class="w-6 h-6" />
+            <div class="bg-[#2B2D31] rounded-full p-0.5">
+              <lucide-icon [img]="Plus" class="w-4 h-4" />
+            </div>
             <input type="file" accept="image/*, video/*" hidden (change)="onFileSelected($event)" />
           </label>
           <input
             type="text"
-            placeholder="Write to {{ activeChat }}"
-            class="flex-1 bg-slate-800 text-white placeholder-slate-500 py-2   focus:outline-none transition-colors "
+            placeholder="Message {{ activeChat }}"
+            class="flex-1 bg-transparent text-gray-100 placeholder-gray-500 py-2.5 text-sm focus:outline-none transition-colors font-normal"
           />
         </div>
       </footer>
