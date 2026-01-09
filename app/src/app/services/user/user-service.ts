@@ -4,11 +4,16 @@ import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { ExtendedChatProps, Status, UserProps } from '../../types';
 import { ChatProps } from '../../types';
 import { url } from '../../../api';
+import { AuthService } from '../auth/auth-service';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private http = inject(HttpClient);
+
+  private authService = inject(AuthService);
+
+  user = this.authService.user();
 
   findById(id: string): Observable<HttpResponse<UserProps>> {
     return this.http.get<UserProps>(`${url}/${id}`, { observe: 'response' });
@@ -54,5 +59,13 @@ export class UserService {
   }
   updateUser(id: string, formData: Partial<UserProps>): Observable<UserProps> {
     return this.http.patch<UserProps>(`${url}/users/${id}`, { ...formData });
+  }
+  findChattedWithUser(id: string, chatId: string): Observable<UserProps> {
+    return this.http.get<ChatProps>(`${url}/chats/${chatId}`).pipe(
+      map((chat: ChatProps) => chat.userIds.filter((userId: string) => userId !== id)[0]),
+      switchMap((userId: string) => {
+        return this.http.get<UserProps>(`${url}/users/${userId}`);
+      }),
+    );
   }
 }

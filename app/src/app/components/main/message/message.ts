@@ -1,9 +1,11 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserProps } from '../../../types';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { DatePipe } from '@angular/common';
 import { MessageProps } from '../../../types';
 import { UserService } from '../../../services/user/user-service';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth-service';
 
 @Component({
   selector: 'app-message',
@@ -14,12 +16,12 @@ import { UserService } from '../../../services/user/user-service';
       @if (messages.length === 0) {
         <div class="flex flex-col items-start justify-end gap-2 px-4 pb-4 mt-auto min-h-[50%]">
           <div class="w-20 h-20 mb-2">
-            <app-profile-image [src]="user()?.img" />
+            <app-profile-image [src]="chattedWithUser?.img" />
           </div>
-          <h2 class="text-3xl font-bold text-white">{{ user()?.username }}</h2>
+          <h2 class="text-3xl font-bold text-white">{{ chattedWithUser?.username }}</h2>
           <div class="text-gray-400 text-base">
             This is the beginning of your direct message history with
-            <span class="font-semibold">{{ user()?.username }}</span
+            <span class="font-semibold">{{ chattedWithUser?.username }}</span
             >.
           </div>
           <div class="flex items-center gap-2 mt-2">
@@ -43,9 +45,7 @@ import { UserService } from '../../../services/user/user-service';
             <div class="flex gap-4">
               <div
                 class="flex-shrink-0 w-10 h-10 bg-slate-600 rounded-full cursor-pointer hover:opacity-80 transition-opacity mt-0.5"
-              >
-                <!-- Avatar Placeholder -->
-              </div>
+              ></div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-0.5">
                   <span class="font-medium text-white text-base hover:underline cursor-pointer"
@@ -71,10 +71,33 @@ import { UserService } from '../../../services/user/user-service';
 })
 export class Message implements OnInit {
   private userService = inject(UserService);
+  private authService = inject(AuthService);
+  private route = inject(ActivatedRoute);
+
+  chatId: string | null = null;
+  user: UserProps | null = null;
+
+  constructor() {
+    this.route.paramMap.subscribe((params) => {
+      this.chatId = params.get('id');
+    });
+    this.user = this.authService.user()!;
+  }
+
+  chattedWithUser: UserProps | null = null;
 
   messages: MessageProps[] = [];
-  user: UserProps | null = null;
-  chattedWithUser = input<UserProps | null>(null);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.chatId && this.user?.id) {
+      this.userService.findChattedWithUser(this.user.id, this.chatId).subscribe({
+        next: (response: UserProps) => {
+          this.chattedWithUser = response;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
 }
