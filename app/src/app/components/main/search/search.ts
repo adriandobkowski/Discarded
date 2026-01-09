@@ -14,7 +14,7 @@ import { Search as SearchIcon, LucideAngularModule } from 'lucide-angular';
       <input
         type="text"
         (input)="search.set($event.target.value)"
-        class="w-full bg-slate-700 border border-slate-600 rounded px-10 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+        class="w-full  border border-slate-600 rounded px-10 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
         placeholder="Search..."
       />
     </div>

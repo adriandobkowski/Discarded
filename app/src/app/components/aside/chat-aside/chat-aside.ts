@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
-import { UserProps } from '../../../types';
+import { Component, inject } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
+import { ChatService } from '../../../services/chat/chat-service';
 
 @Component({
   selector: 'app-chat-aside',
@@ -24,5 +24,6 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
   styleUrl: './chat-aside.scss',
 })
 export class ChatAside {
-  user = input<UserProps>();
+  private chatService = inject(ChatService);
+  user = this.chatService.currentChatUser;
 }

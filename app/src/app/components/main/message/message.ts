@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { UserProps } from '../../../types';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { DatePipe } from '@angular/common';
@@ -6,6 +6,7 @@ import { MessageProps } from '../../../types';
 import { UserService } from '../../../services/user/user-service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth-service';
+import { ChatService } from '../../../services/chat/chat-service';
 
 @Component({
   selector: 'app-message',
@@ -15,7 +16,7 @@ import { AuthService } from '../../../services/auth/auth-service';
     <div class="flex flex-col gap-0 h-full w-full overflow-y-auto no-scrollbar pt-4">
       @if (messages.length === 0) {
         <div class="flex flex-col items-start justify-end gap-2 px-4 pb-4 mt-auto min-h-[50%]">
-          <div class="w-20 h-20 mb-2">
+          <div class=" mb-2">
             <app-profile-image [src]="chattedWithUser?.img" />
           </div>
           <h2 class="text-3xl font-bold text-white">{{ chattedWithUser?.username }}</h2>
@@ -23,20 +24,6 @@ import { AuthService } from '../../../services/auth/auth-service';
             This is the beginning of your direct message history with
             <span class="font-semibold">{{ chattedWithUser?.username }}</span
             >.
-          </div>
-          <div class="flex items-center gap-2 mt-2">
-            <div class="text-gray-400 text-xs uppercase font-bold">No servers in common</div>
-            <div class="w-1 h-1 bg-gray-600 rounded-full"></div>
-            <button
-              class="bg-[#248046] hover:bg-[#1A6334] text-white px-3 py-1 rounded text-sm font-medium transition-colors"
-            >
-              Add Friend
-            </button>
-            <button
-              class="bg-[#4E5058] hover:bg-[#6D6F78] text-white px-3 py-1 rounded text-sm font-medium transition-colors"
-            >
-              Block
-            </button>
           </div>
         </div>
       } @else {
@@ -69,35 +56,36 @@ import { AuthService } from '../../../services/auth/auth-service';
   `,
   styleUrl: './message.scss',
 })
-export class Message implements OnInit {
+export class Message implements OnInit, OnDestroy {
   private userService = inject(UserService);
   private authService = inject(AuthService);
+  private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
 
   chatId: string | null = null;
-  user: UserProps | null = null;
-
-  constructor() {
-    this.route.paramMap.subscribe((params) => {
-      this.chatId = params.get('id');
-    });
-    this.user = this.authService.user()!;
-  }
+  user = this.authService.user;
 
   chattedWithUser: UserProps | null = null;
 
   messages: MessageProps[] = [];
 
   ngOnInit(): void {
-    if (this.chatId && this.user?.id) {
-      this.userService.findChattedWithUser(this.user.id, this.chatId).subscribe({
-        next: (response: UserProps) => {
-          this.chattedWithUser = response;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
+    this.route.paramMap.subscribe((params) => {
+      this.chatId = params.get('id') ?? this.route.parent?.snapshot.paramMap.get('id') ?? null;
+      if (this.chatId) {
+        this.userService.findChattedWithUser(this.chatId).subscribe({
+          next: (response: UserProps) => {
+            this.chattedWithUser = response;
+            this.chatService.currentChatUser.set(this.chattedWithUser);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.chatService.currentChatUser.set(null);
   }
 }

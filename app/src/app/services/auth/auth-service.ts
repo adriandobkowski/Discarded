@@ -1,50 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { LoginProps, LoginResponse, UserProps } from '../../types';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { url } from '../../../api';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  token = signal<string | null>(localStorage.getItem('token'));
   isAuthenticated = computed(() => !!this.token());
+
   private http = inject(HttpClient);
 
-  user = signal<UserProps | null>(null);
+  token = signal<string | null>(localStorage.getItem('token'));
+  user = signal<UserProps | null>(JSON.parse(localStorage.getItem('user') ?? 'null'));
   user$ = toObservable(this.user);
-
-  constructor() {
-    effect(() => {
-      const accessToken = this.token();
-      if (accessToken) {
-        localStorage.setItem('token', accessToken);
-      } else {
-        localStorage.removeItem('token');
-      }
-    });
-
-    this.restoreUser();
-  }
-
-  restoreUser() {
-    const userId = localStorage.getItem('userId');
-    const token = this.token();
-
-    if (userId && token && !this.user()) {
-      this.http.get<UserProps>(`${url}/users/${userId}`).subscribe({
-        next: (user) => {
-          this.user.set({ ...user, status: 'online' });
-        },
-        error: () => {
-          this.logout();
-        },
-      });
-    }
-  }
-
   register(user: LoginProps & UserProps) {
     return this.http
       .post<LoginResponse>(`${url}/register`, {
@@ -81,6 +52,7 @@ export class AuthService {
       tap((response) => {
         if (response.accessToken) {
           this.token.set(response.accessToken);
+          localStorage.setItem('token', response.accessToken);
         }
       }),
       switchMap(() => {
@@ -91,8 +63,8 @@ export class AuthService {
           ...users[0],
           status: 'online',
         };
+        localStorage.setItem('user', JSON.stringify(currentUser));
         this.user.set(currentUser);
-        localStorage.setItem('userId', currentUser.id.toString());
         return currentUser;
       }),
     );
@@ -100,7 +72,7 @@ export class AuthService {
   logout() {
     this.token.set(null);
     this.user.set(null);
-    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     localStorage.removeItem('token');
   }
 }

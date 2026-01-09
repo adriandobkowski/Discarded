@@ -2,7 +2,6 @@ import { Component, computed, inject, OnInit } from '@angular/core';
 import { ChannelSection } from '../../section/channel-section/channel-section';
 import { ChatSection } from '../../section/chat-section/chat-section';
 import { Navbar } from '../../navbar/navbar/navbar';
-import { Message } from '../../main/message/message';
 import { ProfileFooter } from '../../footer/profile-footer/profile-footer';
 import { ChatNavbar } from '../../navbar/chat-navbar/chat-navbar';
 import { MessageFooter } from '../../footer/message-footer/message-footer';
@@ -23,7 +22,6 @@ import { ChannelService } from '../../../services/channel/channel-service';
     ChatSection,
     Navbar,
     RouterOutlet,
-    Message,
     ProfileFooter,
     ChatNavbar,
     MessageFooter,
@@ -41,13 +39,14 @@ import { ChannelService } from '../../../services/channel/channel-service';
           <div class="flex flex-1 overflow-hidden">
             <app-chat-section [chattedWithFriends]="chattedWithFriends" />
             <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[#313338]">
-              @if (!isChannel() && !isChat()) {
-                <router-outlet />
-              } @else {
-                <app-message class="h-full" />
+              @if (isChannel() || isChat()) {
+                <router-outlet class="h-full" />
                 <app-message-footer />
+              } @else {
+                <router-outlet />
               }
             </main>
+            <aside></aside>
             @if (isChannel() && !isChat()) {
               <app-channel-aside class="w-60 flex-shrink-0 bg-[#2B2D31]" />
             } @else if (isChat() && !isChannel()) {
@@ -61,7 +60,7 @@ import { ChannelService } from '../../../services/channel/channel-service';
         </div>
       </div>
       <div>
-        <app-profile-footer [user]="user" />
+        <app-profile-footer [user]="user()!" />
       </div>
     </div>
   `,
@@ -74,7 +73,7 @@ export class RootLayout implements OnInit {
   private userService = inject(UserService);
   private channelService = inject(ChannelService);
 
-  user = this.authService.user()!;
+  user = this.authService.user;
 
   chattedWithFriends: ExtendedChatProps[] = [];
   channels: ChannelProps[] = [];
@@ -90,7 +89,7 @@ export class RootLayout implements OnInit {
   currentRoute = computed(() => this.routerUrl());
 
   ngOnInit(): void {
-    this.userService.findChattedWithUsers(this.user.id).subscribe({
+    this.userService.findChattedWithUsers().subscribe({
       next: (response: ExtendedChatProps[]) => {
         this.chattedWithFriends = response;
       },
@@ -98,7 +97,7 @@ export class RootLayout implements OnInit {
         console.log(err);
       },
     });
-    this.channelService.findAll(this.user.id).subscribe({
+    this.channelService.findAll(this.user()!.id).subscribe({
       next: (response: ChannelProps[]) => {
         this.channels = response;
       },

@@ -11,11 +11,11 @@ export const friendsResolver: ResolveFn<UserProps[]> = () => {
   const router = inject(Router);
 
   return authService.user$.pipe(
-    filter((user): user is UserProps => !!user && !!user.id),
+    filter((user): user is UserProps => !!user),
     take(1),
-    switchMap((user) => {
+    switchMap(() => {
       const status = router.url.includes('/active') ? null : 'online';
-      return userService.findFriends(user.id, status);
+      return userService.findFriends(status);
     }),
   );
 };

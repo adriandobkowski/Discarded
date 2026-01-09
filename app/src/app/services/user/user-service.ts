@@ -13,14 +13,14 @@ export class UserService {
 
   private authService = inject(AuthService);
 
-  user = this.authService.user();
+  id = this.authService.user()?.id;
 
-  findById(id: string): Observable<HttpResponse<UserProps>> {
-    return this.http.get<UserProps>(`${url}/${id}`, { observe: 'response' });
+  findById(): Observable<HttpResponse<UserProps>> {
+    return this.http.get<UserProps>(`${url}/${this.id}`, { observe: 'response' });
   }
 
-  findFriends(id: string, status: Status | null): Observable<UserProps[]> {
-    return this.http.get<UserProps>(`${url}/users/${id}`).pipe(
+  findFriends(status: Status | null): Observable<UserProps[]> {
+    return this.http.get<UserProps>(`${url}/users/${this.id}`).pipe(
       switchMap((user) =>
         this.http.get<UserProps[]>(`${url}/users?${status ? 'status=' + status : ''}`, {
           params: { id: user.friends },
@@ -28,8 +28,8 @@ export class UserService {
       ),
     );
   }
-  findChattedWithUsers(id: string): Observable<ExtendedChatProps[]> {
-    return this.http.get<UserProps>(`${url}/users/${id}`).pipe(
+  findChattedWithUsers(): Observable<ExtendedChatProps[]> {
+    return this.http.get<UserProps>(`${url}/users/${this.id}`).pipe(
       map((user) => user.chats),
       switchMap((chatIds) => {
         if (chatIds.length === 0) return of([]);
@@ -40,7 +40,7 @@ export class UserService {
       map((chats: ChatProps[]) => {
         return chats
           .map((chat) => {
-            const otherUserId = chat.userIds.find((userId) => userId !== id);
+            const otherUserId = chat.userIds.find((userId) => userId !== this.id);
             return otherUserId ? { otherUserId, chatId: chat.id } : null;
           })
           .filter((item): item is { otherUserId: string; chatId: string } => !!item);
@@ -57,12 +57,12 @@ export class UserService {
       }),
     );
   }
-  updateUser(id: string, formData: Partial<UserProps>): Observable<UserProps> {
-    return this.http.patch<UserProps>(`${url}/users/${id}`, { ...formData });
+  updateUser(formData: Partial<UserProps>): Observable<UserProps> {
+    return this.http.patch<UserProps>(`${url}/users/${this.id}`, { ...formData });
   }
-  findChattedWithUser(id: string, chatId: string): Observable<UserProps> {
+  findChattedWithUser(chatId: string): Observable<UserProps> {
     return this.http.get<ChatProps>(`${url}/chats/${chatId}`).pipe(
-      map((chat: ChatProps) => chat.userIds.filter((userId: string) => userId !== id)[0]),
+      map((chat: ChatProps) => chat.userIds.filter((userId: string) => userId !== this.id)[0]),
       switchMap((userId: string) => {
         return this.http.get<UserProps>(`${url}/users/${userId}`);
       }),

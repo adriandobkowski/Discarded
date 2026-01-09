@@ -142,6 +142,7 @@ export class Settings {
   private userService = inject(UserService);
 
   user = this.authService.user()!;
+
   updateForm = new FormGroup({
     username: new FormControl<string | undefined>(this.user.username, {
       nonNullable: true,
@@ -154,16 +155,14 @@ export class Settings {
   logoutClicked: boolean = false;
 
   onSubmit(): void {
-    this.userService
-      .updateUser(this.user.id, this.updateForm.getRawValue() as UserProps)
-      .subscribe({
-        next: (response: UserProps) => {
-          this.authService.user.set(response);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    this.userService.updateUser(this.updateForm.getRawValue() as UserProps).subscribe({
+      next: () => {
+        console.log('Test');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
   get activeUsername(): string {
     return this.updateForm.get('username')?.value ?? this.user.username;
