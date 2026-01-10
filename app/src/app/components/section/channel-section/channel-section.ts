@@ -1,9 +1,10 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, House, Plus, X, Camera } from 'lucide-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChannelProps } from '../../../types';
+import { ChannelService } from '../../../services/channel/channel-service';
 @Component({
   selector: 'app-channel-section',
   standalone: true,
@@ -25,7 +26,7 @@ import { ChannelProps } from '../../../types';
       <div class="w-8 h-[2px] bg-[#35363C] rounded-lg mb-2"></div>
 
       <div class="flex flex-col gap-3 w-full items-center">
-        @for (channel of channels(); track channel.id) {
+        @for (channel of channels; track channel.id) {
           <a
             [routerLink]="['/channels', channel.id]"
             class="relative group w-full flex justify-center"
@@ -138,13 +139,15 @@ import { ChannelProps } from '../../../types';
   `,
   styleUrl: './channel-section.scss',
 })
-export class ChannelSection {
+export class ChannelSection implements OnInit {
   readonly House = House;
   readonly Plus = Plus;
   readonly X = X;
   readonly Camera = Camera;
 
-  channels = input<ChannelProps[]>([]);
+  private channelService = inject(ChannelService);
+
+  channels = this.channelService.channels();
 
   createChannelClicked: boolean = false;
 
@@ -154,4 +157,14 @@ export class ChannelSection {
       validators: [Validators.required],
     }),
   });
+  ngOnInit(): void {
+    this.channelService.findAll().subscribe({
+      next: (response: ChannelProps[]) => {
+        this.channels = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

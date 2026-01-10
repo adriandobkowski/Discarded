@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
-import { ExtendedChatProps, Status, UserProps } from '../../types';
+import { ExtendedUserProps, Status, UserProps } from '../../types';
 import { ChatProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
@@ -31,7 +31,7 @@ export class UserService {
       ),
     );
   }
-  findChattedWithUsers(): Observable<ExtendedChatProps[]> {
+  findChattedWithUsers(): Observable<ExtendedUserProps[]> {
     return this.http.get<UserProps>(`${url}/users/${this.id}`).pipe(
       map((user) => user.chats),
       switchMap((chatIds) => {

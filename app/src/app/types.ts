@@ -44,7 +44,7 @@ export interface ChatProps {
   userIds: string[];
   messages: MessageProps[];
 }
-export interface ExtendedChatProps {
+export interface ExtendedUserProps {
   user: UserProps;
   chatId?: string;
 }

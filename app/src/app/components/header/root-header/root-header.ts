@@ -1,36 +1,20 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import {
-  LucideAngularModule,
-  Inbox,
-  ContactRound,
-  Settings,
-  Handshake,
-  HatGlasses,
-} from 'lucide-angular';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { LucideAngularModule, Inbox, ContactRound, Settings, Handshake } from 'lucide-angular';
 import { map } from 'rxjs';
 import { ChannelProps } from '../../../types';
-import { ChannelService } from '../../../services/channel/channel-service';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-root-header',
   standalone: true,
   imports: [RouterLink, LucideAngularModule],
   template: `
-    <nav class="bg-slate-950 w-full h-12 flex items-center justify-between px-6">
-      @if (isChat() && !isChannel()) {
-        <div class="flex flex-1 items-center gap-4 justify-center">
-          <lucide-icon [img]="HatGlasses" class="w-10 h-10 text-white rounded-full" />
-          <div class="text-white font-semibold text-lg">Private messages</div>
-        </div>
-      } @else if (!isChat() && isChannel()) {
-      } @else {
-        <div class="flex flex-1 items-center gap-4 justify-center">
-          <lucide-icon [img]="ContactRound" class="w-10 h-10 text-white rounded-full" />
-          <div class="text-white font-semibold text-lg">Friends</div>
-        </div>
-      }
+    <header class="bg-slate-950 w-full h-12 flex items-center justify-between px-6">
+      <div class="flex flex-1 items-center gap-4 justify-center">
+        <lucide-icon [img]="ContactRound" class="w-10 h-10 text-white rounded-full" />
+        <div class="text-white font-semibold text-lg">Friends</div>
+      </div>
 
       <div class="relative">
         <button
@@ -102,39 +86,22 @@ import { ChannelService } from '../../../services/channel/channel-service';
           </div>
         }
       </div>
-    </nav>
+    </header>
   `,
-  styleUrl: './navbar.scss',
+  styleUrl: './root-header.scss',
 })
-export class Navbar implements OnInit {
+export class RootHeader {
   readonly Inbox = Inbox;
   readonly ContactRound = ContactRound;
   readonly Settings = Settings;
   readonly Handshake = Handshake;
-  readonly HatGlasses = HatGlasses;
 
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private channelService = inject(ChannelService)
-  
+
   activeElement: string = '';
   inboxActive: boolean = false;
   friendRequests: number | null = 5;
-  channel: ChannelProps| null = null
+  channel: ChannelProps | null = null;
 
   id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
-
-  isChat(): boolean {
-    return this.router.url.startsWith('/chats');
-  }
-
-  isChannel(): boolean {
-    return this.router.url.startsWith('/channels');
-  }
-
-  ngOnInit(): void {
-    if (this.isChannel() && this.id())
-      this.channelService
-    }
-  
 }

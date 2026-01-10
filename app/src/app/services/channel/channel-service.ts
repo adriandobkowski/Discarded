@@ -14,6 +14,8 @@ export class ChannelService {
 
   user = this.authService.user;
 
+  channels = signal<ChannelProps[]>([]);
+
   currentChannel = signal<ChannelProps | null>(null);
 
   messageDisabled = signal<boolean>(false);

@@ -1,65 +1,39 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChannelSection } from '../../section/channel-section/channel-section';
 import { ChatSection } from '../../section/chat-section/chat-section';
-import { Navbar } from '../../navbar/navbar/navbar';
+import { RootHeader } from '../../header/root-header/root-header';
 import { ProfileFooter } from '../../footer/profile-footer/profile-footer';
-import { ChatNavbar } from '../../navbar/chat-navbar/chat-navbar';
-import { MessageFooter } from '../../footer/message-footer/message-footer';
 import { RouterOutlet } from '@angular/router';
-import { ChannelAside } from '../../aside/channel-aside/channel-aside';
-import { ChatAside } from '../../aside/chat-aside/chat-aside';
 import { RootAside } from '../../aside/root-aside/root-aside';
-import { AuthService } from '../../../services/auth/auth-service';
-import { UserService } from '../../../services/user/user-service';
-import { ChannelProps, ExtendedChatProps } from '../../../types';
-import { ChannelService } from '../../../services/channel/channel-service';
-import { PrivateChannelSection } from '../../section/private-channel-section/private-channel-section';
-import { RouteService } from '../../../services/route-service';
+import { RootNavbar } from '../../navbar/root-navbar/root-navbar';
 @Component({
   selector: 'app-root-layout',
   imports: [
     ChannelSection,
     ChatSection,
-    Navbar,
+    RootHeader,
     RouterOutlet,
     ProfileFooter,
-    ChatNavbar,
-    MessageFooter,
-    ChannelAside,
-    ChatAside,
     RootAside,
-    PrivateChannelSection,
+    RootHeader,
+    RootNavbar,
   ],
   template: `
     <div class="w-screen h-screen flex flex-col bg-[#313338] text-gray-100 font-sans">
-      <app-navbar />
+      <app-root-header />
       <div class="flex flex-1">
-        <app-channel-section [channels]="channels" />
+        <app-channel-section />
         <div class="flex flex-col flex-1">
-          <app-chat-navbar />
+          <app-root-navbar />
           <div class="flex flex-1 overflow-hidden">
-            @if (!isChannel()) {
-              <app-chat-section [chattedWithFriends]="chattedWithFriends" />
-            } @else {
-              <app-private-channel-section />
-            }
+            <app-chat-section />
             <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[#313338]">
-              @if (isChannel() || isChat()) {
-                <router-outlet class="h-full" />
-                <app-message-footer />
-              } @else {
-                <router-outlet />
-              }
+              <router-outlet />
             </main>
-            @if (isChannel() && !isChat()) {
-              <app-channel-aside class="w-60 flex-shrink-0 bg-[#2B2D31]" />
-            } @else if (isChat() && !isChannel()) {
-              <app-chat-aside class="w-60 flex-shrink-0 bg-[#2B2D31]" />
-            } @else {
-              <app-root-aside
-                class="w-[360px] flex-shrink-0 bg-[#2B2D31] border-l border-[#26272D]"
-              />
-            }
+
+            <app-root-aside
+              class="w-[360px] flex-shrink-0 bg-[#2B2D31] border-l border-[#26272D]"
+            />
           </div>
         </div>
       </div>
@@ -70,43 +44,4 @@ import { RouteService } from '../../../services/route-service';
   `,
   styleUrl: './root-layout.scss',
 })
-export class RootLayout implements OnInit {
-  private authService = inject(AuthService);
-  private userService = inject(UserService);
-  private channelService = inject(ChannelService);
-  private routeService = inject(RouteService);
-
-  user = this.authService.user;
-
-  chattedWithFriends: ExtendedChatProps[] = [];
-  channels: ChannelProps[] = [];
-
-  isChat = this.routeService.isChat;
-  isChannel = this.routeService.isChannel;
-  isRoom = this.routeService.isRoom;
-
-  ngOnInit(): void {
-    if (this.isChannel() && !this.isRoom()) {
-      this.channelService.messageDisabled.set(true);
-    } else {
-      this.channelService.messageDisabled.set(false);
-    }
-
-    this.userService.findChattedWithUsers().subscribe({
-      next: (response: ExtendedChatProps[]) => {
-        this.chattedWithFriends = response;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-    this.channelService.findAll().subscribe({
-      next: (response: ChannelProps[]) => {
-        this.channels = response;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-}
+export class RootLayout {}

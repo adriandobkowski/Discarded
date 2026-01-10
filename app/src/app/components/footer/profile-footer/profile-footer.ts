@@ -65,7 +65,7 @@ import { AuthService } from '../../../services/auth/auth-service';
           </button>
 
           <a
-            routerLink="settings"
+            [routerLink]="['/', 'settings']"
             class="p-2 hover:bg-[#3F4147] rounded transition-colors flex items-center justify-center h-8 w-8"
           >
             <lucide-icon

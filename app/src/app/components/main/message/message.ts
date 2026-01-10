@@ -1,11 +1,7 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { UserProps } from '../../../types';
+import { Component, inject } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { DatePipe } from '@angular/common';
 import { MessageProps } from '../../../types';
-import { UserService } from '../../../services/user/user-service';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../services/auth/auth-service';
 import { ChatService } from '../../../services/chat/chat-service';
 
 @Component({
@@ -17,12 +13,12 @@ import { ChatService } from '../../../services/chat/chat-service';
       @if (messages.length === 0) {
         <div class="flex flex-col items-start justify-end gap-2 px-4 pb-4 mt-auto min-h-[50%]">
           <div class=" mb-2">
-            <app-profile-image [src]="currentChatUser()?.img" />
+            <app-profile-image [src]="chattedWithUser()?.img" />
           </div>
-          <h2 class="text-3xl font-bold text-white">{{ currentChatUser()?.username }}</h2>
+          <h2 class="text-3xl font-bold text-white">{{ chattedWithUser()?.username }}</h2>
           <div class="text-gray-400 text-base">
             This is the beginning of your direct message history with
-            <span class="font-semibold">{{ currentChatUser()?.username }}</span
+            <span class="font-semibold">{{ chattedWithUser()?.username }}</span
             >.
           </div>
         </div>
@@ -56,35 +52,10 @@ import { ChatService } from '../../../services/chat/chat-service';
   `,
   styleUrl: './message.scss',
 })
-export class Message implements OnInit, OnDestroy {
-  private userService = inject(UserService);
-  private authService = inject(AuthService);
+export class Message {
   private chatService = inject(ChatService);
-  private route = inject(ActivatedRoute);
 
-  chatId: string | null = null;
-  user = this.authService.user;
-
-  currentChatUser = this.chatService.currentChatUser;
+  chattedWithUser = this.chatService.chattedWithUser;
 
   messages: MessageProps[] = [];
-
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.chatId = params.get('id') ?? this.route.parent?.snapshot.paramMap.get('id') ?? null;
-      if (this.chatId) {
-        this.userService.findChattedWithUser(this.chatId).subscribe({
-          next: (response: UserProps) => {
-            this.chatService.currentChatUser.set(response);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      }
-    });
-  }
-  ngOnDestroy(): void {
-    this.chatService.currentChatUser.set(null);
-  }
 }

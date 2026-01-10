@@ -9,11 +9,14 @@ import { authenticatedGuard } from '../guards/authenticatedGuard';
 import { friendsResolver } from './resolvers/friendsResolver';
 import { Settings } from './components/settings/settings';
 import { Message } from './components/main/message/message';
+import { ChatLayout } from './components/layouts/chat-layout/chat-layout';
+import { ChannelLayout } from './components/layouts/channel-layout/channel-layout';
 import { ChannelMessage } from './components/main/channel-message/channel-message';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canMatch: [authenticatedGuard] },
   { path: 'register', component: Register, canMatch: [authenticatedGuard] },
+
   {
     path: '',
     component: RootLayout,
@@ -35,8 +38,6 @@ export const routes: Routes = [
           friends: friendsResolver,
         },
       },
-      { path: 'chats/:id', component: Message },
-      { path: 'channels/:id', component: ChannelMessage, children: [] },
       {
         path: 'add-friend',
         component: NavbarAddFriend,
@@ -46,5 +47,12 @@ export const routes: Routes = [
         component: Settings,
       },
     ],
+  },
+
+  { path: 'chats', component: ChatLayout, children: [{ path: ':id', component: Message }] },
+  {
+    path: 'channels',
+    component: ChannelLayout,
+    children: [{ path: ':id', component: ChannelMessage }],
   },
 ];
