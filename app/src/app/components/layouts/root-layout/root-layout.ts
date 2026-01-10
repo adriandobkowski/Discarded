@@ -1,21 +1,20 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ChannelSection } from '../../section/channel-section/channel-section';
 import { ChatSection } from '../../section/chat-section/chat-section';
 import { Navbar } from '../../navbar/navbar/navbar';
 import { ProfileFooter } from '../../footer/profile-footer/profile-footer';
 import { ChatNavbar } from '../../navbar/chat-navbar/chat-navbar';
 import { MessageFooter } from '../../footer/message-footer/message-footer';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { ChannelAside } from '../../aside/channel-aside/channel-aside';
 import { ChatAside } from '../../aside/chat-aside/chat-aside';
 import { RootAside } from '../../aside/root-aside/root-aside';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth-service';
 import { UserService } from '../../../services/user/user-service';
 import { ChannelProps, ExtendedChatProps } from '../../../types';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { PrivateChannelSection } from '../../section/private-channel-section/private-channel-section';
+import { RouteService } from '../../../services/route-service';
 @Component({
   selector: 'app-root-layout',
   imports: [
@@ -72,26 +71,19 @@ import { PrivateChannelSection } from '../../section/private-channel-section/pri
   styleUrl: './root-layout.scss',
 })
 export class RootLayout implements OnInit {
-  private router = inject(Router);
-
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private channelService = inject(ChannelService);
+  private routeService = inject(RouteService);
 
   user = this.authService.user;
 
   chattedWithFriends: ExtendedChatProps[] = [];
   channels: ChannelProps[] = [];
 
-  routerUrl = toSignal(
-    this.router.events.pipe(
-      filter((e) => e instanceof NavigationEnd),
-      map(() => this.router.url),
-    ),
-    { initialValue: this.router.url },
-  );
-
-  currentRoute = computed(() => this.routerUrl());
+  isChat = this.routeService.isChat;
+  isChannel = this.routeService.isChannel;
+  isRoom = this.routeService.isRoom;
 
   ngOnInit(): void {
     if (this.isChannel() && !this.isRoom()) {
@@ -116,15 +108,5 @@ export class RootLayout implements OnInit {
         console.log(err);
       },
     });
-  }
-
-  isChat(): boolean {
-    return this.router.url.startsWith('/chats');
-  }
-  isChannel(): boolean {
-    return this.router.url.startsWith('/channels');
-  }
-  isRoom(): boolean {
-    return this.router.url.startsWith('/channels');
   }
 }
