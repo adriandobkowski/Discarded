@@ -14,7 +14,7 @@ export const friendsResolver: ResolveFn<UserProps[]> = () => {
     filter((user): user is UserProps => !!user),
     take(1),
     switchMap(() => {
-      const status = router.url.includes('/active') ? null : 'online';
+      const status = router.url.includes('/active') ? undefined : 'online';
       return userService.findFriends(status);
     }),
   );

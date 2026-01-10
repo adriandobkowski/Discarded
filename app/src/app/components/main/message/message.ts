@@ -17,12 +17,12 @@ import { ChatService } from '../../../services/chat/chat-service';
       @if (messages.length === 0) {
         <div class="flex flex-col items-start justify-end gap-2 px-4 pb-4 mt-auto min-h-[50%]">
           <div class=" mb-2">
-            <app-profile-image [src]="chattedWithUser?.img" />
+            <app-profile-image [src]="currentChatUser()?.img" />
           </div>
-          <h2 class="text-3xl font-bold text-white">{{ chattedWithUser?.username }}</h2>
+          <h2 class="text-3xl font-bold text-white">{{ currentChatUser()?.username }}</h2>
           <div class="text-gray-400 text-base">
             This is the beginning of your direct message history with
-            <span class="font-semibold">{{ chattedWithUser?.username }}</span
+            <span class="font-semibold">{{ currentChatUser()?.username }}</span
             >.
           </div>
         </div>
@@ -65,7 +65,7 @@ export class Message implements OnInit, OnDestroy {
   chatId: string | null = null;
   user = this.authService.user;
 
-  chattedWithUser: UserProps | null = null;
+  currentChatUser = this.chatService.currentChatUser;
 
   messages: MessageProps[] = [];
 
@@ -75,8 +75,7 @@ export class Message implements OnInit, OnDestroy {
       if (this.chatId) {
         this.userService.findChattedWithUser(this.chatId).subscribe({
           next: (response: UserProps) => {
-            this.chattedWithUser = response;
-            this.chatService.currentChatUser.set(this.chattedWithUser);
+            this.chatService.currentChatUser.set(response);
           },
           error: (err) => {
             console.log(err);

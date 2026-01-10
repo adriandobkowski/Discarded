@@ -15,6 +15,7 @@ import { AuthService } from '../../../services/auth/auth-service';
 import { UserService } from '../../../services/user/user-service';
 import { ChannelProps, ExtendedChatProps } from '../../../types';
 import { ChannelService } from '../../../services/channel/channel-service';
+import { PrivateChannelSection } from '../../section/private-channel-section/private-channel-section';
 @Component({
   selector: 'app-root-layout',
   imports: [
@@ -28,6 +29,7 @@ import { ChannelService } from '../../../services/channel/channel-service';
     ChannelAside,
     ChatAside,
     RootAside,
+    PrivateChannelSection,
   ],
   template: `
     <div class="w-screen h-screen flex flex-col bg-[#313338] text-gray-100 font-sans">
@@ -37,7 +39,11 @@ import { ChannelService } from '../../../services/channel/channel-service';
         <div class="flex flex-col flex-1">
           <app-chat-navbar />
           <div class="flex flex-1 overflow-hidden">
-            <app-chat-section [chattedWithFriends]="chattedWithFriends" />
+            @if (!isChannel()) {
+              <app-chat-section [chattedWithFriends]="chattedWithFriends" />
+            } @else {
+              <app-private-channel-section />
+            }
             <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[#313338]">
               @if (isChannel() || isChat()) {
                 <router-outlet class="h-full" />
@@ -46,7 +52,6 @@ import { ChannelService } from '../../../services/channel/channel-service';
                 <router-outlet />
               }
             </main>
-            <aside></aside>
             @if (isChannel() && !isChat()) {
               <app-channel-aside class="w-60 flex-shrink-0 bg-[#2B2D31]" />
             } @else if (isChat() && !isChannel()) {
@@ -60,7 +65,7 @@ import { ChannelService } from '../../../services/channel/channel-service';
         </div>
       </div>
       <div>
-        <app-profile-footer [user]="user()!" />
+        <app-profile-footer />
       </div>
     </div>
   `,
@@ -89,6 +94,12 @@ export class RootLayout implements OnInit {
   currentRoute = computed(() => this.routerUrl());
 
   ngOnInit(): void {
+    if (this.isChannel() && !this.isRoom()) {
+      this.channelService.messageDisabled.set(true);
+    } else {
+      this.channelService.messageDisabled.set(false);
+    }
+
     this.userService.findChattedWithUsers().subscribe({
       next: (response: ExtendedChatProps[]) => {
         this.chattedWithFriends = response;
@@ -97,7 +108,7 @@ export class RootLayout implements OnInit {
         console.log(err);
       },
     });
-    this.channelService.findAll(this.user()!.id).subscribe({
+    this.channelService.findAll().subscribe({
       next: (response: ChannelProps[]) => {
         this.channels = response;
       },
@@ -111,6 +122,9 @@ export class RootLayout implements OnInit {
     return this.router.url.startsWith('/chats');
   }
   isChannel(): boolean {
+    return this.router.url.startsWith('/channels');
+  }
+  isRoom(): boolean {
     return this.router.url.startsWith('/channels');
   }
 }

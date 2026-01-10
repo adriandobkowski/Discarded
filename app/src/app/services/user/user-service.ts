@@ -1,5 +1,5 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { ExtendedChatProps, Status, UserProps } from '../../types';
 import { ChatProps } from '../../types';
@@ -15,11 +15,14 @@ export class UserService {
 
   id = this.authService.user()?.id;
 
+  microphoneActive = signal<boolean>(true);
+  headphonesActive = signal<boolean>(true);
+
   findById(): Observable<HttpResponse<UserProps>> {
     return this.http.get<UserProps>(`${url}/${this.id}`, { observe: 'response' });
   }
 
-  findFriends(status: Status | null): Observable<UserProps[]> {
+  findFriends(status?: Status): Observable<UserProps[]> {
     return this.http.get<UserProps>(`${url}/users/${this.id}`).pipe(
       switchMap((user) =>
         this.http.get<UserProps[]>(`${url}/users?${status ? 'status=' + status : ''}`, {

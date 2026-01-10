@@ -1,6 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
-import { UserProps } from '../../../types';
 import {
   HeadphoneOff,
   Headphones,
@@ -10,6 +9,8 @@ import {
   Settings,
 } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../../services/user/user-service';
+import { AuthService } from '../../../services/auth/auth-service';
 
 @Component({
   selector: 'app-profile-footer',
@@ -17,7 +18,7 @@ import { RouterLink } from '@angular/router';
   imports: [ProfileImage, LucideAngularModule, RouterLink],
   template: `
     <footer
-      class="absolute left-2 bottom-2 bg-[#232428] border border-[#1F2023] w-60 rounded-lg p-2 shadow-md"
+      class="fixed left-2 bottom-2 bg-[#232428] border border-[#1F2023] w-60 rounded-lg p-2 shadow-md "
     >
       <div class="flex items-center justify-between">
         <div
@@ -36,11 +37,11 @@ import { RouterLink } from '@angular/router';
 
         <div class="flex items-center flex-shrink-0">
           <button
-            (click)="microphoneActive = !microphoneActive"
+            (click)="microphoneActive.set(!microphoneActive())"
             class="p-2 hover:bg-[#3F4147] rounded transition-colors flex items-center justify-center h-8 w-8"
-            [class.text-red-500]="!microphoneActive"
+            [class.text-red-500]="!microphoneActive()"
           >
-            @if (microphoneActive) {
+            @if (microphoneActive()) {
               <lucide-icon name="mic" [img]="Mic" class="w-5 h-5 text-gray-300 hover:text-white" />
             } @else {
               <lucide-icon name="micoff" [img]="MicOff" class="w-5 h-5 text-red-500" />
@@ -48,11 +49,11 @@ import { RouterLink } from '@angular/router';
           </button>
 
           <button
-            (click)="headphonesActive = !headphonesActive"
+            (click)="headphonesActive.set(!headphonesActive())"
             class="p-2 hover:bg-[#3F4147] rounded transition-colors flex items-center justify-center h-8 w-8"
-            [class.text-red-500]="!headphonesActive"
+            [class.text-red-500]="!headphonesActive()"
           >
-            @if (headphonesActive) {
+            @if (headphonesActive()) {
               <lucide-icon
                 name="Headphones"
                 [img]="Headphones"
@@ -86,7 +87,11 @@ export class ProfileFooter {
   readonly HeadphoneOff = HeadphoneOff;
   readonly MicOff = MicOff;
 
-  user = input<UserProps>();
-  microphoneActive: boolean = true;
-  headphonesActive: boolean = true;
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
+
+  user = this.authService.user;
+
+  microphoneActive = this.userService.microphoneActive;
+  headphonesActive = this.userService.headphonesActive;
 }

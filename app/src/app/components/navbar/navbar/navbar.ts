@@ -1,8 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LucideAngularModule, Inbox, ContactRound, Settings } from 'lucide-angular';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import {
+  LucideAngularModule,
+  Inbox,
+  ContactRound,
+  Settings,
+  Handshake,
+  HatGlasses,
+} from 'lucide-angular';
 import { map } from 'rxjs';
+import { ChannelProps } from '../../../types';
+import { ChannelService } from '../../../services/channel/channel-service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +19,18 @@ import { map } from 'rxjs';
   imports: [RouterLink, LucideAngularModule],
   template: `
     <nav class="bg-slate-950 w-full h-12 flex items-center justify-between px-6">
-      @if (!id()) {
+      @if (isChat() && !isChannel()) {
+        <div class="flex flex-1 items-center gap-4 justify-center">
+          <lucide-icon [img]="HatGlasses" class="w-10 h-10 text-white rounded-full" />
+          <div class="text-white font-semibold text-lg">Private messages</div>
+        </div>
+      } @else if (!isChat() && isChannel()) {
+      } @else {
         <div class="flex flex-1 items-center gap-4 justify-center">
           <lucide-icon [img]="ContactRound" class="w-10 h-10 text-white rounded-full" />
           <div class="text-white font-semibold text-lg">Friends</div>
         </div>
-      } @else {}
+      }
 
       <div class="relative">
         <button
@@ -23,11 +38,6 @@ import { map } from 'rxjs';
           class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors font-medium relative group"
         >
           <lucide-icon [img]="Inbox" class="w-5 h-5" />
-          @if (friendRequests && friendRequests > 0) {
-            <span class="ml-2 px-2 py-1 bg-red-600 rounded-full text-xs font-bold text-white">
-              {{ friendRequests }}
-            </span>
-          }
           <div
             class="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block bg-slate-900 text-white text-sm px-2 py-1 rounded whitespace-nowrap border border-slate-600"
           >
@@ -44,15 +54,31 @@ import { map } from 'rxjs';
                 <lucide-icon [img]="Inbox" class="w-8 h-8 rounded-full bg-slate-700" />
                 <h2 class="font-semibold text-lg">Inbox</h2>
               </div>
-              <a [routerLink]="['invitations']" class="relative">
-                <img src="" alt="" class="w-6 h-6 hover:opacity-80 transition-opacity" />
+              <a
+                [routerLink]="['invitations']"
+                class="relative group flex items-center justify-center"
+              >
+                <lucide-icon
+                  [img]="Handshake"
+                  class="text-slate-400 hover:text-white transition-colors"
+                />
+
                 @if (friendRequests && friendRequests > 0) {
                   <div
-                    class="absolute -top-2 -right-2 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                    class="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-1 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold border-2 border-slate-800"
                   >
                     {{ friendRequests > 99 ? '99+' : friendRequests }}
                   </div>
                 }
+
+                <div
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50"
+                >
+                  Friend requests
+                  <div
+                    class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-black"
+                  ></div>
+                </div>
               </a>
             </header>
 
@@ -80,14 +106,35 @@ import { map } from 'rxjs';
   `,
   styleUrl: './navbar.scss',
 })
-export class Navbar {
+export class Navbar implements OnInit {
   readonly Inbox = Inbox;
   readonly ContactRound = ContactRound;
   readonly Settings = Settings;
+  readonly Handshake = Handshake;
+  readonly HatGlasses = HatGlasses;
+
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private channelService = inject(ChannelService)
+  
   activeElement: string = '';
   inboxActive: boolean = false;
-  friendRequests: number | null = null;
-  private route = inject(ActivatedRoute);
+  friendRequests: number | null = 5;
+  channel: ChannelProps| null = null
 
   id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
+
+  isChat(): boolean {
+    return this.router.url.startsWith('/chats');
+  }
+
+  isChannel(): boolean {
+    return this.router.url.startsWith('/channels');
+  }
+
+  ngOnInit(): void {
+    if (this.isChannel() && this.id())
+      this.channelService
+    }
+  
 }

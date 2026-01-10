@@ -4,14 +4,13 @@ import { RouterLink } from '@angular/router';
 import { LucideAngularModule, House, Plus, X, Camera } from 'lucide-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChannelProps } from '../../../types';
-import { ProfileImage } from '../../profile/profile-image/profile-image';
 @Component({
   selector: 'app-channel-section',
   standalone: true,
-  imports: [RouterLink, LucideAngularModule, ReactiveFormsModule, ProfileImage],
+  imports: [RouterLink, LucideAngularModule, ReactiveFormsModule],
   template: `
     <section
-      class="w-18 h-full fixed top-12 bg-[#1E1F22] flex flex-col items-center gap-2 py-3 overflow-y-auto no-scrollbar"
+      class="w-16 h-full fixed top-12 bg-[#1E1F22] flex flex-col items-center gap-2 py-3 overflow-y-auto no-scrollbar "
     >
       <a
         [routerLink]="['/']"
@@ -28,7 +27,7 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
       <div class="flex flex-col gap-3 w-full items-center">
         @for (channel of channels(); track channel.id) {
           <a
-            [routerLink]="['channels', channel.id]"
+            [routerLink]="['/channels', channel.id]"
             class="relative group w-full flex justify-center"
           >
             <div
@@ -38,7 +37,7 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
             <div
               class="flex items-center justify-center w-12 h-12 rounded-[24px] group-hover:rounded-[16px] overflow-hidden transition-all duration-300 bg-[#313338] group-hover:bg-[#5865F2]"
             >
-              <app-profile-image [src]="channel.img" class="w-full h-full object-cover" />
+              <img [src]="channel.img" [alt]="channel.name" class="w-full h-full object-cover" />
             </div>
 
             <div
@@ -59,9 +58,7 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
         </button>
 
         @if (createChannelClicked) {
-          <div
-            class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-          >
+          <div class="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm">
             <form
               [formGroup]="channelForm"
               class="bg-[#313338] w-[440px] rounded-lg shadow-2xl overflow-hidden animate-fade-in-up"

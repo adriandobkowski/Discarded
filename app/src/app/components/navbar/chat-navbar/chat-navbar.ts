@@ -108,7 +108,7 @@ import { AddFriendService } from '../../../services/friends/add-friend-service';
         }
       }
       @if (isOpen()) {
-        <app-add-friend class="absolute" />
+        <app-add-friend />
       }
     </nav>
   `,

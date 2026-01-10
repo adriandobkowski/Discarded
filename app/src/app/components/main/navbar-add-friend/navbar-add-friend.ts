@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
         <input
           type="text"
           placeholder="Enter username"
-          class="flex-1 px-3 py-2 bg-slate-700 text-white rounded border border-slate-600 placeholder-slate-400 focus:outline-none focus:border-slate-500"
+          class="flex-1 px-3 py-2  text-white rounded border border-slate-600 placeholder-slate-400 focus:outline-none focus:border-slate-500"
         />
         <button
           class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium transition-colors"

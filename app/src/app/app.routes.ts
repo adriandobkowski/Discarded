@@ -9,6 +9,7 @@ import { authenticatedGuard } from '../guards/authenticatedGuard';
 import { friendsResolver } from './resolvers/friendsResolver';
 import { Settings } from './components/settings/settings';
 import { Message } from './components/main/message/message';
+import { ChannelMessage } from './components/main/channel-message/channel-message';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canMatch: [authenticatedGuard] },
@@ -35,6 +36,7 @@ export const routes: Routes = [
         },
       },
       { path: 'chats/:id', component: Message },
+      { path: 'channels/:id', component: ChannelMessage, children: [] },
       {
         path: 'add-friend',
         component: NavbarAddFriend,

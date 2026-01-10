@@ -9,37 +9,50 @@ import { AddFriendService } from '../../../services/friends/add-friend-service';
   standalone: true,
   imports: [ProfileImage, LucideAngularModule],
   template: `
-    <div class="modal-overlay">
-      <form class="modal-content">
-        <nav class="modal-header">
-          <h2 class="text-white font-semibold text-lg">Pick friends</h2>
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+      <form class="flex w-[440px] flex-col rounded bg-[#313338] shadow-2xl">
+        <nav class="flex items-center justify-between px-4 py-4 shadow-sm">
+          <h2 class="text-base font-semibold text-[#F2F3F5]">Pick friends</h2>
           <button
             type="button"
-            (click)="this.addFriendService.isOpen.set(false)"
-            class="modal-close"
+            (click)="addFriendService.isOpen.set(false)"
+            class="text-[#B5BAC1] hover:text-[#DBDEE1]"
           >
-            <lucide-icon [img]="X" class="w-5 h-5" />
+            <lucide-icon [img]="X" class="h-6 w-6" />
           </button>
         </nav>
 
-        <div class="modal-body">
-          <input type="text" placeholder="Enter friends username" class="search-input" />
+        <div class="p-4">
+          <input
+            type="text"
+            placeholder="Enter friends username"
+            class="mb-4 w-full rounded bg-[#1E1F22] p-2.5 text-[#DBDEE1] placeholder-[#87898C] outline-none"
+          />
 
-          <div class="users-list">
+          <div class="flex max-h-[300px] flex-col gap-0.5 overflow-y-auto pr-1">
             @for (user of users(); track user.id) {
-              <div class="user-item">
-                <div class="user-info">
-                  <app-profile-image [src]="user?.img" />
-                  <div class="user-name">{{ user.username }}</div>
+              <div
+                class="group flex cursor-pointer items-center justify-between rounded px-2.5 py-2 hover:bg-[#35373C]"
+                (click)="toggleUser(user.id)"
+                (keydown.enter)="toggleUser(user.id)"
+                tabindex="0"
+              >
+                <div class="flex items-center gap-3">
+                  <div class="h-8 w-8 overflow-hidden rounded-full">
+                    <app-profile-image [src]="user?.img" />
+                  </div>
+                  <div class="font-medium text-[#F2F3F5] group-hover:text-[#DBDEE1]">
+                    {{ user.username }}
+                  </div>
                 </div>
                 <button
                   type="button"
-                  (click)="toggleUser(user.id)"
-                  [class.selected]="isSelected(user.id)"
-                  class="checkbox-btn"
+                  [class.bg-[#5865F2]]="isSelected(user.id)"
+                  [class.border-[#5865F2]]="isSelected(user.id)"
+                  class="flex h-5 w-5 items-center justify-center rounded border border-[#6D6F78]"
                 >
                   @if (isSelected(user.id)) {
-                    <lucide-icon [img]="Check" class="w-4 h-4" />
+                    <lucide-icon [img]="Check" class="h-3.5 w-3.5 text-white" />
                   }
                 </button>
               </div>
@@ -47,16 +60,24 @@ import { AddFriendService } from '../../../services/friends/add-friend-service';
           </div>
         </div>
 
-        <footer class="modal-footer">
-          <button type="button" (click)="addFriendService.isOpen.set(false)" class="btn-secondary">
+        <footer class="flex justify-end gap-3 rounded-b bg-[#2B2D31] p-4">
+          <button
+            type="button"
+            (click)="addFriendService.isOpen.set(false)"
+            class="px-4 py-2 text-sm font-medium text-white hover:underline"
+          >
             Cancel
           </button>
-          <button type="submit" class="btn-primary">Create group</button>
+          <button
+            type="submit"
+            class="rounded bg-[#5865F2] px-9 py-2 text-sm font-medium text-white transition-colors hover:bg-[#4752C4]"
+          >
+            Create group
+          </button>
         </footer>
       </form>
     </div>
   `,
-  styleUrl: './add-friend.scss',
 })
 export class AddFriend {
   readonly Check = Check;

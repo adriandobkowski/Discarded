@@ -25,9 +25,11 @@ export interface MessageProps {
   message: string;
   createdAt: Date;
 }
+
 export interface RoomProps {
   id: string;
   name: string;
+  type: string;
   messages: MessageProps[];
 }
 export interface ChannelProps {
@@ -44,5 +46,5 @@ export interface ChatProps {
 }
 export interface ExtendedChatProps {
   user: UserProps;
-  chatId: string;
+  chatId?: string;
 }

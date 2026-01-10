@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LucideAngularModule, Plus } from 'lucide-angular';
+import { ChannelService } from '../../../services/channel/channel-service';
 
 @Component({
   selector: 'app-message-footer',
@@ -21,6 +22,7 @@ import { LucideAngularModule, Plus } from 'lucide-angular';
           <input
             type="text"
             placeholder="Message {{ activeChat }}"
+            disabled="{{ messageDisabled() }}"
             class="flex-1 bg-transparent text-gray-100 placeholder-gray-500 py-2.5 text-sm focus:outline-none transition-colors font-normal"
           />
         </div>
@@ -31,6 +33,9 @@ import { LucideAngularModule, Plus } from 'lucide-angular';
 })
 export class MessageFooter {
   readonly Plus = Plus;
+
+  private channelService = inject(ChannelService);
+
   messageForm = new FormGroup({
     input: new FormControl<string>('', {
       validators: [Validators.required],
@@ -40,6 +45,8 @@ export class MessageFooter {
     }),
   });
   activeChat: string = '';
+
+  messageDisabled = this.channelService.messageDisabled;
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
