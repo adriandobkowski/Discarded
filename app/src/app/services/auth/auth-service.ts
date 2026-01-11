@@ -16,7 +16,7 @@ export class AuthService {
   token = signal<string | null>(localStorage.getItem('token'));
   user = signal<UserProps | null>(JSON.parse(localStorage.getItem('user') ?? 'null'));
   user$ = toObservable(this.user);
-  
+
   register(user: LoginProps & UserProps) {
     return this.http
       .post<LoginResponse>(`${url}/register`, {
@@ -62,7 +62,6 @@ export class AuthService {
       map((users) => {
         const currentUser: UserProps = {
           ...users[0],
-          status: 'online',
         };
         localStorage.setItem('user', JSON.stringify(currentUser));
         this.user.set(currentUser);

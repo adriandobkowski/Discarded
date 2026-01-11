@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { UserProps } from '../../../types';
+import { Component, inject } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
+import { UserService } from '../../../services/user/user-service';
 
 @Component({
   selector: 'app-root-aside',
@@ -41,5 +41,7 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
   styleUrl: './root-aside.scss',
 })
 export class RootAside {
-  activeUsers = signal<UserProps[]>([]);
+  private userService = inject(UserService);
+
+  activeUsers = this.userService.activeUsers;
 }

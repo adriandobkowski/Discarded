@@ -24,7 +24,8 @@ export class ChatService {
   findChattedWithUser(id: string): Observable<UserProps> {
     return this.http.get<ChatProps>(`${url}/chats/${id}`).pipe(
       map(
-        (chat: ChatProps) => chat.userIds.filter((userId: string) => userId !== this.user()?.id)[0],
+        (chat: ChatProps) =>
+          chat.userIds.find((userId: string) => userId !== this.user()?.id) as string,
       ),
       switchMap((userId: string) => {
         return this.http.get<UserProps>(`${url}/users/${userId}`);

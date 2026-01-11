@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { UserProps } from '../types';
 import { UserService } from '../services/user/user-service';
 import { AuthService } from '../services/auth/auth-service';
-import { filter, switchMap, take } from 'rxjs';
+import { filter, switchMap, take, tap } from 'rxjs';
 
 export const friendsResolver: ResolveFn<UserProps[]> = () => {
   const userService = inject(UserService);
@@ -14,8 +14,11 @@ export const friendsResolver: ResolveFn<UserProps[]> = () => {
     filter((user): user is UserProps => !!user),
     take(1),
     switchMap(() => {
-      const status = router.url.includes('/active') ? undefined : 'online';
+      const status = router.url.includes('/active') ? 'online' : undefined;
       return userService.findFriends(status);
+    }),
+    tap((friends: UserProps[]) => {
+      userService.activeUsers.set(friends);
     }),
   );
 };

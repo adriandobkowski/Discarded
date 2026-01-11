@@ -1,6 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
-import { UserProps } from '../../../types';
+import { Component, effect, inject } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
+import { ChannelService } from '../../../services/channel/channel-service';
+import { UserProps } from '../../../types';
 
 @Component({
   selector: 'app-channel-aside',
@@ -10,10 +11,10 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
     <div class="flex flex-col gap-6 py-4">
       <div>
         <div class="text-slate-400 text-xs uppercase tracking-wide font-semibold px-4 mb-3">
-          Active - {{ activeUsers().length }}
+          Active - {{ activeChannelUsers().length }}
         </div>
         <div class="flex flex-col gap-2 px-2">
-          @for (user of activeUsers(); track user.id) {
+          @for (user of activeChannelUsers(); track user.id) {
             <div
               class="flex items-center gap-3 p-2 rounded hover:bg-slate-700/50 transition-colors cursor-pointer"
             >
@@ -25,10 +26,10 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
       </div>
       <div>
         <div class="text-slate-400 text-xs uppercase tracking-wide font-semibold px-4 mb-3">
-          Busy - {{ busyUsers().length }}
+          Busy - {{ busyChannelUsers().length }}
         </div>
         <div class="flex flex-col gap-2 px-2">
-          @for (user of busyUsers(); track user.id) {
+          @for (user of busyChannelUsers(); track user.id) {
             <div
               class="flex items-center gap-3 p-2 rounded hover:bg-slate-700/50 transition-colors cursor-pointer"
             >
@@ -40,10 +41,10 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
       </div>
       <div>
         <div class="text-slate-400 text-xs uppercase tracking-wide font-semibold px-4 mb-3">
-          Inactive - {{ inactiveUsers().length }}
+          Inactive - {{ inactiveChannelUsers().length }}
         </div>
         <div class="flex flex-col gap-2 px-2">
-          @for (user of inactiveUsers(); track user.id) {
+          @for (user of inactiveChannelUsers(); track user.id) {
             <div
               class="flex items-center gap-3 p-2 rounded hover:bg-slate-700/50 transition-colors cursor-pointer"
             >
@@ -58,11 +59,29 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
   styleUrl: './channel-aside.scss',
 })
 export class ChannelAside {
-  users = signal<UserProps[]>([]);
+  private channelService = inject(ChannelService);
 
-  activeUsers = computed(() => this.users().filter((user: UserProps) => user.status === 'online'));
-  busyUsers = computed(() => this.users().filter((user: UserProps) => user.status === 'busy'));
-  inactiveUsers = computed(() =>
-    this.users().filter((user: UserProps) => user.status === 'offline'),
-  );
+  channelUsers = this.channelService.channelUsers;
+
+  activeChannelUsers = this.channelService.activeChannelUsers;
+  busyChannelUsers = this.channelService.busyChannelUsers;
+  inactiveChannelUsers = this.channelService.inactiveChannelUsers;
+
+  currentChannel = this.channelService.currentChannel;
+
+  constructor() {
+    effect(() => {
+      const currentChatId = this.currentChannel()?.id;
+      if (currentChatId) {
+        this.channelService.findChannelUsers(this.currentChannel()!.id).subscribe({
+          next: (response: UserProps[]) => {
+            this.channelUsers.set(response);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
 }

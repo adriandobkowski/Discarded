@@ -2,8 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ContactRound, Plus } from 'lucide-angular';
-import { AddFriendService } from '../../../services/friends/add-friend-service';
-import { AddFriend } from '../../friends/add-friend/add-friend';
+import { AddFriend } from '../../modal/add-friend/add-friend';
 import { UserService } from '../../../services/user/user-service';
 import { ChatService } from '../../../services/chat/chat-service';
 import { ExtendedUserProps } from '../../../types';
@@ -72,13 +71,11 @@ export class ChatSection implements OnInit {
   readonly ContactRound = ContactRound;
   readonly Plus = Plus;
 
-  private addFriendService = inject(AddFriendService);
-
   private userService = inject(UserService);
 
   private chatService = inject(ChatService);
 
-  isOpen = this.addFriendService.isOpen;
+  isOpen = this.userService.addFriendIsOpen;
 
   chattedWithFriends = this.chatService.chattedWithUsers();
 

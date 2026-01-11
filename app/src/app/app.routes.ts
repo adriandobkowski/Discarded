@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { RootLayout } from './components/layouts/root-layout/root-layout';
-import { FriendsPage } from './components/friends/friends-page/friends-page';
+import { FriendsPage } from './components/main/friends-page/friends-page';
 import { NavbarAddFriend } from './components/main/navbar-add-friend/navbar-add-friend';
 import { authGuard } from '../guards/guard';
 import { Login } from './components/auth/login/login';
@@ -49,10 +49,16 @@ export const routes: Routes = [
     ],
   },
 
-  { path: 'chats', component: ChatLayout, children: [{ path: ':id', component: Message }] },
+  {
+    path: 'chats',
+    component: ChatLayout,
+    children: [{ path: ':id', component: Message }],
+    canMatch: [authGuard],
+  },
   {
     path: 'channels',
     component: ChannelLayout,
     children: [{ path: ':id', component: ChannelMessage }],
+    canMatch: [authGuard],
   },
 ];

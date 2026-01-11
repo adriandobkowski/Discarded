@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { LucideAngularModule, ContactRound, MessageCirclePlus } from 'lucide-angular';
-import { AddFriendService } from '../../../services/friends/add-friend-service';
-import { AddFriend } from '../../friends/add-friend/add-friend';
+import { AddFriend } from '../../modal/add-friend/add-friend';
+import { RouterLink } from '@angular/router';
+import { UserService } from '../../../services/user/user-service';
 
 @Component({
   selector: 'app-root-navbar',
-  imports: [LucideAngularModule, AddFriend],
+  imports: [LucideAngularModule, AddFriend, RouterLink],
   template: `
     <nav
       class="bg-[#313338] h-12 w-full flex items-center justify-between border-b border-[#1F2023] shadow-md pl-4 pr-4"
@@ -26,14 +27,14 @@ import { AddFriend } from '../../friends/add-friend/add-friend';
               Online
             </a>
             <a
-              routerLink="active"
+              [routerLink]="['active']"
               routerLinkActive="bg-[#3F4147] text-white"
               class="px-3 py-1 hover:bg-[#35373C] text-gray-300 hover:text-gray-100 rounded transition-colors text-sm font-medium"
             >
               Active
             </a>
             <a
-              routerLink="all"
+              [routerLink]="['all']"
               routerLinkActive="bg-[#3F4147] text-white"
               class="px-3 py-1 hover:bg-[#35373C] text-gray-300 hover:text-gray-100 rounded transition-colors text-sm font-medium"
             >
@@ -41,7 +42,7 @@ import { AddFriend } from '../../friends/add-friend/add-friend';
             </a>
 
             <a
-              routerLink="add-friend"
+              [routerLink]="['add-friend']"
               class="px-3 py-1 bg-[#248046] hover:bg-[#1A6334] text-white rounded transition-colors text-sm font-bold ml-2 shadow-sm"
             >
               Add Friend
@@ -75,6 +76,6 @@ export class RootNavbar {
   readonly ContactRound = ContactRound;
   readonly MessageCirclePlus = MessageCirclePlus;
 
-  private addFriendService = inject(AddFriendService);
-  isOpen = this.addFriendService.isOpen;
+  private userService = inject(UserService);
+  isOpen = this.userService.addFriendIsOpen;
 }

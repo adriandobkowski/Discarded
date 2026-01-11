@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { ChannelProps, RoomProps, UserProps } from '../../types';
 import { url } from '../../../api';
@@ -13,6 +13,20 @@ export class ChannelService {
   private authService = inject(AuthService);
 
   user = this.authService.user;
+
+  channelUsers = signal<UserProps[]>([]);
+
+  createChannelClicked = signal<boolean>(false);
+
+  activeChannelUsers = computed(() =>
+    this.channelUsers().filter((user: UserProps) => user.status === 'online'),
+  );
+  busyChannelUsers = computed(() =>
+    this.channelUsers().filter((user: UserProps) => user.status === 'busy'),
+  );
+  inactiveChannelUsers = computed(() =>
+    this.channelUsers().filter((user: UserProps) => user.status === 'offline'),
+  );
 
   channels = signal<ChannelProps[]>([]);
 
@@ -65,5 +79,22 @@ export class ChannelService {
     return this.http.patch<ChannelProps>(`${url}/channels/${channel.id}`, {
       userIds: [...channel.userIds, userId],
     });
+  }
+  findChannelUsers(id: string): Observable<UserProps[]> {
+    return this.http.get<ChannelProps>(`${url}/channels/${id}`).pipe(
+      map((channel: ChannelProps) =>
+        channel.userIds.filter((userId: string) => userId !== this.user()?.id),
+      ),
+      switchMap((userIds: string[]) => {
+        if (userIds.length === 0) {
+          return of([]);
+        }
+        return forkJoin(
+          userIds.map((userId: string) => {
+            return this.http.get<UserProps>(`${url}/users/${userId}`);
+          }),
+        );
+      }),
+    );
   }
 }

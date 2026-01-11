@@ -3,19 +3,19 @@ import { UserProps } from '../../../types';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { Check, X } from 'lucide-angular';
 import { LucideAngularModule } from 'lucide-angular';
-import { AddFriendService } from '../../../services/friends/add-friend-service';
+import { UserService } from '../../../services/user/user-service';
 @Component({
   selector: 'app-add-friend',
   standalone: true,
   imports: [ProfileImage, LucideAngularModule],
   template: `
-    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+    <div class="fixed inset-0 z-2000 flex items-center justify-center bg-black/70">
       <form class="flex w-[440px] flex-col rounded bg-[#313338] shadow-2xl">
         <nav class="flex items-center justify-between px-4 py-4 shadow-sm">
           <h2 class="text-base font-semibold text-[#F2F3F5]">Pick friends</h2>
           <button
             type="button"
-            (click)="addFriendService.isOpen.set(false)"
+            (click)="userService.addFriendIsOpen.set(false)"
             class="text-[#B5BAC1] hover:text-[#DBDEE1]"
           >
             <lucide-icon [img]="X" class="h-6 w-6" />
@@ -63,7 +63,7 @@ import { AddFriendService } from '../../../services/friends/add-friend-service';
         <footer class="flex justify-end gap-3 rounded-b bg-[#2B2D31] p-4">
           <button
             type="button"
-            (click)="addFriendService.isOpen.set(false)"
+            (click)="userService.addFriendIsOpen.set(false)"
             class="px-4 py-2 text-sm font-medium text-white hover:underline"
           >
             Cancel
@@ -86,7 +86,7 @@ export class AddFriend {
 
   selectedUsers = new Set<string>();
 
-  addFriendService = inject(AddFriendService);
+  userService = inject(UserService);
 
   isSelected(userId: string): boolean {
     return this.selectedUsers.has(userId);
@@ -98,9 +98,5 @@ export class AddFriend {
     } else {
       this.selectedUsers.add(userId);
     }
-  }
-
-  closeSidebar(): void {
-    this.addFriendService.isOpen.set(false);
   }
 }
