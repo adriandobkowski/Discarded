@@ -1,15 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, House, Plus, X, Camera } from 'lucide-angular';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LucideAngularModule, House, Plus } from 'lucide-angular';
 import { ChannelProps } from '../../../types';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { CreateChannelModal } from '../../modal/create-channel-modal/create-channel-modal';
 @Component({
   selector: 'app-channel-section',
   standalone: true,
-  imports: [RouterLink, LucideAngularModule, ReactiveFormsModule, CreateChannelModal],
+  imports: [RouterLink, LucideAngularModule],
   template: `
     <section
       class="w-16 h-full fixed top-12 bg-[#1E1F22] flex flex-col items-center gap-2 py-3 overflow-y-auto no-scrollbar "
@@ -58,10 +55,6 @@ import { CreateChannelModal } from '../../modal/create-channel-modal/create-chan
         >
           <lucide-icon [img]="Plus" class="w-6 h-6 transition-colors" />
         </button>
-
-        @if (createChannelClicked()) {
-          <app-create-channel-modal [channelForm]="channelForm" />
-        }
       </div>
     </section>
   `,
@@ -70,21 +63,12 @@ import { CreateChannelModal } from '../../modal/create-channel-modal/create-chan
 export class ChannelSection implements OnInit {
   readonly House = House;
   readonly Plus = Plus;
-  readonly X = X;
-  readonly Camera = Camera;
 
   private channelService = inject(ChannelService);
 
   channels = this.channelService.channels();
 
   createChannelClicked = this.channelService.createChannelClicked;
-
-  channelForm = new FormGroup({
-    img: new FormControl<string | null>(null),
-    name: new FormControl<string>('', {
-      validators: [Validators.required],
-    }),
-  });
   ngOnInit(): void {
     this.channelService.findAll().subscribe({
       next: (response: ChannelProps[]) => {

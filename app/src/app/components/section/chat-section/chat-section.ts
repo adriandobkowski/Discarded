@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ContactRound, Plus } from 'lucide-angular';
-import { AddFriend } from '../../modal/add-friend/add-friend';
 import { UserService } from '../../../services/user/user-service';
 import { ChatService } from '../../../services/chat/chat-service';
 import { ExtendedUserProps } from '../../../types';
@@ -10,7 +9,7 @@ import { ExtendedUserProps } from '../../../types';
 @Component({
   selector: 'app-chat-section',
   standalone: true,
-  imports: [ProfileImage, RouterLink, LucideAngularModule, AddFriend],
+  imports: [ProfileImage, RouterLink, LucideAngularModule],
   template: `
     <section
       class="fixed left-16 top-12 w-48 h-full bg-[#2B2D31] text-gray-300 flex flex-col overflow-hidden border-t border-[#1F2023]"
@@ -60,9 +59,6 @@ import { ExtendedUserProps } from '../../../types';
           }
         </main>
       </div>
-      @if (isOpen()) {
-        <app-add-friend class="absolute" />
-      }
     </section>
   `,
   styleUrl: './chat-section.scss',
@@ -75,9 +71,8 @@ export class ChatSection implements OnInit {
 
   private chatService = inject(ChatService);
 
-  isOpen = this.userService.addFriendIsOpen;
-
   chattedWithFriends = this.chatService.chattedWithUsers();
+  isOpen = this.userService.addFriendIsOpen;
 
   isArray = Array.isArray;
 

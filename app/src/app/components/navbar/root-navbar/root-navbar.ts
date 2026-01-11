@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { LucideAngularModule, ContactRound, MessageCirclePlus } from 'lucide-angular';
-import { AddFriend } from '../../modal/add-friend/add-friend';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user/user-service';
 
 @Component({
   selector: 'app-root-navbar',
-  imports: [LucideAngularModule, AddFriend, RouterLink],
+  imports: [LucideAngularModule, RouterLink],
   template: `
     <nav
       class="bg-[#313338] h-12 w-full flex items-center justify-between border-b border-[#1F2023] shadow-md pl-4 pr-4"
@@ -65,9 +64,6 @@ import { UserService } from '../../../services/user/user-service';
           </button>
         </div>
       </div>
-      @if (isOpen()) {
-        <app-add-friend />
-      }
     </nav>
   `,
   styleUrl: './root-navbar.scss',

@@ -9,7 +9,9 @@ import { UserService } from '../../../services/user/user-service';
   standalone: true,
   imports: [ProfileImage, LucideAngularModule],
   template: `
-    <div class="fixed inset-0 z-2000 flex items-center justify-center bg-black/70">
+    <div
+      class="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
+    >
       <form class="flex w-[440px] flex-col rounded bg-[#313338] shadow-2xl">
         <nav class="flex items-center justify-between px-4 py-4 shadow-sm">
           <h2 class="text-base font-semibold text-[#F2F3F5]">Pick friends</h2>

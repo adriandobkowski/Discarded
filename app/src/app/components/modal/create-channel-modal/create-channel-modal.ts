@@ -1,5 +1,5 @@
-import { Component, inject, input } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Camera, LucideAngularModule, Plus, X } from 'lucide-angular';
 import { ChannelService } from '../../../services/channel/channel-service';
 
@@ -7,10 +7,11 @@ import { ChannelService } from '../../../services/channel/channel-service';
   selector: 'app-create-channel-modal',
   imports: [ReactiveFormsModule, LucideAngularModule],
   template: ` <div
-    class="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm "
+    class="fixed inset-0  flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
   >
     <form
-      [formGroup]="channelForm()!"
+      [formGroup]="channelForm"
+      (ngSubmit)="onSubmit()"
       class="bg-[#313338] w-[440px] rounded-lg shadow-2xl overflow-hidden animate-fade-in-up"
     >
       <nav class="p-6 text-center relative">
@@ -91,12 +92,21 @@ export class CreateChannelModal {
 
   private channelService = inject(ChannelService);
 
-  channelForm = input<
-    FormGroup<{
-      img: FormControl<string | null>;
-      name: FormControl<string | null>;
-    }>
-  >();
+  channelForm = new FormGroup({
+    img: new FormControl<string | null>(null),
+    name: new FormControl<string>('', {
+      validators: [Validators.required],
+    }),
+  });
 
   createChannelClicked = this.channelService.createChannelClicked;
+
+  onSubmit(): void {
+    if (this.channelForm.invalid) {
+      this.channelForm.markAllAsTouched();
+      return;
+    }
+
+    this.createChannelClicked.set(false);
+  }
 }

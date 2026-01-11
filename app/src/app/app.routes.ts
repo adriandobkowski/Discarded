@@ -12,6 +12,7 @@ import { Message } from './components/main/message/message';
 import { ChatLayout } from './components/layouts/chat-layout/chat-layout';
 import { ChannelLayout } from './components/layouts/channel-layout/channel-layout';
 import { ChannelMessage } from './components/main/channel-message/channel-message';
+import { PageNotFound } from './components/main/page-not-found/page-not-found';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canMatch: [authenticatedGuard] },
@@ -61,4 +62,5 @@ export const routes: Routes = [
     children: [{ path: ':id', component: ChannelMessage }],
     canMatch: [authGuard],
   },
+  { path: '**', pathMatch: 'full', component: PageNotFound },
 ];
