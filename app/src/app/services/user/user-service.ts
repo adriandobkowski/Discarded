@@ -41,6 +41,8 @@ export class UserService {
 
   inboxActive = signal<boolean>(false);
 
+  inviteToChannelModalActive = signal<boolean>(false);
+
   findById(): Observable<UserProps> {
     return this.http.get<UserProps>(`${url}/${this.authService.user()!.id}`);
   }

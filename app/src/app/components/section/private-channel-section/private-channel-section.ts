@@ -34,7 +34,7 @@ import { RoomService } from '../../../services/room/room-service';
         </button>
         <button
           class="text-gray-400 hover:text-white transition-colors"
-          (click)="$event.stopPropagation()"
+          (click)="inviteToChannelModalActive.set(!inviteToChannelModalActive())"
         >
           <lucide-icon [img]="UserRoundPlus" class="w-5 h-5" />
         </button>
@@ -62,12 +62,6 @@ import { RoomService } from '../../../services/room/room-service';
               }
               <span class="font-medium truncate group-hover:text-gray-200">{{ room.name }}</span>
             </div>
-            <button
-              class="text-gray-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"
-              (click)="$event.preventDefault(); $event.stopPropagation()"
-            >
-              <lucide-icon [img]="UserRoundPlus" class="w-4 h-4" />
-            </button>
           </a>
         }
       </main>
@@ -91,6 +85,8 @@ export class PrivateChannelSection {
   rooms: RoomProps[] = [];
 
   navbarClicked: boolean = false;
+
+  inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
   constructor() {
     effect(() => {

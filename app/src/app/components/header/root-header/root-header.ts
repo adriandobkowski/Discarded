@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule, Inbox, ContactRound, Settings, Handshake } from 'lucide-angular';
@@ -34,7 +34,7 @@ import { UserService } from '../../../services/user/user-service';
   `,
   styleUrl: './root-header.scss',
 })
-export class RootHeader {
+export class RootHeader implements OnDestroy {
   readonly Inbox = Inbox;
   readonly ContactRound = ContactRound;
   readonly Settings = Settings;
@@ -50,4 +50,7 @@ export class RootHeader {
   inboxActive = this.userService.inboxActive;
 
   id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
+  ngOnDestroy(): void {
+    this.inboxActive.set(false);
+  }
 }

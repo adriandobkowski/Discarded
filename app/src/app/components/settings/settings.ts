@@ -39,7 +39,7 @@ import { Router, RouterLink } from '@angular/router';
             </div>
           </main>
         </section>
-        <main class="flex-1 px-10 py-14 bg-[#313338] overflow-y-auto">
+        <main class="flex-1 px-10 py-4 bg-[#313338] overflow-y-auto">
           <nav class="flex justify-between items-start mb-6 max-w-3xl">
             <div class="text-xl font-bold text-white">My account</div>
             <div class="flex flex-col items-center group cursor-pointer">
@@ -116,16 +116,15 @@ import { Router, RouterLink } from '@angular/router';
               </div>
             </div>
 
-            @if (updateForm.dirty) {
-              <div class="mt-8 flex justify-center">
-                <button
-                  type="submit"
-                  class="bg-[#248046] hover:bg-[#1A6334] text-white px-6 py-2 rounded font-medium transition-colors shadow-md"
-                >
-                  Save Changes
-                </button>
-              </div>
-            }
+            <div class="mt-8 flex justify-center">
+              <button
+                type="submit"
+                [disabled]="!updateForm.dirty"
+                class="bg-[#248046] hover:enabled:bg-[#1A6334] text-white px-6 py-2 rounded font-medium transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Save Changes
+              </button>
+            </div>
           </form>
         </main>
       </div>

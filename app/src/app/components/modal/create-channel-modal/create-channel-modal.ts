@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Camera, LucideAngularModule, Plus, X } from 'lucide-angular';
 import { ChannelService } from '../../../services/channel/channel-service';
+import { ChannelProps } from '../../../types';
 
 @Component({
   selector: 'app-create-channel-modal',
@@ -60,10 +61,6 @@ import { ChannelService } from '../../../services/channel/channel-service';
             formControlName="name"
             class="w-full p-2.5 bg-[#1E1F22] text-white rounded outline-none focus:ring-2 focus:ring-[#00A8FC] font-medium"
           />
-          <div class="text-xs text-gray-500 mt-1">
-            By creating a server, you agree to Discord's
-            <a href="#" class="text-[#00A8FC] hover:underline">Community Guidelines</a>.
-          </div>
         </div>
       </div>
       <div class="bg-[#2B2D31] p-4 flex justify-between items-center">
@@ -106,6 +103,7 @@ export class CreateChannelModal {
       this.channelForm.markAllAsTouched();
       return;
     }
+    this.channelService.createChannel(this.channelForm.getRawValue() as ChannelProps);
 
     this.createChannelClicked.set(false);
   }

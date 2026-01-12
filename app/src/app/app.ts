@@ -7,10 +7,18 @@ import { AddFriend } from './components/modal/add-friend/add-friend';
 import { ChangeUserStatusModal } from './components/modal/change-user-status-modal/change-user-status-modal';
 import { AuthService } from './services/auth/auth-service';
 import { InboxModal } from './components/modal/inbox-modal/inbox-modal';
+import { InviteToChannelModal } from './components/modal/invite-to-channel-modal/invite-to-channel-modal';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CreateChannelModal, AddFriend, ChangeUserStatusModal, InboxModal],
+  imports: [
+    RouterOutlet,
+    CreateChannelModal,
+    AddFriend,
+    ChangeUserStatusModal,
+    InboxModal,
+    InviteToChannelModal,
+  ],
   template: `
     <router-outlet />
 
@@ -25,6 +33,9 @@ import { InboxModal } from './components/modal/inbox-modal/inbox-modal';
     }
     @if (inboxActive()) {
       <app-inbox-modal />
+    }
+    @if (inviteToChannelModalActive()) {
+      <app-invite-to-channel-modal />
     }
   `,
   styleUrl: './app.scss',
@@ -45,6 +56,8 @@ export class App {
   statusModalOpen = this.userService.statusModalOpen;
 
   inboxActive = this.userService.inboxActive;
+
+  inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
   constructor() {
     effect(() => {

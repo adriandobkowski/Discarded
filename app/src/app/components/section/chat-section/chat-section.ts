@@ -14,14 +14,6 @@ import { ExtendedUserProps } from '../../../types';
     <section
       class="fixed left-16 top-12 w-48 h-full bg-[#2B2D31] text-gray-300 flex flex-col overflow-hidden border-t border-[#1F2023]"
     >
-      <header class="p-2 ">
-        <input
-          type="text"
-          placeholder="Find or start a conversation"
-          class="truncate w-full px-2 py-1.5 bg-[#1E1F22] text-white rounded text-sm placeholder-gray-400 focus:outline-none transition-all"
-        />
-      </header>
-
       <nav
         class="flex items-center gap-3 px-4 py-2 hover:bg-[#35373C] hover:text-white cursor-pointer transition-colors mt-1"
       >

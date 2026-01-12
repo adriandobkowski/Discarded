@@ -18,6 +18,8 @@ export class ChannelService {
 
   createChannelClicked = signal<boolean>(false);
 
+  inviteToChannelModalActive = signal<boolean>(false);
+
   activeChannelUsers = computed(() =>
     this.channelUsers().filter((user: UserProps) => user.status === 'online'),
   );
@@ -57,15 +59,6 @@ export class ChannelService {
     return this.http.post<ChannelProps>(`${url}/channels`, { ...channelData });
   }
 
-  addToChannel(userId: string): Observable<ChannelProps> {
-    const channel = this.currentChannel();
-    if (!channel) {
-      throw new Error('No active channel selected');
-    }
-    return this.http.patch<ChannelProps>(`${url}/channels/${channel.id}`, {
-      userIds: [...channel.userIds, userId],
-    });
-  }
   findChannelUsers(id: string): Observable<UserProps[]> {
     return this.http.get<ChannelProps>(`${url}/channels/${id}`).pipe(
       map((channel: ChannelProps) =>
@@ -82,5 +75,31 @@ export class ChannelService {
         );
       }),
     );
+  }
+  inviteToChannel(id: string, userId: string): Observable<ChannelProps> {
+    return this.http.get<ChannelProps>(`${url}/channels/${id}`).pipe(
+      switchMap((channel) => {
+        if (channel.userIds.includes(userId)) {
+          return of(channel);
+        }
+
+        const updatedUserIds = [...channel.userIds, userId];
+
+        return this.http.patch<ChannelProps>(`${url}/channels/${id}`, {
+          userIds: updatedUserIds,
+        });
+      }),
+    );
+  }
+  findFriendsToInviteToChannel(id: string): Observable<UserProps[]> {
+    return this.http
+      .get<ChannelProps>(`${url}/channels/${id}`)
+      .pipe(
+        switchMap((channel: ChannelProps) =>
+          this.http
+            .get<UserProps[]>(`${url}/users`)
+            .pipe(map((users) => users.filter((user) => !channel.userIds.includes(user.id)))),
+        ),
+      );
   }
 }
