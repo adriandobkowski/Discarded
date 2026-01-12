@@ -1,15 +1,13 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, HostListener, inject, input, signal } from '@angular/core';
 import { UserProps } from '../../../types';
 import { Search } from '../search/search';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map } from 'rxjs';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-angular';
+import { UserService } from '../../../services/user/user-service';
 @Component({
   selector: 'app-friends-page',
   standalone: true,
-  imports: [Search, ProfileImage, LucideAngularModule, RouterLink],
+  imports: [Search, ProfileImage, LucideAngularModule],
   template: `
     <div class="flex flex-col h-full">
       <nav class="border-b border-slate-700 p-4">
@@ -22,7 +20,7 @@ import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-ang
           All friends - {{ this.filteredfriends().length }}
         }
       </div>
-      <main class="flex-1 overflow-y-auto">
+      <main class="flex-1 overflow-y-auto" (scroll)="closeMenu()">
         @for (user of filteredfriends(); track user.id) {
           <div
             class="border-b border-slate-700 hover:bg-slate-700/50 transition-colors p-4 flex items-center justify-between group"
@@ -34,18 +32,29 @@ import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-ang
                 <div class="text-slate-400 text-xs truncate">{{ user.status }}</div>
               </div>
             </div>
-            <div class="flex gap-2 ml-2">
-              <a
-                routerLink=""
-                class="p-2 bg-[#2B2D31] hover:text-gray-400 rounded-full transition-colors text-white"
-              >
-                <lucide-icon [img]="MessageCircle" class="w-5 h-5 fill-current" />
-              </a>
-              <a
-                class="p-2 bg-[#2B2D31] hover:text-gray-400 rounded-full transition-colors text-white"
+            <div class="relative flex gap-2 ml-2">
+              <button
+                class="p-2 bg-[#2B2D31] hover:text-gray-400 rounded-full transition-colors text-white cursor-pointer"
+                (click)="toggleMenu(user.id, $event)"
               >
                 <lucide-icon [img]="EllipsisVertical" class="w-5 h-5" />
-              </a>
+              </button>
+
+              @if (activeMenuUserId() === user.id) {
+                <button
+                  class="more-menu"
+                  (click)="$event.stopPropagation()"
+                  [style.top]="menuPosition().top"
+                  [style.right]="menuPosition().right"
+                >
+                  <button
+                    class="more-menu__item text-red-500 hover:text-red-400"
+                    (click)="removeFriend(user.id)"
+                  >
+                    Remove friend
+                  </button>
+                </button>
+              }
             </div>
           </div>
         }
@@ -58,25 +67,58 @@ export class FriendsPage {
   readonly MessageCircle = MessageCircle;
   readonly EllipsisVertical = EllipsisVertical;
 
-  private router = inject(Router);
+  private userService = inject(UserService);
 
-  routerUrl = toSignal(
-    this.router.events.pipe(
-      filter((e) => e instanceof NavigationEnd),
-      map(() => this.router.url),
-    ),
-    { initialValue: this.router.url },
-  );
+  currentRoute = this.userService.currentRoute;
 
-  currentRoute = computed(() => this.routerUrl());
+  activeMenuUserId = signal<string | null>(null);
+  menuPosition = signal<{ top: string; right: string }>({ top: '0px', right: '0px' });
 
-  friends = input<UserProps[]>([]);
+  @HostListener('document:click')
+  closeMenu() {
+    this.activeMenuUserId.set(null);
+  }
+
+  toggleMenu(userId: string, event: Event) {
+    event.stopPropagation();
+    if (this.activeMenuUserId() === userId) {
+      this.activeMenuUserId.set(null);
+      return;
+    }
+
+    const button = event.currentTarget as HTMLElement;
+    const rect = button.getBoundingClientRect();
+
+    this.menuPosition.set({
+      top: `${rect.bottom + 8}px`,
+      right: `${window.innerWidth - rect.right}px`,
+    });
+    this.activeMenuUserId.set(userId);
+  }
+
+  friendsInput = input<UserProps[]>([]);
+
+  friends = signal<UserProps[]>([]);
 
   search = signal<string>('');
 
+  constructor() {
+    effect(() => {
+      this.friends.set(this.friendsInput());
+    });
+  }
   filteredfriends = computed(() =>
     this.friends().filter((user) =>
       user.username.toLowerCase().includes(this.search().toLowerCase()),
     ),
   );
+  removeFriend(id: string): void {
+    this.userService.removeFriend(id).subscribe({
+      next: () => {
+        this.friends.update((f) => f.filter((user) => user.id !== id));
+      },
+      error: (err) => console.error(err),
+    });
+  }
+  
 }

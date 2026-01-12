@@ -9,6 +9,7 @@ export interface UserProps {
   friends: string[];
   chats: string[];
   channels: string[];
+  friendRequests: string[];
   createdAt: Date;
 }
 export interface LoginProps {
@@ -22,8 +23,10 @@ export interface LoginResponse {
 export interface MessageProps {
   id: string;
   userId: string;
+  roomId?: string;
+  chatId?: string;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface RoomProps {
@@ -47,4 +50,8 @@ export interface ChatProps {
 export interface ExtendedUserProps {
   user: UserProps;
   chatId?: string;
+}
+export interface ExtendedMessageProps {
+  user: UserProps;
+  message: MessageProps;
 }

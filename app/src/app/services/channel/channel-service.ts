@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
-import { ChannelProps, RoomProps, UserProps } from '../../types';
+import { ChannelProps, UserProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
 
@@ -52,21 +52,7 @@ export class ChannelService {
   findById(id: string): Observable<ChannelProps> {
     return this.http.get<ChannelProps>(`${url}/channels/${id}`);
   }
-  findRoomsById(id: string): Observable<RoomProps[]> {
-    return this.http.get<ChannelProps>(`${url}/channels/${id}`).pipe(
-      map((channel: ChannelProps) => channel.rooms),
-      switchMap((roomIds: string[]) => {
-        if (roomIds.length === 0) {
-          return of([]);
-        }
-        return forkJoin(
-          roomIds.map((roomId: string) => {
-            return this.http.get<RoomProps>(`${url}/rooms/${roomId}`);
-          }),
-        );
-      }),
-    );
-  }
+
   createChannel(channelData: ChannelProps): Observable<ChannelProps> {
     return this.http.post<ChannelProps>(`${url}/channels`, { ...channelData });
   }

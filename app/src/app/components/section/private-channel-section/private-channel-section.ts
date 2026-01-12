@@ -9,10 +9,11 @@ import {
   Hash,
 } from 'lucide-angular';
 import { RoomProps } from '../../../types';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RoomService } from '../../../services/room/room-service';
 @Component({
   selector: 'app-private-channel-section',
-  imports: [LucideAngularModule, RouterLink],
+  imports: [LucideAngularModule, RouterLink, RouterLinkActive],
   template: `
     <section
       class="fixed left-16 top-12 w-48 h-full bg-[#2B2D31] text-gray-300 flex flex-col overflow-hidden border-t border-[#1F2023]"
@@ -41,33 +42,33 @@ import { RouterLink } from '@angular/router';
 
       <main class="flex-1 overflow-y-auto px-2 pt-3">
         @for (room of this.rooms; track room.id) {
-          <div
-            class="group flex items-center justify-between px-2 py-[6px] rounded hover:bg-[#35373C] hover:text-gray-100 cursor-pointer text-gray-400 transition-all mb-[1px]"
+          <a
+            [routerLink]="['/channels', currentChannel()?.id, 'rooms', room.id]"
+            class="group relative flex items-center justify-between px-4 py-[6px] rounded hover:bg-[#35373C] hover:text-gray-100 cursor-pointer text-gray-400 transition-all mb-[1px]"
+            routerLinkActive="bg-[#35373C] text-gray-100 before:content-[''] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-1 before:rounded-full before:bg-[#5865F2] [&_.room-icon]:text-gray-300"
+            [routerLinkActiveOptions]="{ exact: true }"
           >
             <div class="flex items-center gap-2 min-w-0 overflow-hidden">
               @if (room.type === 'text') {
                 <lucide-icon
                   [img]="Hash"
-                  class="w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-gray-300 stroke-[2.5px]"
+                  class="room-icon w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-gray-300 stroke-[2.5px]"
                 />
               } @else if (room.type === 'voice') {
                 <lucide-icon
                   [img]="Volume2"
-                  class="w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-gray-300 stroke-[2.5px]"
+                  class="room-icon w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-gray-300 stroke-[2.5px]"
                 />
               }
-              <a
-                [routerLink]="['/rooms', room.id]"
-                class="font-medium truncate group-hover:text-gray-200"
-                >{{ room.name }}</a
-              >
+              <span class="font-medium truncate group-hover:text-gray-200">{{ room.name }}</span>
             </div>
             <button
               class="text-gray-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"
+              (click)="$event.preventDefault(); $event.stopPropagation()"
             >
               <lucide-icon [img]="UserRoundPlus" class="w-4 h-4" />
             </button>
-          </div>
+          </a>
         }
       </main>
     </section>
@@ -83,6 +84,8 @@ export class PrivateChannelSection {
 
   private channelService = inject(ChannelService);
 
+  private roomService = inject(RoomService);
+
   currentChannel = this.channelService.currentChannel;
 
   rooms: RoomProps[] = [];
@@ -93,7 +96,7 @@ export class PrivateChannelSection {
     effect(() => {
       const channel = this.currentChannel();
       if (channel?.id) {
-        this.channelService.findRoomsById(channel.id).subscribe({
+        this.roomService.findRoomsByChannelId().subscribe({
           next: (response: RoomProps[]) => {
             this.rooms = response;
           },

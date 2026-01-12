@@ -18,11 +18,14 @@ import { AuthService } from '../../../services/auth/auth-service';
   imports: [ProfileImage, LucideAngularModule, RouterLink],
   template: `
     <footer
-      class="fixed left-2 bottom-2 bg-[#232428] border border-[#1F2023] w-60 rounded-lg p-2 shadow-md "
+      class="fixed left-2 bottom-2 bg-[#232428] border border-[#1F2023] w-60 rounded-lg p-2 shadow-md"
     >
       <div class="flex items-center justify-between">
         <div
           class="flex items-center gap-2 flex-1 min-w-0 group cursor-pointer hover:bg-[#3F4147] p-1 rounded transition-colors -ml-1"
+          (click)="statusModalOpen.set(!statusModalOpen())"
+          (keydown.enter)="statusModalOpen.set(!statusModalOpen())"
+          tabindex="0"
         >
           <app-profile-image [src]="user()?.img" [status]="user()?.status" />
           <div class="flex-1 min-w-0">
@@ -89,6 +92,8 @@ export class ProfileFooter {
 
   private authService = inject(AuthService);
   private userService = inject(UserService);
+
+  statusModalOpen = this.userService.statusModalOpen;
 
   user = this.authService.user;
 

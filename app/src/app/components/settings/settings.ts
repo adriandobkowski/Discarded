@@ -5,7 +5,7 @@ import { LucideAngularModule, Pencil, UserPen, LogOut, X } from 'lucide-angular'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user/user-service';
 import { UserProps } from '../../types';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -30,10 +30,11 @@ import { RouterLink } from '@angular/router';
                 <div class="font-medium">My account</div>
               </div>
               <button
-                class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#35373C] text-gray-400 hover:text-gray-200 w-full text-left transition-colors"
+                class="flex items-center cursor-pointer gap-2 px-2 py-1.5 rounded hover:bg-[#35373C] text-gray-400 hover:text-gray-200 w-full text-left transition-colors"
+                (click)="onLogout()"
               >
                 <lucide-icon [img]="LogOut" class="w-5 h-5" />
-                <div class="font-medium" ((keypress))="logoutClicked = !logoutClicked">Log out</div>
+                <div class="font-medium">Log out</div>
               </button>
             </div>
           </main>
@@ -141,6 +142,8 @@ export class Settings {
   private authService = inject(AuthService);
   private userService = inject(UserService);
 
+  private router = inject(Router);
+
   user = this.authService.user()!;
 
   updateForm = new FormGroup({
@@ -163,6 +166,10 @@ export class Settings {
         console.log(err);
       },
     });
+  }
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/', 'login']);
   }
   get activeUsername(): string {
     return this.updateForm.get('username')?.value ?? this.user.username;

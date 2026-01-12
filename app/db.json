@@ -3,86 +3,238 @@
     {
       "email": "fdsfddf12@gmail.com",
       "password": "$2a$10$YSqH.NG1x63Vd1Ydq5Ca6eNZG9E5ByvSvHE8Zxj3PRyA2/inGXSoe",
-      "id": 1,
+      "id": "1",
       "username": "dfsfdsfds",
       "img": "https://randomuser.me/api/portraits/men/1.jpg",
       "status": "online",
-      "friends": ["2", "3"],
-      "channels": ["1"],
-      "chats": ["chat1"],
+      "friends": [
+        "2",
+        "3",
+        "8"
+      ],
+      "channels": [
+        "1",
+        "4"
+      ],
+      "chats": [
+        "chat1",
+        "chat6"
+      ],
       "createdAt": "2026-01-06T21:12:50.555Z"
     },
     {
       "email": "adi123@gmail.com",
       "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "id": 2,
+      "id": "2",
       "username": "adi123",
       "img": "https://randomuser.me/api/portraits/men/2.jpg",
       "status": "online",
-      "friends": ["1", "4"],
-      "channels": ["1", "2"],
-      "chats": ["chat1", "chat2"],
+      "friends": [
+        "1",
+        "4",
+        "5"
+      ],
+      "channels": [
+        "1",
+        "2",
+        "4"
+      ],
+      "chats": [
+        "chat1",
+        "chat2",
+        "chat4"
+      ],
       "createdAt": "2026-01-07T19:07:53.686Z"
     },
     {
       "email": "adi1234@gmail.com",
       "password": "$2a$10$DeyiOnhCvbgmMVCTo3DaKOLCwM2KmmYiR/diqO2IKqeALh2BY1Sc6",
-      "id": 3,
+      "id": "3",
       "img": "https://randomuser.me/api/portraits/women/1.jpg",
       "username": "adi1234",
       "status": "offline",
-      "friends": ["1"],
-      "channels": ["1"],
-      "chats": [],
+      "friends": [
+        "1"
+      ],
+      "channels": [
+        "1"
+      ],
+      "chats": [
+        "chat3"
+      ],
       "createdAt": "2026-01-07T19:19:14.432Z"
     },
     {
       "email": "adi12345@gmail.com",
       "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
-      "id": 4,
+      "id": "4",
       "img": "https://randomuser.me/api/portraits/men/3.jpg",
       "username": "adi1234567",
-      "status": "busy",
-      "friends": ["2"],
-      "channels": ["2"],
-      "chats": ["chat1"],
-      "createdAt": "2026-01-07T19:20:52.639Z"
+      "status": "online",
+      "friends": [],
+      "channels": [
+        "2"
+      ],
+      "chats": [
+        "chat2",
+        "chat5"
+      ],
+      "createdAt": "2026-01-07T19:20:52.639Z",
+      "friendRequests": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
     },
     {
       "email": "john.doe@gmail.com",
       "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
       "img": "https://randomuser.me/api/portraits/men/4.jpg",
-      "id": 5,
+      "id": "5",
       "username": "johndoe",
       "status": "online",
-      "friends": ["6", "7"],
-      "channels": ["3"],
-      "chats": ["chat1"],
+      "friends": [
+        "2",
+        "6",
+        "7",
+        "10"
+      ],
+      "channels": [
+        "3",
+        "4"
+      ],
+      "chats": [
+        "chat4",
+        "chat7"
+      ],
       "createdAt": "2026-01-07T08:00:00.000Z"
     },
     {
       "email": "jane.smith@gmail.com",
       "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
       "img": "https://randomuser.me/api/portraits/women/2.jpg",
-      "id": 6,
+      "id": "6",
       "username": "janesmith",
       "status": "online",
-      "friends": ["5"],
-      "channels": ["3"],
-      "chats": ["chat1"],
+      "friends": [
+        "5"
+      ],
+      "channels": [
+        "3"
+      ],
+      "chats": [
+        "chat7"
+      ],
       "createdAt": "2026-01-07T09:00:00.000Z"
     },
     {
       "email": "mike.wilson@gmail.com",
       "img": "https://randomuser.me/api/portraits/men/5.jpg",
       "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "id": 7,
+      "id": "7",
       "username": "mikewilson",
       "status": "offline",
-      "friends": ["5"],
+      "friends": [
+        "5"
+      ],
       "channels": [],
       "chats": [],
       "createdAt": "2026-01-07T10:00:00.000Z"
+    },
+    {
+      "email": "sarah.connor@gmail.com",
+      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
+      "id": "8",
+      "username": "sconnor",
+      "img": "https://randomuser.me/api/portraits/women/4.jpg",
+      "status": "online",
+      "friends": [
+        "1",
+        "9"
+      ],
+      "channels": [
+        "4"
+      ],
+      "chats": [
+        "chat6"
+      ],
+      "createdAt": "2026-01-08T12:00:00.000Z"
+    },
+    {
+      "email": "bruce.wayne@gmail.com",
+      "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
+      "id": "9",
+      "username": "bwayne",
+      "img": "https://randomuser.me/api/portraits/men/6.jpg",
+      "status": "busy",
+      "friends": [
+        "4",
+        "8"
+      ],
+      "channels": [
+        "2"
+      ],
+      "chats": [
+        "chat5"
+      ],
+      "createdAt": "2026-01-08T13:00:00.000Z"
+    },
+    {
+      "email": "clark.kent@gmail.com",
+      "password": "$2a$10$YSqH.NG1x63Vd1Ydq5Ca6eNZG9E5ByvSvHE8Zxj3PRyA2/inGXSoe",
+      "id": "10",
+      "username": "ckent",
+      "img": "https://randomuser.me/api/portraits/men/7.jpg",
+      "status": "online",
+      "friends": [
+        "5"
+      ],
+      "channels": [
+        "4"
+      ],
+      "chats": [],
+      "createdAt": "2026-01-08T14:00:00.000Z"
+    },
+    {
+      "email": "tony.stark@gmail.com",
+      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
+      "id": "11",
+      "username": "tstark",
+      "img": "https://randomuser.me/api/portraits/men/8.jpg",
+      "status": "online",
+      "friends": [
+        "12"
+      ],
+      "channels": [
+        "2"
+      ],
+      "chats": [
+        "chat8"
+      ],
+      "createdAt": "2026-01-08T15:00:00.000Z"
+    },
+    {
+      "email": "natasha.romanoff@gmail.com",
+      "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
+      "id": "12",
+      "username": "nromanoff",
+      "img": "https://randomuser.me/api/portraits/women/6.jpg",
+      "status": "offline",
+      "friends": [
+        "11"
+      ],
+      "channels": [
+        "2"
+      ],
+      "chats": [
+        "chat8"
+      ],
+      "createdAt": "2026-01-08T16:00:00.000Z"
     }
   ],
   "channels": [
@@ -90,88 +242,214 @@
       "id": "1",
       "name": "General",
       "img": "https://randomuser.me/api/portraits/men/10.jpg",
-      "rooms": ["room1"],
-      "userIds": ["1", "2", "3"]
+      "rooms": [
+        "room1"
+      ],
+      "userIds": [
+        "1",
+        "2",
+        "3"
+      ]
     },
     {
       "id": "2",
       "name": "Development",
       "img": "https://randomuser.me/api/portraits/men/11.jpg",
-      "rooms": ["room2", "room3"],
-      "userIds": ["2", "4"]
+      "rooms": [
+        "room2",
+        "room3",
+        "room5",
+        "room6"
+      ],
+      "userIds": [
+        "2",
+        "4",
+        "9",
+        "11",
+        "12"
+      ]
     },
     {
       "id": "3",
       "name": "Marketing",
       "img": "https://randomuser.me/api/portraits/women/10.jpg",
-      "rooms": ["room4"],
-      "userIds": ["5", "6"]
+      "rooms": [
+        "room4"
+      ],
+      "userIds": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Hangout",
+      "img": "https://randomuser.me/api/portraits/men/12.jpg",
+      "rooms": [
+        "room7",
+        "room8"
+      ],
+      "userIds": [
+        "1",
+        "2",
+        "5",
+        "8",
+        "10"
+      ]
     }
   ],
   "rooms": [
     {
       "id": "room1",
       "name": "announcements",
+      "type": "text",
       "messages": [
         {
-          "id": "msg1",
+          "id": "msg_room1_1",
           "userId": "1",
+          "roomId": "room1",
           "message": "Welcome to the channel!",
           "createdAt": "2026-01-06T21:12:50.555Z"
+        },
+        {
+          "id": "msg_room1_2",
+          "userId": "2",
+          "roomId": "room1",
+          "message": "Hej! Sprawdźcie proszę nowe pokoje :) ",
+          "createdAt": "2026-01-07T09:20:00.000Z"
         }
       ]
     },
     {
       "id": "room2",
       "name": "frontend",
+      "type": "text",
       "messages": [
         {
-          "id": "msg1",
+          "id": "msg_room2_1",
           "userId": "2",
+          "roomId": "room2",
           "message": "Who's working on the UI?",
           "createdAt": "2026-01-07T10:30:00.000Z"
+        },
+        {
+          "id": "msg_room2_2",
+          "userId": "11",
+          "roomId": "room2",
+          "message": "Mam pomysł na layout — wrzucę PR wieczorem.",
+          "createdAt": "2026-01-08T18:10:00.000Z"
         }
       ]
     },
     {
       "id": "room3",
       "name": "backend",
+      "type": "text",
       "messages": [
         {
-          "id": "msg1",
+          "id": "msg_room3_1",
           "userId": "4",
+          "roomId": "room3",
           "message": "API is ready for testing",
           "createdAt": "2026-01-07T13:00:00.000Z"
+        },
+        {
+          "id": "msg_room3_2",
+          "userId": "12",
+          "roomId": "room3",
+          "message": "Dorzucę dziś poprawki do endpointów rooms/messages.",
+          "createdAt": "2026-01-08T19:05:00.000Z"
         }
       ]
     },
     {
       "id": "room4",
       "name": "campaigns",
+      "type": "text",
       "messages": [
         {
-          "id": "msg1",
+          "id": "msg_room4_1",
           "userId": "5",
+          "roomId": "room4",
           "message": "New campaign launched!",
           "createdAt": "2026-01-07T08:00:00.000Z"
+        },
+        {
+          "id": "msg_room4_2",
+          "userId": "6",
+          "roomId": "room4",
+          "message": "Przygotowałam copy na social media.",
+          "createdAt": "2026-01-07T11:15:00.000Z"
         }
       ]
+    },
+    {
+      "id": "room5",
+      "name": "devops",
+      "type": "text",
+      "messages": [
+        {
+          "id": "msg_room5_1",
+          "userId": "9",
+          "roomId": "room5",
+          "message": "CI działa, ale brakuje cache dla node_modules.",
+          "createdAt": "2026-01-08T09:40:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "room6",
+      "name": "Standup",
+      "type": "voice",
+      "messages": []
+    },
+    {
+      "id": "room7",
+      "name": "chill",
+      "type": "text",
+      "messages": [
+        {
+          "id": "msg_room7_1",
+          "userId": "8",
+          "roomId": "room7",
+          "message": "Kto dziś gra w coś po pracy?",
+          "createdAt": "2026-01-08T20:10:00.000Z"
+        },
+        {
+          "id": "msg_room7_2",
+          "userId": "1",
+          "roomId": "room7",
+          "message": "Ja mogę wbić około 21.",
+          "createdAt": "2026-01-08T20:12:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "room8",
+      "name": "music",
+      "type": "voice",
+      "messages": []
     }
   ],
   "chats": [
     {
       "id": "chat1",
-      "userIds": ["1", "2"],
+      "userIds": [
+        "1",
+        "2"
+      ],
       "messages": [
         {
-          "id": "msg1",
+          "id": "msg_chat1_1",
           "userId": "1",
+          "chatId": "chat1",
           "message": "Hey, how are you?",
           "createdAt": "2026-01-06T22:00:00.000Z"
         },
         {
-          "id": "msg2",
+          "id": "msg_chat1_2",
           "userId": "2",
+          "chatId": "chat1",
           "message": "I'm doing great!",
           "createdAt": "2026-01-06T22:05:00.000Z"
         }
@@ -179,19 +457,155 @@
     },
     {
       "id": "chat2",
-      "userIds": ["2", "4"],
+      "userIds": [
+        "2",
+        "4"
+      ],
       "messages": [
         {
-          "id": "msg1",
+          "id": "msg_chat2_1",
           "userId": "2",
+          "chatId": "chat2",
           "message": "Let's grab coffee?",
           "createdAt": "2026-01-07T14:00:00.000Z"
         },
         {
-          "id": "msg2",
+          "id": "msg_chat2_2",
           "userId": "4",
+          "chatId": "chat2",
           "message": "Sure! When?",
           "createdAt": "2026-01-07T14:05:00.000Z"
+        },
+        {
+          "id": "msg_chat2_3",
+          "userId": "2",
+          "chatId": "chat2",
+          "message": "Dziś 16:30?",
+          "createdAt": "2026-01-07T14:06:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat3",
+      "userIds": [
+        "1",
+        "3"
+      ],
+      "messages": [
+        {
+          "id": "msg_chat3_1",
+          "userId": "3",
+          "chatId": "chat3",
+          "message": "Masz chwilę?",
+          "createdAt": "2026-01-07T20:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat4",
+      "userIds": [
+        "2",
+        "5"
+      ],
+      "messages": [
+        {
+          "id": "msg_chat4_1",
+          "userId": "5",
+          "chatId": "chat4",
+          "message": "Podeślesz mi link do kanału Development?",
+          "createdAt": "2026-01-08T08:30:00.000Z"
+        },
+        {
+          "id": "msg_chat4_2",
+          "userId": "2",
+          "chatId": "chat4",
+          "message": "Jasne — już masz zaproszenie.",
+          "createdAt": "2026-01-08T08:31:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat5",
+      "userIds": [
+        "4",
+        "9"
+      ],
+      "messages": [
+        {
+          "id": "msg_chat5_1",
+          "userId": "9",
+          "chatId": "chat5",
+          "message": "Masz jeszcze dostęp do starego repo?",
+          "createdAt": "2026-01-08T13:10:00.000Z"
+        },
+        {
+          "id": "msg_chat5_2",
+          "userId": "4",
+          "chatId": "chat5",
+          "message": "Tak, podeślę Ci.",
+          "createdAt": "2026-01-08T13:11:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat6",
+      "userIds": [
+        "1",
+        "8"
+      ],
+      "messages": [
+        {
+          "id": "msg_chat6_1",
+          "userId": "8",
+          "chatId": "chat6",
+          "message": "Wpadniesz dziś na kanał Hangout?",
+          "createdAt": "2026-01-08T17:45:00.000Z"
+        },
+        {
+          "id": "msg_chat6_2",
+          "userId": "1",
+          "chatId": "chat6",
+          "message": "Pewnie, wieczorem.",
+          "createdAt": "2026-01-08T17:46:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat7",
+      "userIds": [
+        "5",
+        "6"
+      ],
+      "messages": [
+        {
+          "id": "msg_chat7_1",
+          "userId": "6",
+          "chatId": "chat7",
+          "message": "Sprawdzisz moje grafiki?",
+          "createdAt": "2026-01-07T09:15:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat8",
+      "userIds": [
+        "11",
+        "12"
+      ],
+      "messages": [
+        {
+          "id": "msg_chat8_1",
+          "userId": "11",
+          "chatId": "chat8",
+          "message": "Deploy dziś czy jutro?",
+          "createdAt": "2026-01-08T21:05:00.000Z"
+        },
+        {
+          "id": "msg_chat8_2",
+          "userId": "12",
+          "chatId": "chat8",
+          "message": "Jutro rano będzie bezpieczniej.",
+          "createdAt": "2026-01-08T21:06:00.000Z"
         }
       ]
     }

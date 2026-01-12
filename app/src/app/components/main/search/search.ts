@@ -24,4 +24,5 @@ import { Search as SearchIcon, LucideAngularModule } from 'lucide-angular';
 export class Search {
   readonly SearchIcon = SearchIcon;
   search = model<string>('');
+
 }

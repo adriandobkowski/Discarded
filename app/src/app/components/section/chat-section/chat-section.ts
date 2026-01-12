@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, ContactRound, Plus } from 'lucide-angular';
+import { LucideAngularModule, ContactRound } from 'lucide-angular';
 import { UserService } from '../../../services/user/user-service';
 import { ChatService } from '../../../services/chat/chat-service';
 import { ExtendedUserProps } from '../../../types';
@@ -36,9 +36,6 @@ import { ExtendedUserProps } from '../../../types';
           >
             Private messages
           </div>
-          <button class="p-1 hover:text-white transition-colors" (click)="isOpen.set(!isOpen())">
-            <lucide-icon [img]="Plus" class="w-4 h-4 text-gray-400 hover:text-white"></lucide-icon>
-          </button>
         </div>
 
         <main class="flex-1 overflow-y-auto px-2">
@@ -65,7 +62,6 @@ import { ExtendedUserProps } from '../../../types';
 })
 export class ChatSection implements OnInit {
   readonly ContactRound = ContactRound;
-  readonly Plus = Plus;
 
   private userService = inject(UserService);
 
@@ -73,8 +69,6 @@ export class ChatSection implements OnInit {
 
   chattedWithFriends = this.chatService.chattedWithUsers();
   isOpen = this.userService.addFriendIsOpen;
-
-  isArray = Array.isArray;
 
   ngOnInit(): void {
     this.userService.findChattedWithUsers().subscribe({

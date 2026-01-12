@@ -47,21 +47,6 @@ import { UserService } from '../../../services/user/user-service';
               Add Friend
             </a>
           </div>
-          <button
-            class="text-gray-300 hover:text-white transition-colors mx-2 relative group p-1"
-            title="Start a new group chat"
-          >
-            <lucide-icon
-              [img]="MessageCirclePlus"
-              (click)="isOpen.set(!isOpen())"
-              class="w-6 h-6"
-            />
-            <div
-              class="absolute top-full right-0 mt-2 hidden group-hover:block bg-[#111214] text-white text-xs px-2 py-1 rounded whitespace-nowrap border border-[#1F2023] shadow-lg z-50 pointer-events-none"
-            >
-              New Group DM
-            </div>
-          </button>
         </div>
       </div>
     </nav>
