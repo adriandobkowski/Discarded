@@ -4,6 +4,7 @@ import { Search } from '../search/search';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-angular';
 import { UserService } from '../../../services/user/user-service';
+import { RouteService } from '../../../services/route/route-service';
 @Component({
   selector: 'app-friends-page',
   standalone: true,
@@ -68,8 +69,9 @@ export class FriendsPage {
   readonly EllipsisVertical = EllipsisVertical;
 
   private userService = inject(UserService);
+  private routeService = inject(RouteService);
 
-  currentRoute = this.userService.currentRoute;
+  currentRoute = this.routeService.currentRoute;
 
   activeMenuUserId = signal<string | null>(null);
   menuPosition = signal<{ top: string; right: string }>({ top: '0px', right: '0px' });
@@ -120,5 +122,4 @@ export class FriendsPage {
       error: (err) => console.error(err),
     });
   }
-  
 }

@@ -26,6 +26,7 @@ export interface MessageProps {
   roomId?: string;
   chatId?: string;
   message: string;
+  media?: string;
   createdAt: string;
 }
 

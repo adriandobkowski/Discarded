@@ -1,29 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, computed, inject, signal } from '@angular/core';
-import { EMPTY, Observable, filter, forkJoin, map, of, switchMap, tap } from 'rxjs';
+import { Injectable, inject, signal } from '@angular/core';
+import { EMPTY, Observable, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { ExtendedUserProps, Status, UserProps } from '../../types';
 import { ChatProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private http = inject(HttpClient);
-  private router = inject(Router);
-
-  routerUrl = toSignal(
-    this.router.events.pipe(
-      filter((e) => e instanceof NavigationEnd),
-      map(() => this.router.url),
-    ),
-    { initialValue: this.router.url },
-  );
-
-  currentRoute = computed(() => this.routerUrl());
 
   private authService = inject(AuthService);
 

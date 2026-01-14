@@ -4,6 +4,7 @@ import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { ChannelProps, UserProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
+import { RouteService } from '../route/route-service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { AuthService } from '../auth/auth-service';
 export class ChannelService {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
+  private routeService = inject(RouteService);
 
   user = this.authService.user;
 
@@ -33,8 +35,6 @@ export class ChannelService {
   channels = signal<ChannelProps[]>([]);
 
   currentChannel = signal<ChannelProps | null>(null);
-
-  messageDisabled = signal<boolean>(false);
 
   findAll(): Observable<ChannelProps[]> {
     return this.http.get<UserProps>(`${url}/users/${this.user()?.id}`).pipe(
