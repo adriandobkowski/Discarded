@@ -20,7 +20,9 @@ export class RoomService {
 
   currentChannel = this.channelService.currentChannel;
 
-  currentRoom = signal<RoomProps | null>(null);
+  
+  roomId = signal<string|null>(null)
+  channelId = this.channelService.channelId
 
   rooms = signal<RoomProps[]>([]);
 
@@ -40,16 +42,16 @@ export class RoomService {
     );
   }
 
-  findRoomById(id: string): Observable<RoomProps> {
-    return this.http.get<ChannelProps>(`${url}/channels/${this.currentChannel()?.id}`).pipe(
-      map((channel) => channel.rooms.find((roomId) => roomId === id) as string),
+  findRoomById(): Observable<RoomProps> {
+    return this.http.get<ChannelProps>(`${url}/channels/${this.channelId}`).pipe(
+      map((channel) => channel.rooms.find((rId) => rId === this.roomId()) as string),
       switchMap((roomId: string) => {
         return this.http.get<RoomProps>(`${url}/rooms/${roomId}`);
       }),
     );
   }
-  findMessagesByRoomId(id: string): Observable<ExtendedMessageProps[]> {
-    return this.http.get<RoomProps>(`${url}/rooms/${id}`).pipe(
+  findMessagesByRoomId(): Observable<ExtendedMessageProps[]> {
+    return this.http.get<RoomProps>(`${url}/rooms/${this.roomId()}`).pipe(
       map((room: RoomProps) => room.messages ?? []),
       switchMap((messages: MessageProps[]) => {
         if (messages.length === 0) {
@@ -74,18 +76,13 @@ export class RoomService {
       }),
     );
   }
-  // updateMessages(message: MessageProps): void {
-  //   if (this.currentChat()?.id !== message.chatId) {
-  //     return;
-  //   }
-  //   this.currentChat.update((chat) => {
-  //     if (chat) {
-  //       return {
-  //         ...chat,
-  //         messages: [...chat.messages, message],
-  //       };
-  //     }
-  //     return chat;
-  //   });
-  // }
+
+  sendMessage(message:MessageProps): Observable<RoomProps> {
+      return this.http.get<RoomProps>(`${url}/rooms/${this.roomId()}`).pipe(map((chat:RoomProps)=> {
+        const updatedMessages = [...(chat.messages ?? []), message]
+        return updatedMessages
+      }), switchMap((messages: MessageProps[]) => this.http.patch<RoomProps>(`${url}/rooms/${this.roomId()}`, {
+        messages: messages
+      })))
+    }
 }

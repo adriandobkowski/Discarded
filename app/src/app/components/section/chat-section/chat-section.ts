@@ -3,7 +3,6 @@ import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ContactRound } from 'lucide-angular';
 import { UserService } from '../../../services/user/user-service';
-import { ChatService } from '../../../services/chat/chat-service';
 import { ExtendedUserProps } from '../../../types';
 
 @Component({
@@ -57,9 +56,9 @@ export class ChatSection implements OnInit {
 
   private userService = inject(UserService);
 
-  private chatService = inject(ChatService);
 
-  chattedWithFriends = this.chatService.chattedWithUsers();
+  chattedWithFriends: ExtendedUserProps[] = [];
+
   isOpen = this.userService.addFriendIsOpen;
 
   ngOnInit(): void {

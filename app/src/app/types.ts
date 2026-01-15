@@ -23,10 +23,10 @@ export interface LoginResponse {
 export interface MessageProps {
   id: string;
   userId: string;
-  roomId?: string;
-  chatId?: string;
+  roomId: string | null;
+  chatId: string | null;
   message: string;
-  media?: string;
+  media: string | null;
   createdAt: string;
 }
 

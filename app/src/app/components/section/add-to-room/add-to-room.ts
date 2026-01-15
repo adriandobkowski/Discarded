@@ -57,6 +57,6 @@ export class AddToRoom implements OnInit {
     });
   }
   addToChannel(userId: string): void {
-    this.channelService.inviteToChannel(this.channelService.currentChannel()!.id, userId);
+    this.channelService.inviteToChannel(userId);
   }
 }

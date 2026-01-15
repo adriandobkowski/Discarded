@@ -339,6 +339,69 @@
           "roomId": "room2",
           "message": "Mam pomysł na layout — wrzucę PR wieczorem.",
           "createdAt": "2026-01-08T18:10:00.000Z"
+        },
+        {
+          "id": "797744c4-01b0-4847-b303-20fa0cc105ad",
+          "message": "",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:44:01 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": null,
+          "roomId": "room2"
+        },
+        {
+          "id": "72c09865-ffdf-444b-a85f-290afcb2dfaf",
+          "message": "",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:44:08 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": null,
+          "roomId": "room2"
+        },
+        {
+          "id": "328fe732-63c3-453e-9545-7df373350d47",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:46:13 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": null,
+          "roomId": "room2"
+        },
+        {
+          "id": "aad7264b-e697-4f76-beaf-c1223eeb1448",
+          "message": "skibidi",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:46:20 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": null,
+          "roomId": "room2"
+        },
+        {
+          "id": "f11f0174-f37b-4c6b-9715-fecc56584d1a",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:47:02 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room2"
+        },
+        {
+          "id": "2a78f76c-c2cb-49e6-b5c3-333af13c96da",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:30:51 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room2"
+        },
+        {
+          "id": "d9b92d70-2714-4b54-a475-7b111309a5cc",
+          "message": "yooo",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:30:56 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room2"
         }
       ]
     },
@@ -360,6 +423,33 @@
           "roomId": "room3",
           "message": "Dorzucę dziś poprawki do endpointów rooms/messages.",
           "createdAt": "2026-01-08T19:05:00.000Z"
+        },
+        {
+          "id": "508c5af0-d28f-4f4a-9701-520f1997c1dd",
+          "message": "yp",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:01:45 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room3"
+        },
+        {
+          "id": "b7e8dc3b-1c1d-43b6-a5f0-672037cfb6ce",
+          "message": "hmm",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:01:48 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room3"
+        },
+        {
+          "id": "35a503ce-639c-4f5a-99c8-0fb8e1392b96",
+          "message": "mock",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:01:54 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat5",
+          "roomId": "room3"
         }
       ]
     },
@@ -395,6 +485,15 @@
           "roomId": "room5",
           "message": "CI działa, ale brakuje cache dla node_modules.",
           "createdAt": "2026-01-08T09:40:00.000Z"
+        },
+        {
+          "id": "afdeb3aa-c979-4430-8a77-5acf6a8eb43b",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:02:05 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": null,
+          "roomId": "room5"
         }
       ]
     },
@@ -483,6 +582,69 @@
           "chatId": "chat2",
           "message": "Dziś 16:30?",
           "createdAt": "2026-01-07T14:06:00.000Z"
+        },
+        {
+          "id": "f11f0174-f37b-4c6b-9715-fecc56584d1a",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:47:02 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room2"
+        },
+        {
+          "id": "edf69860-84af-404a-b3f7-9e7d27ac27cb",
+          "message": "drugi test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:53:45 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "e3673e51-bb82-4efa-8494-abf0bdd78693",
+          "message": "tescik",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 18:53:54 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "508c5af0-d28f-4f4a-9701-520f1997c1dd",
+          "message": "yp",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:01:45 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room3"
+        },
+        {
+          "id": "b7e8dc3b-1c1d-43b6-a5f0-672037cfb6ce",
+          "message": "hmm",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:01:48 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room3"
+        },
+        {
+          "id": "2a78f76c-c2cb-49e6-b5c3-333af13c96da",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:30:51 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room2"
+        },
+        {
+          "id": "d9b92d70-2714-4b54-a475-7b111309a5cc",
+          "message": "yooo",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:30:56 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat2",
+          "roomId": "room2"
         }
       ]
     },
@@ -545,6 +707,15 @@
           "chatId": "chat5",
           "message": "Tak, podeślę Ci.",
           "createdAt": "2026-01-08T13:11:00.000Z"
+        },
+        {
+          "id": "35a503ce-639c-4f5a-99c8-0fb8e1392b96",
+          "message": "mock",
+          "media": null,
+          "userId": "4",
+          "createdAt": "Thu Jan 15 2026 19:01:54 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "chatId": "chat5",
+          "roomId": "room3"
         }
       ]
     },

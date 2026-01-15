@@ -57,11 +57,16 @@ export class ChannelLayout implements OnInit {
   private channelService = inject(ChannelService);
   currentChannel = this.channelService.currentChannel;
 
+  channelId = this.channelService.channelId
+
   ngOnInit(): void {
     this.route.firstChild?.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (!id) return;
-      this.channelService.findById(id).subscribe({
+
+      this.channelId.set(id)
+      
+      this.channelService.findById().subscribe({
         next: (response: ChannelProps) => {
           this.currentChannel.set(response);
         },

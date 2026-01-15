@@ -73,7 +73,7 @@ export class ChannelAside {
     effect(() => {
       const currentChatId = this.currentChannel()?.id;
       if (currentChatId) {
-        this.channelService.findChannelUsers(this.currentChannel()!.id).subscribe({
+        this.channelService.findChannelUsers().subscribe({
           next: (response: UserProps[]) => {
             this.channelUsers.set(response);
           },

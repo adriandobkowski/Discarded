@@ -14,7 +14,11 @@ export class AuthService {
   private http = inject(HttpClient);
 
   token = signal<string | null>(localStorage.getItem('token'));
+
+  
   user = signal<UserProps | null>(JSON.parse(localStorage.getItem('user') ?? 'null'));
+
+
   user$ = toObservable(this.user);
 
   register(user: LoginProps & UserProps) {

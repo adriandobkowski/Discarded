@@ -81,7 +81,7 @@ export class InviteToChannelModal implements OnInit {
   inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
   ngOnInit(): void {
-    this.channelService.findFriendsToInviteToChannel(this.currentChannel()!.id).subscribe({
+    this.channelService.findFriendsToInviteToChannel().subscribe({
       next: (response: UserProps[]) => {
         this.friendsToInvite.set(response);
       },

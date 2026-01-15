@@ -3,14 +3,12 @@ import { inject, Injectable, signal } from '@angular/core';
 import {
   ChatProps,
   ExtendedMessageProps,
-  ExtendedUserProps,
   MessageProps,
   UserProps,
 } from '../../types';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
-import { WebSocketService } from '../ws/web-socket-service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,18 +18,16 @@ export class ChatService {
 
   private authService = inject(AuthService);
 
-  private webSocketService = inject(WebSocketService);
-
   user = this.authService.user;
+
+  chatId = signal<string|null>(null)
 
   chattedWithUser = signal<UserProps | null>(null);
 
-  chattedWithUsers = signal<ExtendedUserProps[]>([]);
-
   currentChat = signal<ChatProps | null>(null);
 
-  findChattedWithUser(id: string): Observable<UserProps> {
-    return this.http.get<ChatProps>(`${url}/chats/${id}`).pipe(
+  findChattedWithUser(): Observable<UserProps> {
+    return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`).pipe(
       map(
         (chat: ChatProps) =>
           chat.userIds.find((userId: string) => userId !== this.user()?.id) as string,
@@ -41,11 +37,11 @@ export class ChatService {
       }),
     );
   }
-  findChatById(id: string): Observable<ChatProps> {
-    return this.http.get<ChatProps>(`${url}/chats/${id}`);
+  findChatById(): Observable<ChatProps> {
+    return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`);
   }
-  findMessagesByChatId(id: string): Observable<ExtendedMessageProps[]> {
-    return this.http.get<ChatProps>(`${url}/chats/${id}`).pipe(
+  findMessagesByChatId(): Observable<ExtendedMessageProps[]> {
+    return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`).pipe(
       map((chat: ChatProps) => chat.messages ?? []),
       switchMap((messages: MessageProps[]) => {
         if (messages.length === 0) {
@@ -71,18 +67,12 @@ export class ChatService {
     );
   }
 
-  updateMessages(message: MessageProps): void {
-    if (this.currentChat()?.id !== message.chatId) {
-      return;
-    }
-    this.currentChat.update((chat) => {
-      if (chat) {
-        return {
-          ...chat,
-          messages: [...chat.messages, message],
-        };
-      }
-      return chat;
-    });
+  sendMessage(message:MessageProps): Observable<ChatProps> {
+    return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`).pipe(map((chat:ChatProps)=> {
+      const updatedMessages = [...(chat.messages ?? []), message]
+      return updatedMessages
+    }), switchMap((messages: MessageProps[]) => this.http.patch<ChatProps>(`${url}/chats/${this.chatId()}`, {
+      messages: messages
+    })))
   }
 }

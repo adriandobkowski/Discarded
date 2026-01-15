@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import {
   ArrowUp,
@@ -9,7 +9,7 @@ import {
   Hash,
 } from 'lucide-angular';
 import { RoomProps } from '../../../types';
-import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
+import {  RouterLink, RouterLinkActive } from '@angular/router';
 import { RoomService } from '../../../services/room/room-service';
 @Component({
   selector: 'app-private-channel-section',
@@ -69,7 +69,7 @@ import { RoomService } from '../../../services/room/room-service';
   `,
   styleUrl: './private-channel-section.scss',
 })
-export class PrivateChannelSection implements OnInit {
+export class PrivateChannelSection  {
   readonly ArrowUp = ArrowUp;
   readonly ArrowDown = ArrowDown;
   readonly UserRoundPlus = UserRoundPlus;
@@ -88,15 +88,19 @@ export class PrivateChannelSection implements OnInit {
 
   inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
-  ngOnInit(): void {
-    console.log(this.currentChannel());
-    this.roomService.findRoomsByChannelId(this.channelId()!).subscribe({
-      next: (response: RoomProps[]) => {
-        this.rooms = response;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-}
+  constructor() {
+    effect(() => {
+    const channelId = this.currentChannel()?.id
+    if (channelId) {
+      this.roomService.findRoomsByChannelId(channelId).subscribe({
+        next: (response: RoomProps[]) => {
+          this.rooms = response;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+
+    }}
+    )
+}}

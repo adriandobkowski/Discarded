@@ -47,6 +47,7 @@ export class ChatNavbar {
 
   private route = inject(ActivatedRoute);
   private chatService = inject(ChatService);
+  
   chattedWithUser = this.chatService.chattedWithUser;
 
   id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));

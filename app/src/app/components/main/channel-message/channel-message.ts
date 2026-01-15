@@ -24,16 +24,15 @@ export class ChannelMessage implements OnInit {
   private channelService = inject(ChannelService);
   private route = inject(ActivatedRoute);
 
-  channelId: string | null = null;
   currentChannel = this.channelService.currentChannel;
+  channelId = this.channelService.channelId
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (!id) return;
-      this.channelId = id;
-      if (this.channelId) {
-        this.channelService.findById(this.channelId).subscribe({
+      if (this.channelId()) {
+        this.channelService.findById().subscribe({
           next: (response: ChannelProps) => {
             this.currentChannel.set(response);
           },

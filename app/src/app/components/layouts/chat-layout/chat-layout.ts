@@ -55,16 +55,20 @@ export class ChatLayout implements OnInit, OnDestroy {
   private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
 
+  chatId = this.chatService.chatId
+
   ngOnInit(): void {
     this.route
       .firstChild!.paramMap.pipe(
         map((params) => params.get('id')),
         filter(Boolean),
-        switchMap((chatId) =>
-          forkJoin({
-            user: this.chatService.findChattedWithUser(chatId!),
-            chat: this.chatService.findChatById(chatId!),
-          }),
+        switchMap((chatId) => {
+          this.chatId.set(chatId)
+          return forkJoin({
+            user: this.chatService.findChattedWithUser(),
+            chat: this.chatService.findChatById(),
+          })
+          }
         ),
       )
       .subscribe(({ user, chat }) => {
