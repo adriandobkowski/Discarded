@@ -29,7 +29,9 @@ export class ChannelMessage implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.channelId = params.get('id') ?? this.route.parent?.snapshot.paramMap.get('id') ?? null;
+      const id = params.get('id');
+      if (!id) return;
+      this.channelId = id;
       if (this.channelId) {
         this.channelService.findById(this.channelId).subscribe({
           next: (response: ChannelProps) => {

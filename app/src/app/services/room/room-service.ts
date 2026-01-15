@@ -10,7 +10,6 @@ import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ChannelService } from '../channel/channel-service';
 import { url } from '../../../api';
-// import { MessageProps } from '../../types';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +22,10 @@ export class RoomService {
 
   currentRoom = signal<RoomProps | null>(null);
 
-  findRoomsByChannelId(): Observable<RoomProps[]> {
-    return this.http.get<ChannelProps>(`${url}/channels/${this.currentChannel()?.id}`).pipe(
+  rooms = signal<RoomProps[]>([]);
+
+  findRoomsByChannelId(channelId: string): Observable<RoomProps[]> {
+    return this.http.get<ChannelProps>(`${url}/channels/${channelId}`).pipe(
       map((channel: ChannelProps) => channel.rooms),
       switchMap((roomIds: string[]) => {
         if (roomIds.length === 0) {

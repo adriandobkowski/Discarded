@@ -32,6 +32,7 @@ export class ChannelService {
     this.channelUsers().filter((user: UserProps) => user.status === 'offline'),
   );
 
+  channelId = signal<string | null>(null);
   channels = signal<ChannelProps[]>([]);
 
   currentChannel = signal<ChannelProps | null>(null);

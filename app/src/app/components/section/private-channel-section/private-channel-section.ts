@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import {
   ArrowUp,
@@ -9,7 +9,7 @@ import {
   Hash,
 } from 'lucide-angular';
 import { RoomProps } from '../../../types';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { RoomService } from '../../../services/room/room-service';
 @Component({
   selector: 'app-private-channel-section',
@@ -25,7 +25,7 @@ import { RoomService } from '../../../services/room/room-service';
           class="flex justify-center items-center gap-2 text-gray-400 hover:text-white transition-colors"
           (click)="navbarClicked = !navbarClicked"
         >
-          <div class="truncate">{{ currentChannel?.name }}</div>
+          <div class="truncate">{{ currentChannel()?.name }}</div>
           @if (navbarClicked) {
             <lucide-icon [img]="ArrowUp" class="w-5 h-5 flex-shrink-0" />
           } @else {
@@ -43,7 +43,7 @@ import { RoomService } from '../../../services/room/room-service';
       <main class="flex-1 overflow-y-auto px-2 pt-3">
         @for (room of this.rooms; track room.id) {
           <a
-            [routerLink]="['/channels', currentChannel?.id, 'rooms', room.id]"
+            [routerLink]="['/channels', currentChannel()?.id, 'rooms', room.id]"
             class="group relative flex items-center justify-between px-4 py-[6px] rounded hover:bg-[#35373C] hover:text-gray-100 cursor-pointer text-gray-400 transition-all mb-[1px]"
             routerLinkActive="bg-[#35373C] text-gray-100 before:content-[''] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-1 before:rounded-full before:bg-[#5865F2] [&_.room-icon]:text-gray-300"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -80,7 +80,7 @@ export class PrivateChannelSection implements OnInit {
 
   private roomService = inject(RoomService);
 
-  currentChannel = this.channelService.currentChannel();
+  currentChannel = this.channelService.currentChannel;
 
   rooms: RoomProps[] = [];
 
@@ -89,7 +89,8 @@ export class PrivateChannelSection implements OnInit {
   inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
   ngOnInit(): void {
-    this.roomService.findRoomsByChannelId().subscribe({
+    console.log(this.currentChannel());
+    this.roomService.findRoomsByChannelId(this.channelId()!).subscribe({
       next: (response: RoomProps[]) => {
         this.rooms = response;
       },

@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ChannelHeader } from '../../header/channel-header/channel-header';
 import { ChannelSection } from '../../section/channel-section/channel-section';
 import { PrivateChannelSection } from '../../section/private-channel-section/private-channel-section';
 import { ChannelNavbar } from '../../navbar/channel-navbar/channel-navbar';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { ChannelAside } from '../../aside/channel-aside/channel-aside';
 import { ProfileFooter } from '../../footer/profile-footer/profile-footer';
 import { MessageFooter } from '../../footer/message-footer/message-footer';
+import { ChannelService } from '../../../services/channel/channel-service';
+import { ChannelProps } from '../../../types';
 
 @Component({
   selector: 'app-channel-layout',
@@ -50,4 +52,20 @@ import { MessageFooter } from '../../footer/message-footer/message-footer';
   `,
   styleUrl: './channel-layout.scss',
 })
-export class ChannelLayout {}
+export class ChannelLayout implements OnInit {
+  private route = inject(ActivatedRoute);
+  private channelService = inject(ChannelService);
+  currentChannel = this.channelService.currentChannel;
+
+  ngOnInit(): void {
+    this.route.firstChild?.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (!id) return;
+      this.channelService.findById(id).subscribe({
+        next: (response: ChannelProps) => {
+          this.currentChannel.set(response);
+        },
+      });
+    });
+  }
+}
