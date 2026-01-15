@@ -7,10 +7,13 @@ import {
   Mic,
   MicOff,
   Settings,
+  Sun,
+  Moon,
 } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user/user-service';
 import { AuthService } from '../../../services/auth/auth-service';
+import { ThemeService } from '../../../services/theme/theme-service';
 
 @Component({
   selector: 'app-profile-footer',
@@ -39,6 +42,19 @@ import { AuthService } from '../../../services/auth/auth-service';
         </div>
 
         <div class="flex items-center flex-shrink-0">
+          <button
+            type="button"
+            (click)="toggleTheme()"
+            class="p-2 hover:bg-[#3F4147] rounded transition-colors flex items-center justify-center h-8 w-8"
+            [attr.aria-label]="theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          >
+            @if (theme() === 'dark') {
+              <lucide-icon [img]="Sun" class="w-5 h-5 text-gray-300 hover:text-white" />
+            } @else {
+              <lucide-icon [img]="Moon" class="w-5 h-5 text-gray-300 hover:text-white" />
+            }
+          </button>
+
           <button
             (click)="microphoneActive.set(!microphoneActive())"
             class="p-2 hover:bg-[#3F4147] rounded transition-colors flex items-center justify-center h-8 w-8"
@@ -89,14 +105,23 @@ export class ProfileFooter {
   readonly Headphones = Headphones;
   readonly HeadphoneOff = HeadphoneOff;
   readonly MicOff = MicOff;
+  readonly Sun = Sun;
+  readonly Moon = Moon;
 
   private authService = inject(AuthService);
   private userService = inject(UserService);
+  private themeService = inject(ThemeService);
 
   statusModalOpen = this.userService.statusModalOpen;
 
   user = this.authService.user;
 
+  theme = this.themeService.theme;
+
   microphoneActive = this.userService.microphoneActive;
   headphonesActive = this.userService.headphonesActive;
+
+  toggleTheme(): void {
+    this.themeService.toggle();
+  }
 }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../services/auth/auth-service';
 import { LoginProps, UserProps } from '../../../types';
 import { Router, RouterLink } from '@angular/router';
+import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-login',
@@ -75,16 +76,19 @@ export class Login {
   });
   private router = inject(Router);
   private authService = inject(AuthService);
+  private toastService = inject(ToastService);
 
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.getRawValue() as LoginProps).subscribe({
         next: (response: UserProps) => {
           this.authService.user.set(response);
+          this.toastService.success('Logged in successfully');
           this.router.navigate(['/']);
         },
         error: (err) => {
           console.log(err);
+          this.toastService.error('Invalid credentials or server error', 'Login failed');
         },
       });
     }

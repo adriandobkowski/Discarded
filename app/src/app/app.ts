@@ -8,6 +8,8 @@ import { ChangeUserStatusModal } from './components/modal/change-user-status-mod
 import { AuthService } from './services/auth/auth-service';
 import { InboxModal } from './components/modal/inbox-modal/inbox-modal';
 import { InviteToChannelModal } from './components/modal/invite-to-channel-modal/invite-to-channel-modal';
+import { ToastContainer } from './components/toast/toast-container/toast-container';
+import { ThemeService } from './services/theme/theme-service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +20,12 @@ import { InviteToChannelModal } from './components/modal/invite-to-channel-modal
     ChangeUserStatusModal,
     InboxModal,
     InviteToChannelModal,
+    ToastContainer,
   ],
   template: `
     <router-outlet />
+
+    <app-toast-container />
 
     @if (createChannelClicked()) {
       <app-create-channel-modal></app-create-channel-modal>
@@ -46,6 +51,7 @@ export class App {
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
   private authService = inject(AuthService);
+  private themeService = inject(ThemeService);
 
   createChannelClicked = this.channelService.createChannelClicked;
 

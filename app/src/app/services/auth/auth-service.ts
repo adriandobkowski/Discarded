@@ -39,7 +39,7 @@ export class AuthService {
               channels: [],
               chats: [],
               img: '',
-              createdAt: new Date(),
+              createdAt: new Date().toISOString(),
             },
             {
               headers: {

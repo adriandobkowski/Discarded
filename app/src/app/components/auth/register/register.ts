@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth-service';
 import { LoginProps, UserProps } from '../../../types';
+import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-register',
@@ -86,6 +87,7 @@ export class Register {
   });
   private authService = inject(AuthService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   onSubmit(): void {
     if (this.registerForm.valid) {
@@ -94,10 +96,12 @@ export class Register {
         .subscribe({
           next: () => {
             this.registerForm.reset();
+            this.toastService.success('Account created. You can log in now.', 'Success');
             this.router.navigate(['/login']);
           },
           error: (err) => {
             console.log(err);
+            this.toastService.error('Could not create account', 'Register failed');
           },
         });
     }

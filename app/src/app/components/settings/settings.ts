@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user/user-service';
 import { UserProps } from '../../types';
 import { Router, RouterLink } from '@angular/router';
+import { ToastService } from '../../services/toast/toast-service';
 
 @Component({
   selector: 'app-settings',
@@ -140,6 +141,7 @@ export class Settings {
 
   private authService = inject(AuthService);
   private userService = inject(UserService);
+  private toastService = inject(ToastService);
 
   private router = inject(Router);
 
@@ -158,11 +160,15 @@ export class Settings {
 
   onSubmit(): void {
     this.userService.updateUser(this.updateForm.getRawValue() as UserProps).subscribe({
-      next: () => {
-        console.log('Test');
+      next: (updatedUser) => {
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        this.authService.user.set(updatedUser);
+        this.updateForm.markAsPristine();
+        this.toastService.success('Profile updated');
       },
       error: (err) => {
         console.log(err);
+        this.toastService.error('Could not save changes', 'Update failed');
       },
     });
   }

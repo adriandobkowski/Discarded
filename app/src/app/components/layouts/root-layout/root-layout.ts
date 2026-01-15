@@ -19,7 +19,7 @@ import { RootNavbar } from '../../navbar/root-navbar/root-navbar';
     RootNavbar,
   ],
   template: `
-    <div class="w-screen h-screen flex flex-col bg-[#313338] text-gray-100 font-sans">
+    <div class="w-screen h-screen flex flex-col bg-[var(--app-bg)] text-[var(--app-text)] font-sans">
       <app-root-header />
       <div class="flex flex-1">
         <app-channel-section />
@@ -27,12 +27,12 @@ import { RootNavbar } from '../../navbar/root-navbar/root-navbar';
           <app-root-navbar />
           <div class="flex flex-1 overflow-hidden">
             <app-chat-section />
-            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[#313338]">
+            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[var(--app-bg)]">
               <router-outlet />
             </main>
 
             <app-root-aside
-              class="w-[360px] flex-shrink-0 bg-[#2B2D31] border-l border-[#26272D]"
+              class="w-[360px] flex-shrink-0 bg-[var(--app-surface)] border-l border-[var(--app-border)]"
             />
           </div>
         </div>

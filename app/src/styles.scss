@@ -1,6 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'tailwindcss';
 
+:root {
+  --app-bg: #313338;
+  --app-surface: #2b2d31;
+  --app-surface-2: #232428;
+  --app-border: #26272d;
+  --app-border-strong: #1f2023;
+  --app-text: #f3f4f6;
+  --app-muted: #9ca3af;
+}
+
+html.theme-light {
+  /* Slightly darker light theme to reduce glare */
+  --app-bg: #e7ebf0;
+  --app-surface: #f1f5f9;
+  --app-surface-2: #e9eef5;
+  --app-border: #cbd5e1;
+  --app-border-strong: #b6c2d3;
+  --app-text: #0f172a;
+  --app-muted: #334155;
+}
+
+/*
+  Many components currently hardcode Tailwind colors (e.g. bg-[#313338], text-white).
+  These scoped overrides remap the most common ones in light theme so the UI stays readable
+  without having to refactor every component immediately.
+*/
+html.theme-light {
+  /* Text */
+  .text-white,
+  .text-gray-100,
+  .text-gray-200,
+  .text-gray-300,
+  .text-slate-100 {
+    color: var(--app-text) !important;
+  }
+
+  .text-gray-400,
+  .text-slate-400,
+  .text-gray-500,
+  .text-slate-500 {
+    color: var(--app-muted) !important;
+  }
+
+  /* Backgrounds (escaped Tailwind arbitrary values) */
+  .bg-\[\#313338\] {
+    background-color: var(--app-bg) !important;
+  }
+
+  .bg-\[\#2B2D31\] {
+    background-color: var(--app-surface) !important;
+  }
+
+  .bg-\[\#232428\],
+  .bg-\[\#202225\],
+  .bg-\[\#1E1F22\] {
+    background-color: var(--app-surface-2) !important;
+  }
+
+  /* Borders */
+  .border-\[\#26272D\] {
+    border-color: var(--app-border) !important;
+  }
+
+  .border-\[\#1F2023\] {
+    border-color: var(--app-border-strong) !important;
+  }
+}
+
+html.theme-dark {
+  --app-bg: #313338;
+  --app-surface: #2b2d31;
+  --app-surface-2: #232428;
+  --app-border: #26272d;
+  --app-border-strong: #1f2023;
+  --app-text: #f3f4f6;
+  --app-muted: #9ca3af;
+}
+
 html,
 body {
   margin: 0;
@@ -8,4 +86,6 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background: var(--app-bg);
+  color: var(--app-text);
 }

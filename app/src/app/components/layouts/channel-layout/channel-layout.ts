@@ -23,7 +23,7 @@ import { ChannelProps } from '../../../types';
     MessageFooter,
   ],
   template: `
-    <div class="w-screen h-screen flex flex-col bg-[#313338] text-gray-100 font-sans">
+    <div class="w-screen h-screen flex flex-col bg-[var(--app-bg)] text-[var(--app-text)] font-sans">
       <app-channel-header />
       <div class="flex flex-1">
         <app-channel-section />
@@ -31,7 +31,7 @@ import { ChannelProps } from '../../../types';
         <div class="flex flex-col flex-1">
           <div class="flex flex-1 overflow-hidden">
             <app-private-channel-section />
-            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[#313338]">
+            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[var(--app-bg)]">
               <app-channel-navbar />
               <div class="flex-1 min-h-0 overflow-hidden relative">
                 <router-outlet />
@@ -40,7 +40,7 @@ import { ChannelProps } from '../../../types';
             </main>
 
             <app-channel-aside
-              class="w-[360px] flex-shrink-0 bg-[#2B2D31] border-l border-[#26272D]"
+              class="w-[360px] flex-shrink-0 bg-[var(--app-surface)] border-l border-[var(--app-border)]"
             />
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { Component, computed, effect, HostListener, inject, input, signal } from '@angular/core';
-import { UserProps } from '../../../types';
+import { FriendsSortOption, FriendsStatusFilter, UserProps } from '../../../types';
 import { Search } from '../search/search';
 import { ProfileImage } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-angular';
@@ -13,6 +13,50 @@ import { RouteService } from '../../../services/route/route-service';
     <div class="flex flex-col h-full">
       <nav class="border-b border-slate-700 p-4">
         <app-search [(search)]="search" />
+
+        <div class="mt-3 flex flex-wrap items-center gap-2">
+          <select
+            class="h-9 rounded-md px-3 text-sm border bg-[var(--app-surface-2)] border-[var(--app-border)] text-[var(--app-text)] outline-none"
+            [disabled]="isActiveRoute()"
+            [value]="statusFilter()"
+            (change)="statusFilter.set($any($event.target).value)"
+            aria-label="Status filter"
+            title="Filter by status"
+          >
+            <option value="all">Status: All</option>
+            <option value="online">Status: Online</option>
+            <option value="busy">Status: Busy</option>
+            <option value="offline">Status: Offline</option>
+          </select>
+
+          <label
+            class="h-9 inline-flex items-center gap-2 rounded-md px-3 text-sm border bg-[var(--app-surface-2)] border-[var(--app-border)] text-[var(--app-text)] select-none"
+            title="Show only users with avatar"
+          >
+            <input
+              type="checkbox"
+              class="accent-blue-500"
+              [checked]="hasAvatarOnly()"
+              (change)="hasAvatarOnly.set($any($event.target).checked)"
+            />
+            Avatar only
+          </label>
+
+          <select
+            class="h-9 rounded-md px-3 text-sm border bg-[var(--app-surface-2)] border-[var(--app-border)] text-[var(--app-text)] outline-none ml-auto"
+            [value]="sortOption()"
+            (change)="sortOption.set($any($event.target).value)"
+            aria-label="Sort"
+            title="Sort list"
+          >
+            <option value="username-asc">Sort: A → Z</option>
+            <option value="username-desc">Sort: Z → A</option>
+            <option value="createdAt-desc">Sort: Newest</option>
+            <option value="createdAt-asc">Sort: Oldest</option>
+            <option value="friendsCount-desc">Sort: Friends (high)</option>
+            <option value="friendsCount-asc">Sort: Friends (low)</option>
+          </select>
+        </div>
       </nav>
       <div class="text-slate-400 text-sm px-4 py-3 border-b border-slate-700">
         @if (!currentRoute().includes('/all')) {
@@ -104,16 +148,56 @@ export class FriendsPage {
 
   search = signal<string>('');
 
+  statusFilter = signal<FriendsStatusFilter>('all');
+  hasAvatarOnly = signal<boolean>(false);
+  sortOption = signal<FriendsSortOption>('username-asc');
+
+  isActiveRoute = computed(() => this.currentRoute().includes('/active'));
+
+
   constructor() {
     effect(() => {
       this.friends.set(this.friendsInput());
     });
   }
-  filteredfriends = computed(() =>
-    this.friends().filter((user) =>
-      user.username.toLowerCase().includes(this.search().toLowerCase()),
-    ),
-  );
+
+  private createdAtMs(user: UserProps): number {
+    return Date.parse(user.createdAt) || 0;
+  }
+
+  filteredfriends = computed(() => {
+    const query = this.search().trim().toLowerCase();
+
+    const effectiveStatusFilter: FriendsStatusFilter =
+      this.isActiveRoute() ? 'online' : this.statusFilter();
+
+    const filtered = this.friends().filter((user) => {
+      if (query && !user.username.toLowerCase().includes(query)) return false;
+      if (effectiveStatusFilter !== 'all' && user.status !== effectiveStatusFilter) return false;
+      if (this.hasAvatarOnly() && !user.img) return false;
+      return true;
+    });
+
+    const option = this.sortOption();
+    const sorted = [...filtered].sort((a, b) => {
+      switch (option) {
+        case 'username-asc':
+          return a.username.localeCompare(b.username);
+        case 'username-desc':
+          return b.username.localeCompare(a.username);
+        case 'createdAt-desc':
+          return this.createdAtMs(b) - this.createdAtMs(a);
+        case 'createdAt-asc':
+          return this.createdAtMs(a) - this.createdAtMs(b);
+        case 'friendsCount-desc':
+          return (b.friends?.length ?? 0) - (a.friends?.length ?? 0);
+        case 'friendsCount-asc':
+          return (a.friends?.length ?? 0) - (b.friends?.length ?? 0);
+      }
+    });
+
+    return sorted;
+  });
   removeFriend(id: string): void {
     this.userService.removeFriend(id).subscribe({
       next: () => {

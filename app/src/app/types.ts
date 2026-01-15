@@ -10,7 +10,7 @@ export interface UserProps {
   chats: string[];
   channels: string[];
   friendRequests: string[];
-  createdAt: Date;
+  createdAt: string;
 }
 export interface LoginProps {
   email: string;
@@ -56,3 +56,14 @@ export interface ExtendedMessageProps {
   user: UserProps;
   message: MessageProps;
 }
+
+// FriendsPage filter/sort types
+export type FriendsStatusFilter = 'all' | 'online' | 'busy' | 'offline';
+
+export type FriendsSortOption =
+  | 'username-asc'
+  | 'username-desc'
+  | 'createdAt-desc'
+  | 'createdAt-asc'
+  | 'friendsCount-desc'
+  | 'friendsCount-asc';
