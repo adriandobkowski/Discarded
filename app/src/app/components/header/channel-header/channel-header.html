@@ -1,1 +1,9 @@
-<p>channel-header works!</p>
+<header
+      class="bg-[var(--app-surface)] w-full h-12 flex items-center justify-center gap-4 px-6 border-b border-[var(--app-border-strong)] shadow-sm"
+    >
+      <app-profile-image
+        [src]="currentChannel()?.img"
+        class="w-10 h-10 text-[var(--app-text)] rounded-full"
+      />
+      <div class="text-[var(--app-text)] font-semibold text-lg">{{ currentChannel()?.name }}</div>
+    </header>

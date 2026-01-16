@@ -1,71 +1,53 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CreateChannelModal } from './components/modal/create-channel-modal/create-channel-modal';
+import { CreateChannelModalComponent } from './components/modal/create-channel-modal/create-channel-modal';
 import { ChannelService } from './services/channel/channel-service';
 import { UserService } from './services/user/user-service';
-import { AddFriend } from './components/modal/add-friend/add-friend';
-import { ChangeUserStatusModal } from './components/modal/change-user-status-modal/change-user-status-modal';
+import { AddFriendComponent } from './components/modal/add-friend/add-friend';
+import { ChangeUserStatusModalComponent } from './components/modal/change-user-status-modal/change-user-status-modal';
 import { AuthService } from './services/auth/auth-service';
-import { InboxModal } from './components/modal/inbox-modal/inbox-modal';
-import { InviteToChannelModal } from './components/modal/invite-to-channel-modal/invite-to-channel-modal';
-import { ToastContainer } from './components/toast/toast-container/toast-container';
-import { ThemeService } from './services/theme/theme-service';
+import { InboxModalComponent } from './components/modal/inbox-modal/inbox-modal';
+import { InviteToChannelModalComponent } from './components/modal/invite-to-channel-modal/invite-to-channel-modal';
+import { DeleteAccountModalComponent } from "./components/modal/delete-account-modal/delete-account-modal";
 
 @Component({
   selector: 'app-root',
+  standalone:true,
   imports: [
     RouterOutlet,
-    CreateChannelModal,
-    AddFriend,
-    ChangeUserStatusModal,
-    InboxModal,
-    InviteToChannelModal,
-    ToastContainer,
-  ],
-  template: `
-    <router-outlet />
-
-    <app-toast-container />
-
-    @if (createChannelClicked()) {
-      <app-create-channel-modal></app-create-channel-modal>
-    }
-    @if (addFriendIsOpen()) {
-      <app-add-friend></app-add-friend>
-    }
-    @if (statusModalOpen()) {
-      <app-change-user-status-modal />
-    }
-    @if (inboxActive()) {
-      <app-inbox-modal />
-    }
-    @if (inviteToChannelModalActive()) {
-      <app-invite-to-channel-modal />
-    }
-  `,
+    CreateChannelModalComponent,
+    AddFriendComponent,
+    ChangeUserStatusModalComponent,
+    InboxModalComponent,
+    InviteToChannelModalComponent,
+    DeleteAccountModalComponent
+],
+  templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
+
+export class AppComponent {
   protected readonly title = signal('app');
 
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
   private authService = inject(AuthService);
-  private themeService = inject(ThemeService);
 
-  createChannelClicked = this.channelService.createChannelClicked;
+  protected createChannelClicked = this.channelService.createChannelClicked;
 
-  addFriendIsOpen = this.userService.addFriendIsOpen;
+  protected addFriendIsOpen = this.userService.addFriendIsOpen;
 
-  user = this.authService.user;
+  protected user = this.authService.user;
 
-  statusModalOpen = this.userService.statusModalOpen;
+  protected statusModalOpen = this.userService.statusModalOpen;
 
-  inboxActive = this.userService.inboxActive;
+  protected inboxActive = this.userService.inboxActive;
 
-  inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
+  protected inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
-  constructor() {
+  protected deleteAccountClicked = this.userService.deleteAccountClicked;
+
+  public constructor() {
     effect(() => {
       if (this.userService.closeProfileFooter()) {
         this.statusModalOpen.set(false);

@@ -1,97 +1,48 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { Search } from '../../main/search/search';
+import { SearchComponent } from '../../main/search/search';
 import { UserProps } from '../../../types';
-import { ProfileImage } from '../../profile/profile-image/profile-image';
+import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, X } from 'lucide-angular';
+import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-invite-to-channel-modal',
-  imports: [Search, ProfileImage, LucideAngularModule],
-  template: `
-    <div
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
-    >
-      <div
-        class="flex w-[440px] flex-col rounded-md bg-[#313338] shadow-2xl animate-fade-in-up overflow-hidden"
-      >
-        <header class="flex items-center justify-between px-4 py-4 shadow-sm">
-          <h2 class="text-base font-bold text-[#F2F3F5] uppercase tracking-wide">
-            Invite friends to {{ currentChannel()?.name }}
-          </h2>
-          <button
-            type="button"
-            (click)="close()"
-            class="text-[#B5BAC1] hover:text-[#DBDEE1] transition-colors"
-          >
-            <lucide-icon [img]="X" class="h-6 w-6" />
-          </button>
-        </header>
-
-        <div class="px-4 pt-2 pb-2">
-          <app-search [(search)]="search" />
-        </div>
-
-        <main
-          class="flex max-h-[300px] flex-col gap-0.5 overflow-y-auto px-2 pb-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-[#2B2D31] [&::-webkit-scrollbar-thumb]:bg-[#1A1B1E] [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full"
-        >
-          @for (user of filteredfriends(); track user.id) {
-            <div
-              class="group flex cursor-pointer items-center justify-between rounded px-2.5 py-2 hover:bg-[#35373C] transition-colors"
-            >
-              <div class="flex items-center gap-3">
-                <div class="h-8 w-8 overflow-hidden rounded-full">
-                  <app-profile-image [src]="user.img" />
-                </div>
-                <div class="font-medium text-[#F2F3F5] group-hover:text-[#DBDEE1]">
-                  {{ user.username }}
-                </div>
-              </div>
-              <button
-                class="px-4 py-1.5 border border-green-600 text-green-500 hover:bg-green-600 hover:text-white rounded text-xs font-semibold transition-all duration-200"
-              >
-                Invite
-              </button>
-            </div>
-          } @empty {
-            <div class="py-8 text-center text-[#949BA4] text-sm">No friends to invite</div>
-          }
-        </main>
-      </div>
-    </div>
-  `,
+  imports: [SearchComponent, ProfileImageComponent, LucideAngularModule],
+  standalone:true,
+  templateUrl: './invite-to-channel-modal.html',
   styleUrl: './invite-to-channel-modal.scss',
 })
-export class InviteToChannelModal implements OnInit {
-  readonly X = X;
-
+export class InviteToChannelModalComponent implements OnInit {
+  protected readonly X = X;
   private channelService = inject(ChannelService);
+  private toastService = inject(ToastService);
 
-  currentChannel = this.channelService.currentChannel;
+  protected currentChannel = this.channelService.currentChannel;
 
-  friendsToInvite = signal<UserProps[]>([]);
+  protected friendsToInvite = signal<UserProps[]>([]);
 
-  filteredfriends = computed(() =>
+  protected filteredfriends = computed(() =>
     this.friendsToInvite().filter((user) =>
       user.username.toLowerCase().includes(this.search().toLowerCase()),
     ),
   );
-  search = signal<string>('');
+  protected search = signal<string>('');
 
-  inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
+  protected inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.channelService.findFriendsToInviteToChannel().subscribe({
       next: (response: UserProps[]) => {
         this.friendsToInvite.set(response);
       },
       error: (err) => {
-        console.log(err);
+        this.toastService.errorFrom(err, 'Could not load friends to invite', 'Error');
       },
     });
   }
 
-  close() {
+  protected close():void {
     this.inviteToChannelModalActive.set(false);
   }
 }

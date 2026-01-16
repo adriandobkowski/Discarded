@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "lintstyle": "stylelint 'src/**/*.scss' --custom-syntax postcss-scss",
     "api": "json-server-auth db.json --port 3000"
   },
   "prettier": {
@@ -60,6 +61,11 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.7.4",
+    "stylelint": "^17.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-order": "^7.0.1",
+    "stylelint-scss": "^7.0.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.46.4"
   }

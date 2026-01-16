@@ -1,0 +1,76 @@
+ <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-account-title"
+      (click)="close()"
+      (keypress)="close()"
+    >
+      <div
+        class="w-[440px] max-w-[calc(100vw-2rem)] rounded-lg bg-[#313338] shadow-2xl overflow-hidden animate-fade-in-up"
+      >
+        <header class="flex items-start justify-between gap-3 px-4 py-4 border-b border-[#2B2D31]">
+          <div class="flex items-start gap-3 min-w-0">
+            <div
+              class="mt-0.5 h-9 w-9 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0"
+            >
+              <lucide-icon [img]="TriangleAlert" class="h-5 w-5 text-red-300" />
+            </div>
+
+            <div class="min-w-0">
+              <h2
+                id="delete-account-title"
+                class="text-base font-bold text-[#F2F3F5] uppercase tracking-wide"
+              >
+                Delete account
+              </h2>
+              <div class="text-sm text-[#B5BAC1] mt-1">
+                This action is permanent and cannot be undone.
+                @if (user()) {
+                  <div class="mt-1">
+                    You are about to delete <span class="text-[#DBDEE1] font-medium">{{ user()!.username }}</span>.
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            (click)="close()"
+            class="text-[#B5BAC1] hover:text-[#DBDEE1] transition-colors"
+            aria-label="Close"
+          >
+            <lucide-icon [img]="X" class="h-6 w-6" />
+          </button>
+        </header>
+
+        <main class="px-4 py-4">
+          <div class="rounded-md bg-[#2B2D31] border border-[#1F2023] p-3 text-sm text-[#DBDEE1]">
+            @if (user()) {
+              <div class="font-semibold">{{ user()!.email }}</div>
+            }
+            <div class="text-[#949BA4] mt-1">
+              You can still log in until you confirm deletion.
+            </div>
+          </div>
+        </main>
+
+        <footer class="bg-[#2B2D31] px-4 py-3 flex justify-end gap-3">
+          <button
+            type="button"
+            (click)="close()"
+            class="px-4 py-2 text-sm font-medium text-white hover:underline"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="deleteAccount()"
+            class="rounded bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-sm font-semibold transition-colors"
+          >
+            Delete account
+          </button>
+        </footer>
+      </div>
+    </div>

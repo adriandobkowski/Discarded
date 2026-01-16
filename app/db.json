@@ -298,6 +298,19 @@
         "8",
         "10"
       ]
+    },
+    {
+      "img": null,
+      "name": "test",
+      "id": "LUupiuIbw"
+    },
+    {
+      "img": null,
+      "name": "test",
+      "userIds": [
+        "4"
+      ],
+      "id": "nTGj_-mqW"
     }
   ],
   "rooms": [
@@ -402,6 +415,15 @@
           "userId": "4",
           "createdAt": "Thu Jan 15 2026 19:30:56 GMT+0100 (czas środkowoeuropejski standardowy)",
           "chatId": "chat2",
+          "roomId": "room2"
+        },
+        {
+          "id": "6a16e5c9-b2e1-4b7a-b8ae-444c9e5a6f5d",
+          "message": "ye",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:05:04.084Z",
+          "chatId": "chat5",
           "roomId": "room2"
         }
       ]
@@ -664,6 +686,177 @@
           "createdAt": "Thu Jan 15 2026 19:58:07 GMT+0100 (czas środkowoeuropejski standardowy)",
           "chatId": "chat2",
           "roomId": "room3"
+        },
+        {
+          "id": "6ff4c967-6b77-4772-a933-a9b3baf37633",
+          "message": "test",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:09:02.604Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "70778e47-af9c-4690-9a1f-65961bf3fc88",
+          "message": "yooo",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:09:05.346Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "75092c39-fd1e-4e86-bc08-0275cdc15697",
+          "message": "hghg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:40.762Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "0d32e8be-cc66-49dc-8347-068ebd45e9fe",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:41.271Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "24a7d090-f763-43f8-847b-c5a8e62ec97b",
+          "message": "hg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:41.589Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "93248690-5688-490c-b089-0b7577369ece",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:42.170Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "b134f1e1-18b3-40d8-8b05-ae313e128095",
+          "message": "y",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:42.946Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "53d2ffa1-2d77-43ff-bfdc-a4aefef982ac",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:44.306Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "36454050-a7a0-4d2b-ae9d-7256c7cf15ea",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:44.833Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "baa4efa1-38b4-4573-bc0a-f3354d052e6b",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:44.993Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "146d5392-82f9-4a7b-afc1-089bb050ac52",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:45.149Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "7b4f1934-3a93-4219-93b0-b647376ff52a",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:45.303Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "8c9c58d4-d521-471d-8893-8416475264fa",
+          "message": "hello",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:24:09.844Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "0d476596-8d62-40a8-9aee-d6f2488e23bf",
+          "message": "hi",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:25:35.044Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "9458b4e4-9acf-49d1-ba31-daf74d43b454",
+          "message": "hello",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:26:20.805Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "2ef8a3bc-5fbf-4b84-a232-4f972bdf0cdf",
+          "message": "hi",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:30:12.892Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "654109ad-66fb-4289-85a8-7610e2ea286d",
+          "message": "hello",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:32:50.567Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "64ac360d-596e-421b-b654-e94396deb229",
+          "message": "hi",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:32:56.151Z",
+          "chatId": "chat2",
+          "roomId": null
+        },
+        {
+          "id": "42203177-d712-4f6d-8770-2f9f2599185a",
+          "message": "hello",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T20:35:11.731Z",
+          "chatId": "chat2",
+          "roomId": null
         }
       ]
     },
@@ -735,6 +928,213 @@
           "createdAt": "Thu Jan 15 2026 19:01:54 GMT+0100 (czas środkowoeuropejski standardowy)",
           "chatId": "chat5",
           "roomId": "room3"
+        },
+        {
+          "id": "6a16e5c9-b2e1-4b7a-b8ae-444c9e5a6f5d",
+          "message": "ye",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:05:04.084Z",
+          "chatId": "chat5",
+          "roomId": "room2"
+        },
+        {
+          "id": "3e1856c7-96a3-43f4-adee-e029a706d0d8",
+          "message": "yoo",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:07.709Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "7455ca58-35f7-459a-a2f1-04ccfddb89ce",
+          "message": "elo",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:11.020Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "ad471552-a60a-4b4c-9b5f-5809f63da65b",
+          "message": "aaa",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:14.289Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "5dc168ee-b88f-4716-b3db-3981d00b5983",
+          "message": "a",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:15.195Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "bb05b0f2-bb8d-47de-8e90-52ee679e6767",
+          "message": "a",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:15.378Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "3ccc2f91-1704-4976-a7fe-9e17e16faa81",
+          "message": "a",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:15.553Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "1e15f432-6ad7-45f6-ad9c-ef3b3d85430a",
+          "message": "a",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:15.721Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "4d3908b1-25f6-4499-9f2a-876acf6258b3",
+          "message": "a",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:25:15.890Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "5b78adac-b1cc-4851-9526-ebf2c1a91ae5",
+          "message": "jhghjhjg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:30.876Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "03ef9563-30bc-419d-a26d-84f9511f176c",
+          "message": "hgj",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:31.077Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "9a3f55f0-a55a-4449-b2b5-8bb26f3b13a4",
+          "message": "hjg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:31.210Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "db33f9bb-ec92-448c-b932-ab42fe19cad9",
+          "message": "jhg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:31.358Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "abb30695-93f1-44f5-ab3e-85bc045247c6",
+          "message": "ghj",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:31.493Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "d7004f62-12d4-40b2-a7ff-6d1cff4d1d16",
+          "message": "ghj",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:31.632Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "a71de45c-ac10-47ca-af97-5d34ad07da36",
+          "message": "jgg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:31.950Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "ae32a1f6-18f3-42d4-bd57-b73decf8c0aa",
+          "message": "jgh",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:32.093Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "2101545e-9bc2-4516-8e61-b169e9931375",
+          "message": "jhg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:32.227Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "46b7079e-3e77-4270-b19c-25c99e1241c4",
+          "message": "jhg",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:32.388Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "3f8e7ac5-71e8-4e13-9a4e-587fbaa6e254",
+          "message": "hj",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:32.533Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "dae99f4f-07ab-4d19-9f5e-e6abf677fafd",
+          "message": "j",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:32.837Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "6dcfb541-7e30-4cd2-9081-c35fc87b134e",
+          "message": "jh",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:32.992Z",
+          "chatId": "chat5",
+          "roomId": null
+        },
+        {
+          "id": "bf8173d1-7589-45ce-8950-9746138e1647",
+          "message": "h",
+          "media": null,
+          "userId": "4",
+          "createdAt": "2026-01-16T16:33:33.144Z",
+          "chatId": "chat5",
+          "roomId": null
         }
       ]
     },

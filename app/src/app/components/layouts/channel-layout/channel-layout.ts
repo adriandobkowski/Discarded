@@ -1,75 +1,52 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ChannelHeader } from '../../header/channel-header/channel-header';
-import { ChannelSection } from '../../section/channel-section/channel-section';
-import { PrivateChannelSection } from '../../section/private-channel-section/private-channel-section';
-import { ChannelNavbar } from '../../navbar/channel-navbar/channel-navbar';
+import { ChannelHeaderComponent } from '../../header/channel-header/channel-header';
+import { ChannelSectionComponent } from '../../section/channel-section/channel-section';
+import { PrivateChannelSectionComponent } from '../../section/private-channel-section/private-channel-section';
+import { ChannelNavbarComponent } from '../../navbar/channel-navbar/channel-navbar';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { ChannelAside } from '../../aside/channel-aside/channel-aside';
-import { ProfileFooter } from '../../footer/profile-footer/profile-footer';
-import { MessageFooter } from '../../footer/message-footer/message-footer';
+import { ChannelAsideComponent } from '../../aside/channel-aside/channel-aside';
+import { ProfileFooterComponent } from '../../footer/profile-footer/profile-footer';
+import { MessageFooterComponent } from '../../footer/message-footer/message-footer';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { ChannelProps } from '../../../types';
+import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-channel-layout',
+  standalone:true,
   imports: [
-    ChannelHeader,
-    ChannelSection,
-    PrivateChannelSection,
-    ChannelNavbar,
+    ChannelHeaderComponent,
+    ChannelSectionComponent,
+    PrivateChannelSectionComponent,
+    ChannelNavbarComponent,
     RouterOutlet,
-    ChannelAside,
-    ProfileFooter,
-    MessageFooter,
+    ChannelAsideComponent,
+    ProfileFooterComponent,
+    MessageFooterComponent,
   ],
-  template: `
-    <div class="w-screen h-screen flex flex-col bg-[var(--app-bg)] text-[var(--app-text)] font-sans">
-      <app-channel-header />
-      <div class="flex flex-1">
-        <app-channel-section />
-
-        <div class="flex flex-col flex-1">
-          <div class="flex flex-1 overflow-hidden">
-            <app-private-channel-section />
-            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[var(--app-bg)]">
-              <app-channel-navbar />
-              <div class="flex-1 min-h-0 overflow-hidden relative">
-                <router-outlet />
-              </div>
-              <app-message-footer />
-            </main>
-
-            <app-channel-aside
-              class="w-[360px] flex-shrink-0 bg-[var(--app-surface)] border-l border-[var(--app-border)]"
-            />
-          </div>
-        </div>
-      </div>
-      <div>
-        <app-profile-footer />
-      </div>
-    </div>
-  `,
+  templateUrl:'./channel-layout.html',
   styleUrl: './channel-layout.scss',
 })
-export class ChannelLayout implements OnInit {
+export class ChannelLayoutComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private channelService = inject(ChannelService);
-  currentChannel = this.channelService.currentChannel;
+  private toastService = inject(ToastService);
+  protected currentChannel = this.channelService.currentChannel;
 
-  channelId = this.channelService.channelId
+  protected channelId = this.channelService.channelId;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.route.firstChild?.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (!id) return;
 
-      this.channelId.set(id)
+      this.channelId.set(id);
       
       this.channelService.findById().subscribe({
         next: (response: ChannelProps) => {
           this.currentChannel.set(response);
         },
+        error: (err) => this.toastService.errorFrom(err, 'Could not load channel', 'Error'),
       });
     });
   }

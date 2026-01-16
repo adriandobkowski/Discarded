@@ -9,19 +9,19 @@ import { toObservable } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class AuthService {
-  isAuthenticated = computed(() => !!this.token());
+  public isAuthenticated = computed(() => !!this.token());
 
   private http = inject(HttpClient);
 
-  token = signal<string | null>(localStorage.getItem('token'));
+  public token = signal<string | null>(localStorage.getItem('token'));
 
   
-  user = signal<UserProps | null>(JSON.parse(localStorage.getItem('user') ?? 'null'));
+  public user = signal<UserProps | null>(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "null") as UserProps : null);
 
 
-  user$ = toObservable(this.user);
+  public user$ = toObservable(this.user);
 
-  register(user: LoginProps & UserProps) {
+  public register(user: LoginProps & UserProps): Observable<UserProps> {
     return this.http
       .post<LoginResponse>(`${url}/register`, {
         email: user.email,
@@ -41,18 +41,12 @@ export class AuthService {
               img: '',
               createdAt: new Date().toISOString(),
             },
-            {
-              headers: {
-                Authorization: `Bearer ${res.accessToken}`,
-              },
-              observe: 'response',
-            },
           );
         }),
       );
   }
 
-  login(user: LoginProps): Observable<UserProps> {
+  public login(user: LoginProps): Observable<UserProps> {
     return this.http.post<LoginResponse>(`${url}/login`, user).pipe(
       tap((response) => {
         if (response.accessToken) {
@@ -69,11 +63,12 @@ export class AuthService {
         };
         localStorage.setItem('user', JSON.stringify(currentUser));
         this.user.set(currentUser);
-        return currentUser;
+        
+return currentUser;
       }),
     );
   }
-  logout() {
+  public logout(): void {
     this.token.set(null);
     this.user.set(null);
     localStorage.removeItem('user');

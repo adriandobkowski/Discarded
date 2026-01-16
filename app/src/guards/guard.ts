@@ -9,5 +9,6 @@ export const authGuard: CanMatchFn = () => {
   if (!authService.isAuthenticated()) {
     return router.parseUrl('/login');
   }
-  return true;
+  
+return true;
 };

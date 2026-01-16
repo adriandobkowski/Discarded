@@ -1,1 +1,9 @@
-<p>person-to-add works!</p>
+  <div>
+      <div>
+        <app-profile-image [src]="user()?.img" />
+        <div>{{ user()?.username }}</div>
+      </div>
+      <button (click)="selectUser(user()!.username)">
+        <div></div>
+      </button>
+    </div>

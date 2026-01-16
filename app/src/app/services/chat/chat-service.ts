@@ -18,15 +18,15 @@ export class ChatService {
 
   private authService = inject(AuthService);
 
-  user = this.authService.user;
+  public user = this.authService.user;
 
-  chatId = signal<string|null>(null)
+  public chatId = signal<string|null>(null);
 
-  chattedWithUser = signal<UserProps | null>(null);
+  public chattedWithUser = signal<UserProps | null>(null);
 
-  currentChat = signal<ChatProps | null>(null);
+  public currentChat = signal<ChatProps | null>(null);
 
-  findChattedWithUser(): Observable<UserProps> {
+  public findChattedWithUser(): Observable<UserProps> {
     return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`).pipe(
       map(
         (chat: ChatProps) =>
@@ -37,12 +37,12 @@ export class ChatService {
       }),
     );
   }
-  findChatById(): Observable<ChatProps> {
+  public findChatById(): Observable<ChatProps> {
     return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`);
   }
-  findMessagesByChatId(): Observable<ExtendedMessageProps[]> {
+  public findMessagesByChatId(): Observable<ExtendedMessageProps[]> {
     return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`).pipe(
-      map((chat: ChatProps) => chat.messages ?? []),
+      map((chat: ChatProps) => chat.messages.length > 0 ? chat.messages : []),
       switchMap((messages: MessageProps[]) => {
         if (messages.length === 0) {
           return of([]);
@@ -55,7 +55,8 @@ export class ChatService {
         ).pipe(
           map((users: UserProps[]) => {
             const usersById = new Map(users.map((u) => [u.id, u]));
-            return messages
+            
+return messages
               .filter((m) => !!m.userId && usersById.has(m.userId))
               .map((message) => ({
                 user: usersById.get(message.userId)!,
@@ -67,12 +68,13 @@ export class ChatService {
     );
   }
 
-  sendMessage(message:MessageProps): Observable<ChatProps> {
+  public sendMessage(message:MessageProps): Observable<ChatProps> {
     return this.http.get<ChatProps>(`${url}/chats/${this.chatId()}`).pipe(map((chat:ChatProps)=> {
-      const updatedMessages = [...(chat.messages ?? []), message]
-      return updatedMessages
+      const updatedMessages = [...(chat.messages.length > 0 ? chat.messages : []), message];
+      
+return updatedMessages;
     }), switchMap((messages: MessageProps[]) => this.http.patch<ChatProps>(`${url}/chats/${this.chatId()}`, {
       messages: messages
-    })))
+    })));
   }
 }

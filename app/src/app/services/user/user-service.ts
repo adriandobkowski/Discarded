@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { EMPTY, Observable, forkJoin, map, of, switchMap, tap } from 'rxjs';
-import { ExtendedUserProps, Status, UserProps } from '../../types';
-import { ChatProps } from '../../types';
+import { ChatProps, ExtendedUserProps, Status, UserProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,30 +13,32 @@ export class UserService {
 
   private authService = inject(AuthService);
 
-  microphoneActive = signal<boolean>(true);
-  headphonesActive = signal<boolean>(true);
+  public microphoneActive = signal<boolean>(true);
+  public headphonesActive = signal<boolean>(true);
 
-  activeUsers = signal<UserProps[]>([]);
+  public activeUsers = signal<UserProps[]>([]);
 
-  addFriendIsOpen = signal<boolean>(false);
+  public addFriendIsOpen = signal<boolean>(false);
 
-  closeProfileFooter = signal<boolean>(false);
-  statusModalOpen = signal<boolean>(false);
+  public closeProfileFooter = signal<boolean>(false);
+  public statusModalOpen = signal<boolean>(false);
 
-  friendRequests = signal<string[]>([]);
+  public friendRequests = signal<string[]>([]);
 
-  inboxActive = signal<boolean>(false);
+  public inboxActive = signal<boolean>(false);
 
-  inviteToChannelModalActive = signal<boolean>(false);
+  public inviteToChannelModalActive = signal<boolean>(false);
 
-  findById(): Observable<UserProps> {
+ public  deleteAccountClicked = signal<boolean>(false);
+
+ public findById(): Observable<UserProps> {
     return this.http.get<UserProps>(`${url}/${this.authService.user()!.id}`);
   }
 
-  findFriends(status?: Status): Observable<UserProps[]> {
+  public findFriends(status?: Status): Observable<UserProps[]> {
     return this.http.get<UserProps>(`${url}/users/${this.authService.user()!.id}`).pipe(
       switchMap((user) => {
-        if (!user.friends || user.friends.length === 0) {
+        if (user.friends.length === 0) {
           return of([]);
         }
 
@@ -53,12 +54,13 @@ export class UserService {
       }),
     );
   }
-  findChattedWithUsers(): Observable<ExtendedUserProps[]> {
+  public findChattedWithUsers(): Observable<ExtendedUserProps[]> {
     return this.http.get<UserProps>(`${url}/users/${this.authService.user()!.id}`).pipe(
       map((user) => user.chats),
       switchMap((chatIds) => {
         if (chatIds.length === 0) return of([]);
-        return forkJoin(
+        
+return forkJoin(
           chatIds.map((chatId) => this.http.get<ChatProps>(`${url}/chats/${chatId}`)),
         );
       }),
@@ -68,13 +70,15 @@ export class UserService {
             const otherUserId = chat.userIds.find(
               (userId) => userId !== this.authService.user()!.id,
             );
-            return otherUserId ? { otherUserId, chatId: chat.id } : null;
+            
+return otherUserId ? { otherUserId, chatId: chat.id } : null;
           })
           .filter((item): item is { otherUserId: string; chatId: string } => !!item);
       }),
       switchMap((pairs: { otherUserId: string; chatId: string }[]) => {
         if (pairs.length === 0) return of([]);
-        return forkJoin(
+        
+return forkJoin(
           pairs.map((pair) =>
             this.http
               .get<UserProps>(`${url}/users/${pair.otherUserId}`)
@@ -84,12 +88,12 @@ export class UserService {
       }),
     );
   }
-  updateUser(formData: Partial<UserProps>): Observable<UserProps> {
+  public updateUser(formData: Partial<UserProps>): Observable<UserProps> {
     return this.http.patch<UserProps>(`${url}/users/${this.authService.user()!.id}`, {
       ...formData,
     });
   }
-  findChattedWithUser(chatId: string): Observable<UserProps> {
+  public findChattedWithUser(chatId: string): Observable<UserProps> {
     return this.http.get<ChatProps>(`${url}/chats/${chatId}`).pipe(
       map(
         (chat: ChatProps) =>
@@ -100,16 +104,16 @@ export class UserService {
       }),
     );
   }
-  sendFriendRequest(username: string): Observable<UserProps> {
+  public sendFriendRequest(username: string): Observable<UserProps> {
     return this.http.get<UserProps[]>(`${url}/users?username=${username}`).pipe(
       map((users) => {
-        if (!users || users.length === 0) {
+        if (users.length === 0) {
           throw new Error('User not found');
         }
-        return users[0].id;
+        
+return users[0].id;
       }),
       switchMap((friendId) => {
-        console.log(friendId, this.authService.user()!.id);
         if (friendId === this.authService.user()!.id) {
           return EMPTY;
         }
@@ -120,7 +124,7 @@ export class UserService {
 
         return this.http.get<UserProps>(`${url}/users/${this.authService.user()!.id}`).pipe(
           map((user) => ({
-            friendRequests: [...(user.friendRequests ?? []), friendId],
+            friendRequests: [...(user.friendRequests.length > 0 ? user.friendRequests : []), friendId],
           })),
           switchMap((payload) =>
             this.http.patch<UserProps>(`${url}/users/${this.authService.user()!.id}`, payload),
@@ -133,9 +137,10 @@ export class UserService {
     );
   }
 
-  acceptFriendRequest(friendId: string): Observable<ChatProps> {
+  public acceptFriendRequest(friendId: string): Observable<ChatProps> {
     const newChatId = uuidv4();
-    return this.http.get<UserProps>(`${url}/users/${this.authService.user()!.id}`).pipe(
+    
+return this.http.get<UserProps>(`${url}/users/${this.authService.user()!.id}`).pipe(
       map((user: UserProps) => ({
         friendRequests: user.friendRequests.filter((id: string) => id !== friendId),
         friends: [...user.friends, friendId],
@@ -158,7 +163,7 @@ export class UserService {
       }),
     );
   }
-  denyFriendRequest(friendId: string): Observable<UserProps> {
+  public denyFriendRequest(friendId: string): Observable<UserProps> {
     return this.http.get<UserProps>(`${url}/users/${this.authService.user()!.id}`).pipe(
       map((user: UserProps) => ({
         friendRequests: user.friendRequests.filter((id: string) => id !== friendId),
@@ -168,7 +173,7 @@ export class UserService {
       ),
     );
   }
-  removeFriend(friendId: string): Observable<UserProps> {
+  public removeFriend(friendId: string): Observable<UserProps> {
     const userId = this.authService.user()!.id;
 
     return this.http.get<UserProps>(`${url}/users/${userId}`).pipe(
@@ -181,8 +186,12 @@ export class UserService {
       }),
     );
   }
-  findUsersByFriendRequests(ids: string[]): Observable<UserProps[]> {
+  public findUsersByFriendRequests(ids: string[]): Observable<UserProps[]> {
     if (ids.length === 0) return of([]);
-    return forkJoin(ids.map((id: string) => this.http.get<UserProps>(`${url}/users/${id}`)));
+    
+return forkJoin(ids.map((id: string) => this.http.get<UserProps>(`${url}/users/${id}`)));
+  }
+  public deleteAccount(): Observable<void> {
+    return this.http.delete<void>(`${url}/users/${this.authService.user()!.id}`);
   }
 }

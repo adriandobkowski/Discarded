@@ -2,32 +2,24 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { ActivatedRoute } from '@angular/router';
 import { ChannelProps } from '../../../types';
+import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-channel-message',
   standalone: true,
   imports: [],
-  template: `
-    <div class="flex flex-col items-center justify-center w-full h-full text-center p-8">
-      <div
-        class="w-20 h-20 rounded-full bg-[#41434a] flex items-center justify-center mb-4 shadow-lg"
-      >
-        <span class="text-4xl text-gray-200 font-bold">#</span>
-      </div>
-      <h1 class="text-3xl font-bold text-white mb-2">This is #{{ currentChannel()?.name }}</h1>
-      <p class="text-gray-400 text-lg max-w-lg">Go to or create rooms to message with friends.</p>
-    </div>
-  `,
+  templateUrl: './channel-message.html',
   styleUrl: './channel-message.scss',
 })
-export class ChannelMessage implements OnInit {
+export class ChannelMessageComponent implements OnInit {
   private channelService = inject(ChannelService);
   private route = inject(ActivatedRoute);
+  private toastService = inject(ToastService);
 
-  currentChannel = this.channelService.currentChannel;
-  channelId = this.channelService.channelId
+  protected currentChannel = this.channelService.currentChannel;
+  protected channelId = this.channelService.channelId;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (!id) return;
@@ -37,7 +29,7 @@ export class ChannelMessage implements OnInit {
             this.currentChannel.set(response);
           },
           error: (err) => {
-            console.log(err);
+            this.toastService.errorFrom(err, 'Could not load channel', 'Error');
           },
         });
       }

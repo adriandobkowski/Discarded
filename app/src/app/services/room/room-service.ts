@@ -18,22 +18,23 @@ export class RoomService {
   private http = inject(HttpClient);
   private channelService = inject(ChannelService);
 
-  currentChannel = this.channelService.currentChannel;
+  public currentChannel = this.channelService.currentChannel;
 
   
-  roomId = signal<string|null>(null)
-  channelId = this.channelService.channelId
+  public roomId = signal<string|null>(null);
+  public channelId = this.channelService.channelId;
 
-  rooms = signal<RoomProps[]>([]);
+  public rooms = signal<RoomProps[]>([]);
 
-  findRoomsByChannelId(channelId: string): Observable<RoomProps[]> {
+  public findRoomsByChannelId(channelId: string): Observable<RoomProps[]> {
     return this.http.get<ChannelProps>(`${url}/channels/${channelId}`).pipe(
       map((channel: ChannelProps) => channel.rooms),
       switchMap((roomIds: string[]) => {
         if (roomIds.length === 0) {
           return of([]);
         }
-        return forkJoin(
+        
+return forkJoin(
           roomIds.map((roomId: string) => {
             return this.http.get<RoomProps>(`${url}/rooms/${roomId}`);
           }),
@@ -41,18 +42,17 @@ export class RoomService {
       }),
     );
   }
-
-  findRoomById(): Observable<RoomProps> {
-    return this.http.get<ChannelProps>(`${url}/channels/${this.channelId}`).pipe(
+  public findRoomById(): Observable<RoomProps> {
+    return this.http.get<ChannelProps>(`${url}/channels/${this.channelId()}`).pipe(
       map((channel) => channel.rooms.find((rId) => rId === this.roomId()) as string),
       switchMap((roomId: string) => {
         return this.http.get<RoomProps>(`${url}/rooms/${roomId}`);
       }),
     );
   }
-  findMessagesByRoomId(): Observable<ExtendedMessageProps[]> {
+  public findMessagesByRoomId(): Observable<ExtendedMessageProps[]> {
     return this.http.get<RoomProps>(`${url}/rooms/${this.roomId()}`).pipe(
-      map((room: RoomProps) => room.messages ?? []),
+      map((room: RoomProps) => room.messages.length > 0 ? room.messages : []),
       switchMap((messages: MessageProps[]) => {
         if (messages.length === 0) {
           return of([]);
@@ -65,7 +65,8 @@ export class RoomService {
         ).pipe(
           map((users: UserProps[]) => {
             const usersById = new Map(users.map((u) => [u.id, u]));
-            return messages
+            
+return messages
               .filter((m) => !!m.userId && usersById.has(m.userId))
               .map((message) => ({
                 user: usersById.get(message.userId)!,
@@ -77,12 +78,13 @@ export class RoomService {
     );
   }
 
-  sendMessage(message:MessageProps): Observable<RoomProps> {
+  public sendMessage(message:MessageProps): Observable<RoomProps> {
       return this.http.get<RoomProps>(`${url}/rooms/${this.roomId()}`).pipe(map((chat:RoomProps)=> {
-        const updatedMessages = [...(chat.messages ?? []), message]
-        return updatedMessages
+        const updatedMessages = [...(chat.messages.length > 0 ? chat.messages : []), message];
+        
+return updatedMessages;
       }), switchMap((messages: MessageProps[]) => this.http.patch<RoomProps>(`${url}/rooms/${this.roomId()}`, {
         messages: messages
-      })))
+      })));
     }
 }

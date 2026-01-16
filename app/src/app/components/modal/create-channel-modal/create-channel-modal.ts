@@ -3,107 +3,46 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Camera, LucideAngularModule, Plus, X } from 'lucide-angular';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { ChannelProps } from '../../../types';
+import { trimmedRequired } from '../../../validators/form-validators';
+import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-create-channel-modal',
+  standalone:true,
   imports: [ReactiveFormsModule, LucideAngularModule],
-  template: ` <div
-    class="fixed inset-0  flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
-  >
-    <form
-      [formGroup]="channelForm"
-      (ngSubmit)="onSubmit()"
-      class="bg-[#313338] w-[440px] rounded-lg shadow-2xl overflow-hidden animate-fade-in-up"
-    >
-      <nav class="p-6 text-center relative">
-        <h1 class="text-2xl font-bold text-white mb-2">Customize Your Server</h1>
-        <p class="text-gray-400 text-sm text-center px-4">
-          Give your new server a personality with a name and an icon. You can always change it
-          later.
-        </p>
-        <button
-          type="button"
-          (click)="createChannelClicked.set(false)"
-          class="absolute top-4 right-4 text-gray-400 hover:text-gray-200"
-        >
-          <lucide-icon [img]="X" class="w-6 h-6" />
-        </button>
-      </nav>
-      <div class="px-4 pb-4">
-        <div class="flex justify-center mb-6">
-          <div class="relative">
-            <input type="file" id="file-input" class="hidden" />
-            <label
-              for="file-input"
-              class="flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-400 rounded-full hover:border-gray-200 cursor-pointer overflow-hidden bg-[#2B2D31]"
-            >
-              <div
-                class="flex flex-col items-center gap-1 text-gray-400 text-xs font-bold uppercase p-2 text-center"
-              >
-                <lucide-icon [img]="Camera" class="w-6 h-6" />
-                <span>Upload</span>
-              </div>
-            </label>
-            <div
-              class="absolute -top-1 -right-1 bg-[#5865F2] rounded-full p-1 border-[3px] border-[#313338]"
-            >
-              <lucide-icon [img]="Plus" class="w-3 h-3 text-white" />
-            </div>
-          </div>
-        </div>
-        <div class="mb-4">
-          <label for="name" class="text-xs font-bold text-gray-400 uppercase mb-2 block"
-            >Server name</label
-          >
-          <input
-            type="text"
-            id="name"
-            formControlName="name"
-            class="w-full p-2.5 bg-[#1E1F22] text-white rounded outline-none focus:ring-2 focus:ring-[#00A8FC] font-medium"
-          />
-        </div>
-      </div>
-      <div class="bg-[#2B2D31] p-4 flex justify-between items-center">
-        <button
-          type="button"
-          (click)="createChannelClicked.set(false)"
-          class="text-white text-sm font-medium hover:underline px-4"
-        >
-          Back
-        </button>
-        <button
-          type="submit"
-          class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-8 py-2.5 rounded text-sm font-medium transition-colors"
-        >
-          Create
-        </button>
-      </div>
-    </form>
-  </div>`,
+  templateUrl: './create-channel-modal.html',
   styleUrl: './create-channel-modal.scss',
 })
-export class CreateChannelModal {
-  readonly X = X;
-  readonly Plus = Plus;
-  readonly Camera = Camera;
-
+export class CreateChannelModalComponent {
+  protected readonly X = X;
+  protected readonly Plus = Plus;
+  protected readonly Camera = Camera;
   private channelService = inject(ChannelService);
+  private toastService = inject(ToastService);
 
-  channelForm = new FormGroup({
+  protected channelForm = new FormGroup({
     img: new FormControl<string | null>(null),
     name: new FormControl<string>('', {
-      validators: [Validators.required],
+      validators: [(control) => Validators.required(control), trimmedRequired, Validators.minLength(3), Validators.maxLength(40)],
     }),
   });
 
-  createChannelClicked = this.channelService.createChannelClicked;
+  protected createChannelClicked = this.channelService.createChannelClicked;
 
-  onSubmit(): void {
+  protected onSubmit(): void {
     if (this.channelForm.invalid) {
       this.channelForm.markAllAsTouched();
-      return;
+      
+return;
     }
-    this.channelService.createChannel(this.channelForm.getRawValue() as ChannelProps);
+    this.channelService.createChannel(this.channelForm.getRawValue() as ChannelProps).subscribe({
+      next:()=> {
+        this.toastService.success("Successfully created channel");
+      },
+      error: (err)=> {
+        this.toastService.errorFrom(err, "Failed to create channel");
+      }
+    });
 
     this.createChannelClicked.set(false);
   }

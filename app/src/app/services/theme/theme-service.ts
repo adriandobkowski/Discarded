@@ -8,17 +8,17 @@ const STORAGE_KEY = 'theme-mode';
   providedIn: 'root',
 })
 export class ThemeService {
-  theme = signal<ThemeMode>(this.readInitialTheme());
+  public theme = signal<ThemeMode>(this.readInitialTheme());
 
-  constructor() {
+  private constructor() {
     this.applyTheme(this.theme());
   }
 
-  toggle(): void {
+  public toggle(): void {
     this.set(this.theme() === 'dark' ? 'light' : 'dark');
   }
 
-  set(theme: ThemeMode): void {
+  private set(theme: ThemeMode): void {
     this.theme.set(theme);
     localStorage.setItem(STORAGE_KEY, theme);
     this.applyTheme(theme);
@@ -28,8 +28,9 @@ export class ThemeService {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'dark' || stored === 'light') return stored;
 
-    const prefersLight = window.matchMedia?.('(prefers-color-scheme: light)')?.matches;
-    return prefersLight ? 'light' : 'dark';
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    
+return prefersLight ? 'light' : 'dark';
   }
 
   private applyTheme(theme: ThemeMode): void {

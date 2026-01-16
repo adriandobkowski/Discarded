@@ -7,98 +7,83 @@ import { AuthService } from '../../../services/auth/auth-service';
 import { v4 as uuidv4 } from 'uuid';
 import { ChatService } from '../../../services/chat/chat-service';
 import { RoomService } from '../../../services/room/room-service';
+import { messageOrMediaRequired } from '../../../validators/form-validators';
+import { ToastService } from '../../../services/toast/toast-service';
 @Component({
   selector: 'app-message-footer',
   standalone: true,
   imports: [ReactiveFormsModule, LucideAngularModule],
-  template: `
-    <form [formGroup]="messageForm" class="px-4 pb-6 pt-2" (ngSubmit)="send()">
-      <footer class="flex items-center">
-        <div class="relative flex items-center bg-[#383A40] rounded-lg w-full">
-          <label
-            class="px-4 py-2.5 text-gray-400 hover:text-white cursor-pointer transition-colors flex-shrink-0"
-          >
-            <div class="bg-[#2B2D31] rounded-full p-0.5">
-              <lucide-icon [img]="Plus" class="w-4 h-4" />
-            </div>
-            <input type="file" accept="image/*, video/*" hidden (change)="onFileSelected($event)" formControlName="media"/>
-          </label>
-          <input
-            type="text"
-            placeholder="Message"
-            [disabled]="messageDisabled()"
-            formControlName="message"
-            class="flex-1 bg-transparent text-gray-100 placeholder-gray-500 py-2.5 text-sm focus:outline-none transition-colors font-normal"
-          />
-          <button type="submit" hidden></button>
-        </div>
-      </footer>
-    </form>
-  `,
+  templateUrl:'./message-footer.html',
   styleUrl: './message-footer.scss',
 })
-export class MessageFooter {
-  readonly Plus = Plus;
+export class MessageFooterComponent {
+  protected readonly Plus = Plus;
 
   private authService = inject(AuthService);
   private routeService = inject(RouteService);
-  private chatService = inject(ChatService)
-  private roomService = inject(RoomService)
+  private chatService = inject(ChatService);
+  private roomService = inject(RoomService);
+  private toastService = inject(ToastService);
 
-  currentChat = this.chatService.currentChat
+  protected currentChat = this.chatService.currentChat;
 
-  messageDisabled = this.routeService.messageDisabled;
+  protected messageDisabled = this.routeService.messageDisabled;
 
-  roomId = this.roomService.roomId
-  chatId = this.chatService.chatId
+  protected roomId = this.roomService.roomId;
+  protected chatId = this.chatService.chatId;
 
-  messageForm = new FormGroup({
-    message: new FormControl<string>('', {
-      validators: [Validators.required],
-      nonNullable:true
-    }),
-    media: new FormControl<string | null>(null),
-  });
+  protected messageForm = new FormGroup(
+    {
+      message: new FormControl<string>('', {
+        validators: [Validators.maxLength(2000)],
+        nonNullable: true,
+      }),
+      media: new FormControl<string | null>(null),
+    },
+    {
+      validators: [messageOrMediaRequired('message', 'media')],
+    },
+  );
 
-  onFileSelected(event: Event): void {
+  protected onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const files = input.files!;
-    if (files[0]) {
-      const fileUrl = `/assets/uploads/${files[0].name}`;
-      this.messageForm.patchValue({ media: fileUrl });
-    }
+    const fileUrl = `/assets/uploads/${files[0].name}`;
+    this.messageForm.patchValue({ media: fileUrl });
   }
-  send(): void {
-    const chatId = this.chatId()
-    const roomId = this.roomId()
-
-    console.log(chatId, roomId)
+  protected send(): void {
+    if (this.messageForm.invalid) {
+      this.messageForm.markAllAsTouched();
+      this.toastService.error('Type a message or attach media', 'Cannot send');
+      
+return;
+    }
+    const chatId = this.chatId();
+    const roomId = this.roomId();
     const message: MessageProps = {
         id: uuidv4(),
       ...this.messageForm.getRawValue(),
         userId: this.authService.user()!.id,
-        createdAt: new Date().toString(),
+        createdAt: new Date().toISOString(),
         chatId: chatId ?? null,
         roomId: roomId ?? null
-      }
+      };
     if (chatId) {
       this.chatService.sendMessage(message).subscribe({
         next: ()=> {
-          this.messageForm.reset()
-          console.log("message sent")
+          this.messageForm.reset();
         },
-        error: (err)=>console.log(err)
+        error: (err) => this.toastService.errorFrom(err, 'Could not send message', 'Send failed')
         
-      })
+      });
     }
     if (roomId) {
       this.roomService.sendMessage(message).subscribe({
         next: ()=> {
-          this.messageForm.reset()
-          console.log("message sent")
+          this.messageForm.reset();
         },
-        error: (err)=>console.log(err)
-      })
+        error: (err) => this.toastService.errorFrom(err, 'Could not send message', 'Send failed')
+      });
     }
     };
   }

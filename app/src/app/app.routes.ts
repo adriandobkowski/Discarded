@@ -1,27 +1,27 @@
 import { Routes } from '@angular/router';
-import { RootLayout } from './components/layouts/root-layout/root-layout';
+import {  RootLayoutComponent } from './components/layouts/root-layout/root-layout';
 import { FriendsPage } from './components/main/friends-page/friends-page';
-import { NavbarAddFriend } from './components/navbar/navbar-add-friend/navbar-add-friend';
+import { NavbarAddFriendComponent } from './components/navbar/navbar-add-friend/navbar-add-friend';
 import { authGuard } from '../guards/guard';
-import { Login } from './components/auth/login/login';
-import { Register } from './components/auth/register/register';
+import { LoginComponent } from './components/auth/login/login';
+import { RegisterComponent } from './components/auth/register/register';
 import { authenticatedGuard } from '../guards/authenticatedGuard';
 import { friendsResolver } from './resolvers/friendsResolver';
-import { Settings } from './components/settings/settings';
-import { ChatLayout } from './components/layouts/chat-layout/chat-layout';
-import { ChannelLayout } from './components/layouts/channel-layout/channel-layout';
-import { ChannelMessage } from './components/main/channel-message/channel-message';
-import { PageNotFound } from './components/main/page-not-found/page-not-found';
-import { RoomMessage } from './components/main/room-message/room-message';
-import { ChatMessage } from './components/main/chat-message/chat-message';
+import { SettingsComponent } from './components/settings/settings';
+import { ChatLayoutComponent } from './components/layouts/chat-layout/chat-layout';
+import { ChannelLayoutComponent } from './components/layouts/channel-layout/channel-layout';
+import { ChannelMessageComponent } from './components/main/channel-message/channel-message';
+import { PageNotFoundComponent } from './components/main/page-not-found/page-not-found';
+import { RoomMessageComponent } from './components/main/room-message/room-message';
+import { ChatMessageComponent } from './components/main/chat-message/chat-message';
 
 export const routes: Routes = [
-  { path: 'login', component: Login, canMatch: [authenticatedGuard] },
-  { path: 'register', component: Register, canMatch: [authenticatedGuard] },
+  { path: 'login', component: LoginComponent, canMatch: [authenticatedGuard] },
+  { path: 'register', component: RegisterComponent, canMatch: [authenticatedGuard] },
 
   {
     path: '',
-    component: RootLayout,
+    component: RootLayoutComponent,
     canMatch: [authGuard],
     children: [
       { path: '', redirectTo: 'active', pathMatch: 'full' },
@@ -42,29 +42,29 @@ export const routes: Routes = [
       },
       {
         path: 'add-friend',
-        component: NavbarAddFriend,
+        component: NavbarAddFriendComponent,
       },
       {
         path: 'settings',
-        component: Settings,
+        component: SettingsComponent,
       },
     ],
   },
 
   {
     path: 'chats',
-    component: ChatLayout,
-    children: [{ path: ':id', component: ChatMessage }],
+    component: ChatLayoutComponent,
+    children: [{ path: ':id', component: ChatMessageComponent }],
     canMatch: [authGuard],
   },
   {
     path: 'channels',
-    component: ChannelLayout,
+    component: ChannelLayoutComponent,
     children: [
-      { path: ':id', component: ChannelMessage },
-      { path: ':id/rooms/:roomId', component: RoomMessage },
+      { path: ':id', component: ChannelMessageComponent },
+      { path: ':id/rooms/:roomId', component: RoomMessageComponent },
     ],
     canMatch: [authGuard],
   },
-  { path: '**', pathMatch: 'full', component: PageNotFound },
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];

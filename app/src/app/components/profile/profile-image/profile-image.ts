@@ -4,27 +4,11 @@ import { Status } from '../../../types';
 @Component({
   selector: 'app-profile-image',
   imports: [],
-  template: `
-    <div class="relative inline-block w-10 h-10">
-      <img [src]="src()" alt="Profile Image" class="w-full h-full rounded-full object-cover" />
-      @if (status() === 'online') {
-        <div
-          class="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-slate-900 shadow-md bg-green-500"
-        ></div>
-      } @else if (status() === 'busy') {
-        <div
-          class="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-slate-900 shadow-md bg-red-500"
-        ></div>
-      } @else if (status() === 'offline') {
-        <div
-          class="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-slate-900 shadow-md bg-gray-500"
-        ></div>
-      }
-    </div>
-  `,
+  standalone:true,
+  templateUrl: './profile-image.html',
   styleUrl: './profile-image.scss',
 })
-export class ProfileImage {
-  src = input<string>();
-  status = input<Status>();
+export class ProfileImageComponent {
+  public src = input<string>();
+  public status = input<Status>();
 }

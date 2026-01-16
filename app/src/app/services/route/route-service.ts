@@ -9,7 +9,7 @@ import { filter, map } from 'rxjs';
 export class RouteService {
   private router = inject(Router);
 
-  routerUrl = toSignal(
+  public routerUrl = toSignal(
     this.router.events.pipe(
       filter((e) => e instanceof NavigationEnd),
       map(() => this.router.url),
@@ -17,8 +17,8 @@ export class RouteService {
     { initialValue: this.router.url },
   );
 
-  currentRoute = computed(() => this.routerUrl());
-  messageDisabled = computed(
+  public currentRoute = computed(() => this.routerUrl());
+  public messageDisabled = computed(
     () => this.currentRoute().includes('/channels') && !this.currentRoute().includes('/rooms'),
   );
 }
