@@ -1,24 +1,24 @@
- <div>
-      <nav>
-        <div>
-          <div>Invite friends to: {{ room()?.name }}</div>
-        </div>
-        <button>
-          <lucide-icon [img]="X" />
-        </button>
-      </nav>
-      <div>
-        <app-search />
-      </div>
-      <main>
-        @for (user of this.users; track user.id) {
-          <div>
-            <div>
-              <app-profile-image [src]="user?.img" />
-              <div>{{ user.username }}</div>
-            </div>
-            <button (click)="addToChannel(user.id)">Invite</button>
-          </div>
-        }
-      </main>
+<div>
+  <nav>
+    <div>
+      <div>Invite friends to: {{ room()?.name }}</div>
     </div>
+    <button>
+      <lucide-icon [img]="X" />
+    </button>
+  </nav>
+  <div>
+    <app-search />
+  </div>
+  <main>
+    @for (user of this.users; track user.id) {
+      <div>
+        <div>
+          <app-profile-image [src]="user?.img" />
+          <div>{{ user.username }}</div>
+        </div>
+        <button (click)="addToChannel(user.id)">Invite</button>
+      </div>
+    }
+  </main>
+</div>

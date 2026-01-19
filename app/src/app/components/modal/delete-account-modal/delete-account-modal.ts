@@ -30,7 +30,7 @@ export class DeleteAccountModalComponent {
     this.userService.deleteAccount().subscribe({
       next: () => {
         this.authService.logout();
-       void this.router.navigate(['/login']);
+        void this.router.navigate(['/login']);
       },
     });
   }

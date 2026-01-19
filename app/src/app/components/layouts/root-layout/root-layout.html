@@ -1,22 +1,15 @@
-  <div class="w-screen h-screen flex flex-col bg-[var(--app-bg)] text-[var(--app-text)] font-sans">
-      <app-root-header />
-      <div class="flex flex-1">
-        <app-channel-section />
-        <div class="flex flex-col flex-1">
-          <app-root-navbar />
-          <div class="flex flex-1 overflow-hidden">
-            <app-chat-section />
-            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[var(--app-bg)]">
-              <router-outlet />
-            </main>
-
-            <app-root-aside
-              class="w-[360px] flex-shrink-0 bg-[var(--app-surface)] border-l border-[var(--app-border)]"
-            />
-          </div>
-        </div>
-      </div>
-      <div>
-        <app-profile-footer />
-      </div>
+<app-root-header />
+<div class="flex">
+  <app-channel-section />
+  <app-chat-section />
+  <div class="flex flex-col flex-1">
+    <app-root-navbar />
+    <div class="flex flex-1">
+      <main class="flex flex-col flex-1">
+        <router-outlet />
+      </main>
+      <app-root-aside class="w-md bg-[var(--app-surface)] border-l border-[var(--app-border)]" />
     </div>
+  </div>
+</div>
+<app-profile-footer />

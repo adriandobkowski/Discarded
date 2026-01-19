@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RootAside } from './root-aside';
+import { RootAsideComponent } from './root-aside';
 
-describe('RootAside', () => {
-  let component: RootAside;
-  let fixture: ComponentFixture<RootAside>;
+describe('RootAsideComponent', () => {
+  let component: RootAsideComponent;
+  let fixture: ComponentFixture<RootAsideComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RootAside]
-    })
-    .compileComponents();
+      imports: [RootAsideComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RootAside);
+    fixture = TestBed.createComponent(RootAsideComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

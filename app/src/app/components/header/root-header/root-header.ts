@@ -10,7 +10,7 @@ import { UserService } from '../../../services/user/user-service';
   selector: 'app-root-header',
   standalone: true,
   imports: [LucideAngularModule],
-  templateUrl:'./root-header.html',
+  templateUrl: './root-header.html',
   styleUrl: './root-header.scss',
 })
 export class RootHeaderComponent implements OnDestroy {

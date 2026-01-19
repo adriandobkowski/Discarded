@@ -1,24 +1,17 @@
- <div class="w-screen h-screen flex flex-col bg-[var(--app-bg)] text-[var(--app-text)] font-sans">
-      <app-chat-header />
-      <div class="flex flex-1">
-        <app-channel-section />
-        <div class="flex flex-col flex-1">
-          <div class="flex flex-1 overflow-hidden">
-            <app-chat-section />
-            <main class="flex flex-col flex-1 h-full pl-64 min-w-0 bg-[var(--app-bg)]">
-              <app-chat-navbar />
-              <div class="flex-1">
-                <router-outlet />
-              </div>
-              <app-message-footer />
-            </main>
-            <app-chat-aside
-              class="w-[360px] flex-shrink-0 bg-[var(--app-surface)] border-l border-[var(--app-border)]"
-            />
-          </div>
-        </div>
+<app-chat-header />
+
+<div class="w-screen h-screen flex">
+  <app-channel-section />
+  <app-chat-section />
+  <div class="flex justify-between w-screen">
+    <main class="flex flex-col flex-1">
+      <app-chat-navbar />
+      <div class="overflow-auto flex-1">
+        <router-outlet />
       </div>
-      <div>
-        <app-profile-footer />
-      </div>
-    </div>
+      <app-message-footer />
+    </main>
+    <app-chat-aside class="w-md border-l border-[var(--app-border)]" />
+  </div>
+</div>
+<app-profile-footer />

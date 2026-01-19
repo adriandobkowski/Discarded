@@ -16,13 +16,26 @@ import { trimmedRequired } from '../../../validators/form-validators';
 export class RegisterComponent {
   protected registerForm = new FormGroup({
     email: new FormControl<string>('', {
-      validators: [(control) => Validators.required(control), trimmedRequired, (control) => Validators.email(control)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        (control) => Validators.email(control),
+      ],
     }),
     username: new FormControl<string>('', {
-      validators: [(control) => Validators.required(control), trimmedRequired, Validators.minLength(3), Validators.maxLength(24)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        Validators.minLength(3),
+        Validators.maxLength(24),
+      ],
     }),
     password: new FormControl<string>('', {
-      validators: [(control) => Validators.required(control), trimmedRequired, Validators.minLength(8)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        Validators.minLength(8),
+      ],
     }),
   });
   private authService = inject(AuthService);

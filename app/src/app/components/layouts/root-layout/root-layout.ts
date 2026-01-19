@@ -8,7 +8,7 @@ import { RootAsideComponent } from '../../aside/root-aside/root-aside';
 import { RootNavbarComponent } from '../../navbar/root-navbar/root-navbar';
 @Component({
   selector: 'app-root-layout',
-  standalone:true,
+  standalone: true,
   imports: [
     ChannelSectionComponent,
     ChatSectionComponent,

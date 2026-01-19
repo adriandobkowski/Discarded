@@ -37,8 +37,8 @@ export interface RoomProps {
   messages: MessageProps[];
 }
 export interface ChannelProps {
-  id: string;
-  img?: string;
+  id?: string;
+  img: string;
   name: string;
   rooms: string[];
   userIds: string[];
@@ -57,7 +57,6 @@ export interface ExtendedMessageProps {
   message: MessageProps;
 }
 
-// FriendsPage filter/sort types
 export type FriendsStatusFilter = 'all' | 'online' | 'busy' | 'offline';
 
 export type FriendsSortOption =

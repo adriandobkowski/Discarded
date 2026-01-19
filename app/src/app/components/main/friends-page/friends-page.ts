@@ -1,114 +1,83 @@
-import { Component, computed, effect, HostListener, inject, input, signal } from '@angular/core';
-import { FriendsSortOption, FriendsStatusFilter, UserProps } from '../../../types';
+import { Component, effect, HostListener, inject, input } from '@angular/core';
 import { SearchComponent } from '../search/search';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-angular';
-import { UserService } from '../../../services/user/user-service';
 import { RouteService } from '../../../services/route/route-service';
+import { FriendService } from '../../../services/friends/friend/friend-service.service';
+import { UserProps } from '../../../types';
 import { ToastService } from '../../../services/toast/toast-service';
+import { FriendFilterService } from '../../../services/friends/friendFilter/friend-filter.service';
+import { FriendStoreService } from '../../../services/friends/friendStore/friend-store.service';
+import { FriendMenuService } from '../../../services/friends/friendMenu/friend-menu.service';
+import { UserService } from '../../../services/user/user-service';
 @Component({
   selector: 'app-friends-page',
   standalone: true,
   imports: [SearchComponent, ProfileImageComponent, LucideAngularModule],
   templateUrl: './friends-page.html',
   styleUrl: './friends-page.scss',
+  host: {
+    class: 'h-full',
+  },
 })
-
 export class FriendsPage {
   protected readonly MessageCircle = MessageCircle;
   protected readonly EllipsisVertical = EllipsisVertical;
 
-  private userService = inject(UserService);
   private routeService = inject(RouteService);
+
+  private userService = inject(UserService);
+
+  private friendService = inject(FriendService);
+  private friendFilterService = inject(FriendFilterService);
+
+  private friendStoreService = inject(FriendStoreService);
+
+  private friendMenuService = inject(FriendMenuService);
+
   private toastService = inject(ToastService);
 
   protected currentRoute = this.routeService.currentRoute;
-
- protected  activeMenuUserId = signal<string | null>(null);
- protected  menuPosition = signal<{ top: string; right: string }>({ top: '0px', right: '0px' });
+  protected activeMenuUserId = this.friendService.activeMenuUserId;
 
   protected friendsInput = input<UserProps[]>([]);
 
-  protected friends = signal<UserProps[]>([]);
+  protected friends = this.friendStoreService.friends;
 
-  protected search = signal<string>('');
+  protected isActiveRoute = this.routeService.isActiveRoute;
 
-  protected statusFilter = signal<FriendsStatusFilter>('all');
-  protected  hasAvatarOnly = signal<boolean>(false);
-  protected sortOption = signal<FriendsSortOption>('username-asc');
+  protected search = this.friendFilterService.search;
 
-  protected isActiveRoute = computed(() => this.currentRoute().includes('/active'));
+  protected statusFilter = this.friendFilterService.statusFilter;
 
-   protected filteredfriends = computed(() => {
-    const query = this.search().trim().toLowerCase();
+  protected hasAvatarOnly = this.friendFilterService.hasAvatarOnly;
 
-    const effectiveStatusFilter: FriendsStatusFilter =
-      this.isActiveRoute() ? 'online' : this.statusFilter();
+  protected sortOption = this.friendFilterService.sortOption;
 
-    const filtered = this.friends().filter((user) => {
-      if (query && !user.username.toLowerCase().includes(query)) return false;
-      if (effectiveStatusFilter !== 'all' && user.status !== effectiveStatusFilter) return false;
-      if (this.hasAvatarOnly() && !user.img) return false;
-      
-return true;
-    });
+  protected filteredfriends = this.friendFilterService.filteredfriends;
 
-    const option = this.sortOption();
-    const sorted = [...filtered].sort((a, b) => {
-      switch (option) {
-        case 'username-asc':
-          return a.username.localeCompare(b.username);
-        case 'username-desc':
-          return b.username.localeCompare(a.username);
-        case 'createdAt-desc':
-          return this.createdAtMs(b) - this.createdAtMs(a);
-        case 'createdAt-asc':
-          return this.createdAtMs(a) - this.createdAtMs(b);
-        case 'friendsCount-desc':
-          return (b.friends.length) - (a.friends.length);
-        case 'friendsCount-asc':
-          return (a.friends.length) - (b.friends.length);
-      }
-    });
+  protected menuPosition = this.friendMenuService.menuPosition;
 
-    return sorted;
-  });
+  protected toggleMenu = this.friendMenuService.toggleMenu.bind(this.friendService);
 
-   public constructor() {
+  public constructor() {
     effect(() => {
-      this.friends.set(this.friendsInput());
+      this.userService.findFriends().subscribe({
+        next: (friends: UserProps[]) => {
+          this.friends.set(friends);
+        },
+        error: (err) => {
+          this.toastService.errorFrom(err, 'Error finding friends');
+        },
+      });
     });
   }
-
   @HostListener('document:click')
-  protected closeMenu():void {
+  protected closeMenu(): void {
     this.activeMenuUserId.set(null);
   }
-
- protected  toggleMenu(userId: string, event: Event):void {
-    event.stopPropagation();
-    if (this.activeMenuUserId() === userId) {
-      this.activeMenuUserId.set(null);
-      
-return;
-    }
-
-    const button = event.currentTarget as HTMLElement;
-    const rect = button.getBoundingClientRect();
-
-    this.menuPosition.set({
-      top: `${rect.bottom + 8}px`,
-      right: `${window.innerWidth - rect.right}px`,
-    });
-    this.activeMenuUserId.set(userId);
-  }
-
-  private createdAtMs(user: UserProps): number {
-    return Date.parse(user.createdAt) || 0;
-  }
- 
-  protected removeFriend(id: string): void {
-    this.userService.removeFriend(id).subscribe({
+  protected remove(id: string): void {
+    this.friendService.removeFriend(id).subscribe({
       next: () => {
         this.friends.update((f) => f.filter((user) => user.id !== id));
       },

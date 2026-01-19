@@ -1,22 +1,26 @@
-    <form [formGroup]="messageForm" class=" px-4 pb-6 pt-2" (ngSubmit)="send() ">
-      <footer class="flex items-center">
-        <div class="flex items-center bg-[#383A40] rounded-lg w-full">
-          <label
-            class="px-4 py-2.5 text-gray-400 hover:text-white cursor-pointer transition-colors "
-          >
-            <div class="bg-[#2B2D31] rounded-full p-0.5">
-              <lucide-icon [img]="Plus" class="w-4 h-4" />
-            </div>
-            <input type="file" accept="image/*, video/*" hidden (change)="onFileSelected($event)" formControlName="media"/>
-          </label>
-          <input
-            type="text"
-            placeholder="Message"
-            [disabled]="messageDisabled()"
-            formControlName="message"
-            class="flex-1 bg-transparent text-gray-100 placeholder-gray-500 py-2.5 text-sm focus:outline-none transition-colors font-normal"
-          />
-          <button type="submit" hidden></button>
+<form [formGroup]="messageForm" class="mb-10 px-4 pb-6 pt-2" (ngSubmit)="send()">
+  <footer class="flex items-center">
+    <div class="flex items-center bg-[#383A40] rounded-lg w-full">
+      <label class="px-4 py-2.5 text-gray-400 hover:text-white cursor-pointer transition-colors">
+        <div class="bg-[#2B2D31] rounded-full p-0.5">
+          <lucide-icon [img]="Plus" class="w-4 h-4" />
         </div>
-      </footer>
-    </form>
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          (change)="onFileSelected($event)"
+          formControlName="media"
+        />
+      </label>
+      <input
+        type="text"
+        placeholder="Message"
+        [disabled]="messageDisabled()"
+        formControlName="message"
+        class="flex-1 bg-transparent text-gray-100 placeholder-gray-500 py-2.5 text-sm focus:outline-none transition-colors font-normal"
+      />
+      <button type="submit" hidden></button>
+    </div>
+  </footer>
+</form>

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {  ProfileImageComponent } from '../../profile/profile-image/profile-image';
+import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import {
   HeadphoneOff,
   Headphones,
@@ -13,8 +13,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user/user-service';
 import { AuthService } from '../../../services/auth/auth-service';
-import { ThemeService } from '../../../services/theme/theme-service';
-
+import { ThemeService } from '../../../services/theme/theme.service';
 @Component({
   selector: 'app-profile-footer',
   standalone: true,

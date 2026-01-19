@@ -1,22 +1,25 @@
 <router-outlet />
 
-<app-toast-container />
+<app-toast-component />
 
 @if (createChannelClicked()) {
-    <app-create-channel-modal></app-create-channel-modal>
+  <app-create-channel-modal></app-create-channel-modal>
 }
 @if (addFriendIsOpen()) {
-    <app-add-friend></app-add-friend>
+  <app-add-friend></app-add-friend>
 }
 @if (statusModalOpen()) {
-    <app-change-user-status-modal />
+  <app-change-user-status-modal />
 }
 @if (inboxActive()) {
-    <app-inbox-modal />
+  <app-inbox-modal />
 }
 @if (inviteToChannelModalActive()) {
-    <app-invite-to-channel-modal />
+  <app-invite-to-channel-modal />
 }
 @if (deleteAccountClicked()) {
-    <app-delete-account-modal/>
+  <app-delete-account-modal />
+}
+@if (createRoomClicked()) {
+  <app-create-room-modal />
 }

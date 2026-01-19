@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RootLayout } from './root-layout';
+import { RootLayoutComponent } from './root-layout';
 
-describe('RootLayout', () => {
-  let component: RootLayout;
-  let fixture: ComponentFixture<RootLayout>;
+describe('RootLayoutComponent', () => {
+  let component: RootLayoutComponent;
+  let fixture: ComponentFixture<RootLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RootLayout]
-    })
-    .compileComponents();
+      imports: [RootLayoutComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RootLayout);
+    fixture = TestBed.createComponent(RootLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

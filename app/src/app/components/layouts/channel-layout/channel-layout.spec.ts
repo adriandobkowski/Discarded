@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChannelLayout } from './channel-layout';
+import { ChannelLayoutComponent } from './channel-layout';
 
-describe('ChannelLayout', () => {
-  let component: ChannelLayout;
-  let fixture: ComponentFixture<ChannelLayout>;
+describe('ChannelLayoutComponent', () => {
+  let component: ChannelLayoutComponent;
+  let fixture: ComponentFixture<ChannelLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChannelLayout]
-    })
-    .compileComponents();
+      imports: [ChannelLayoutComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ChannelLayout);
+    fixture = TestBed.createComponent(ChannelLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

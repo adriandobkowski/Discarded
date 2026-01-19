@@ -5,7 +5,7 @@ import { ProfileImageComponent } from '../../profile/profile-image/profile-image
 @Component({
   selector: 'app-person-to-add',
   imports: [ProfileImageComponent],
-  standalone:true,
+  standalone: true,
   templateUrl: './person-to-add.html',
   styleUrl: './person-to-add.scss',
 })

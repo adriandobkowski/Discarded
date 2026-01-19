@@ -6,23 +6,23 @@ import { ArrowLeft, House, LucideAngularModule, TriangleAlert } from 'lucide-ang
 @Component({
   selector: 'app-page-not-found',
   imports: [LucideAngularModule],
-  standalone:true,
+  standalone: true,
   templateUrl: './page-not-found.html',
   styleUrl: './page-not-found.scss',
 })
 export class PageNotFoundComponent {
   protected readonly TriangleAlert = TriangleAlert;
   protected readonly ArrowLeft = ArrowLeft;
- protected readonly House = House;
+  protected readonly House = House;
 
   private location = inject(Location);
   private router = inject(Router);
 
- protected goBack(): void {
+  protected goBack(): void {
     this.location.back();
   }
 
- protected goHome(): void {
+  protected goHome(): void {
     void this.router.navigateByUrl('/');
   }
 }

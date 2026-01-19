@@ -13,7 +13,7 @@ import { ToastService } from '../../../services/toast/toast-service';
   selector: 'app-message-footer',
   standalone: true,
   imports: [ReactiveFormsModule, LucideAngularModule],
-  templateUrl:'./message-footer.html',
+  templateUrl: './message-footer.html',
   styleUrl: './message-footer.scss',
 })
 export class MessageFooterComponent {
@@ -55,35 +55,34 @@ export class MessageFooterComponent {
     if (this.messageForm.invalid) {
       this.messageForm.markAllAsTouched();
       this.toastService.error('Type a message or attach media', 'Cannot send');
-      
-return;
+
+      return;
     }
     const chatId = this.chatId();
     const roomId = this.roomId();
     const message: MessageProps = {
-        id: uuidv4(),
+      id: uuidv4(),
       ...this.messageForm.getRawValue(),
-        userId: this.authService.user()!.id,
-        createdAt: new Date().toISOString(),
-        chatId: chatId ?? null,
-        roomId: roomId ?? null
-      };
+      userId: this.authService.user()!.id,
+      createdAt: new Date().toISOString(),
+      chatId: chatId ?? null,
+      roomId: roomId ?? null,
+    };
     if (chatId) {
       this.chatService.sendMessage(message).subscribe({
-        next: ()=> {
+        next: () => {
           this.messageForm.reset();
         },
-        error: (err) => this.toastService.errorFrom(err, 'Could not send message', 'Send failed')
-        
+        error: (err) => this.toastService.errorFrom(err, 'Could not send message', 'Send failed'),
       });
     }
     if (roomId) {
       this.roomService.sendMessage(message).subscribe({
-        next: ()=> {
+        next: () => {
           this.messageForm.reset();
         },
-        error: (err) => this.toastService.errorFrom(err, 'Could not send message', 'Send failed')
+        error: (err) => this.toastService.errorFrom(err, 'Could not send message', 'Send failed'),
       });
     }
-    };
   }
+}

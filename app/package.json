@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "lintstyle": "stylelint 'src/**/*.scss' --custom-syntax postcss-scss",
-    "api": "json-server-auth db.json --port 3000"
+    "api": "json-server-auth db.json --port 3000",
+    "format": "prettier --write ."
   },
   "prettier": {
     "printWidth": 100,

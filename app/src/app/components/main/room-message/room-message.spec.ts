@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoomMessage } from './room-message';
+import { RoomMessageComponent } from './room-message';
 
-describe('RoomMessage', () => {
-  let component: RoomMessage;
-  let fixture: ComponentFixture<RoomMessage>;
+describe('RoomMessageComponent', () => {
+  let component: RoomMessageComponent;
+  let fixture: ComponentFixture<RoomMessageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RoomMessage]
-    })
-    .compileComponents();
+      imports: [RoomMessageComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RoomMessage);
+    fixture = TestBed.createComponent(RoomMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

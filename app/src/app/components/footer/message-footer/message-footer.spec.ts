@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageFooter } from './message-footer';
+import { MessageFooterComponent } from './message-footer';
 
-describe('MessageFooter', () => {
-  let component: MessageFooter;
-  let fixture: ComponentFixture<MessageFooter>;
+describe('MessageFooterComponent', () => {
+  let component: MessageFooterComponent;
+  let fixture: ComponentFixture<MessageFooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MessageFooter]
-    })
-    .compileComponents();
+      imports: [MessageFooterComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(MessageFooter);
+    fixture = TestBed.createComponent(MessageFooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

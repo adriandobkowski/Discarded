@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
-import {  ProfileImageComponent } from '../../profile/profile-image/profile-image';
-import { UserService } from '../../../services/user/user-service';
+import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
+import { FriendStoreService } from '../../../services/friends/friendStore/friend-store.service';
 
 @Component({
   selector: 'app-root-aside',
   imports: [ProfileImageComponent],
-  standalone:true,
-  templateUrl:'./root-aside.html',
+  standalone: true,
+  templateUrl: './root-aside.html',
   styleUrl: './root-aside.scss',
 })
 export class RootAsideComponent {
-  private userService = inject(UserService);
+  private friendStore = inject(FriendStoreService);
 
-  protected activeUsers = this.userService.activeUsers;
+  protected activeUsers = this.friendStore.onlineFriends;
 }

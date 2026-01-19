@@ -1,31 +1,24 @@
- <div 
-      class="flex relative flex-col justify-end w-full h-full  pt-4"
-    >
-      <div #scrollContainer class="flex flex-1 flex-col overflow-y-auto">
-          @for (extendedMessage of messages; track extendedMessage.message.id) {
-            <div
-              class="group hover:bg-[#2e3035] transition-colors py-0.5 px-4 mt-[17px] first:mt-0"
-            >
-              <div class="flex gap-4">
-                <app-profile-image [src]="extendedMessage.user.img" />
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-center gap-2 mb-0.5">
-                    <span class="font-medium text-white text-base hover:underline cursor-pointer">{{
-                      extendedMessage.user.username
-                    }}</span>
-                    <span class="text-xs text-gray-500 font-medium">
-                      {{ extendedMessage.message.createdAt | date: 'mediumDate' }} at
-                      {{ extendedMessage.message.createdAt | date: 'shortTime' }}
-                    </span>
-                  </div>
+<div #scrollContainer class="flex flex-col flex-1 h-full overflow-auto">
+  @for (extendedMessage of messages; track extendedMessage.message.id) {
+    <div class="group hover:bg-[#2e3035] transition-colors py-2 px-4 mt-4">
+      <div class="flex gap-4">
+        <app-profile-image [src]="extendedMessage.user.img" />
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-white text-base hover:underline cursor-pointer">{{
+              extendedMessage.user.username
+            }}</span>
+            <span class="text-xs text-gray-500 font-medium">
+              {{ extendedMessage.message.createdAt | date: 'mediumDate' }} at
+              {{ extendedMessage.message.createdAt | date: 'shortTime' }}
+            </span>
+          </div>
 
-                  <div class="text-gray-300 text-base break-words font-normal leading-relaxed">
-                    {{ extendedMessage.message.message }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
-
+          <div class="text-gray-300 text-base break-words font-normal leading-relaxed">
+            {{ extendedMessage.message.message }}
+          </div>
+        </div>
       </div>
     </div>
+  }
+</div>

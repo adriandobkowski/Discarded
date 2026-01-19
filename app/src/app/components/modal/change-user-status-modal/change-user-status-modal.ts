@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Status } from '../../../types';
+import { Status, UserProps } from '../../../types';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, LogOut, Pencil, ChevronRight } from 'lucide-angular';
 import { AuthService } from '../../../services/auth/auth-service';
@@ -9,12 +9,11 @@ import { UserService } from '../../../services/user/user-service';
 
 @Component({
   selector: 'app-change-user-status-modal',
-  standalone:true,
+  standalone: true,
   imports: [ProfileImageComponent, RouterLink, LucideAngularModule, NgClass],
   templateUrl: './change-user-status-modal.html',
   styleUrl: './change-user-status-modal.scss',
 })
-
 export class ChangeUserStatusModalComponent {
   protected readonly Pencil = Pencil;
   protected readonly ChevronRight = ChevronRight;
@@ -31,7 +30,7 @@ export class ChangeUserStatusModalComponent {
 
   protected readonly statusOptions: { value: Status; label: string; dotClass: string }[] = [
     { value: 'online', label: 'Online', dotClass: 'bg-emerald-500' },
-    { value: 'busy', label: 'Busy', dotClass: 'bg-amber-400' },
+    { value: 'busy', label: 'Busy', dotClass: 'bg-red-500' },
     { value: 'offline', label: 'Offline', dotClass: 'bg-gray-400' },
   ];
 
@@ -40,7 +39,7 @@ export class ChangeUserStatusModalComponent {
       case 'online':
         return 'bg-emerald-500';
       case 'busy':
-        return 'bg-amber-400';
+        return 'bg-red-500';
       case 'offline':
         return 'bg-gray-400';
       default:
@@ -54,7 +53,7 @@ export class ChangeUserStatusModalComponent {
     this.statusMenuOpen = false;
     this.clearStatusCloseTimer();
     this.userService.updateUser({ status }).subscribe({
-      next: (updatedUser) => {
+      next: (updatedUser: UserProps) => {
         this.authService.user.set(updatedUser);
         localStorage.setItem('user', JSON.stringify(updatedUser));
         this.user.set(updatedUser);

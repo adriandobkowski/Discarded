@@ -18,7 +18,6 @@ export class ChatSectionComponent implements OnInit {
   private userService = inject(UserService);
   private toastService = inject(ToastService);
 
-
   protected chattedWithFriends: ExtendedUserProps[] = [];
 
   protected isOpen = this.userService.addFriendIsOpen;

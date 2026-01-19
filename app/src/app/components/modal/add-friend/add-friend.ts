@@ -11,7 +11,7 @@ import { ToastService } from '../../../services/toast/toast-service';
   standalone: true,
   imports: [ProfileImageComponent, LucideAngularModule, ReactiveFormsModule],
   templateUrl: './add-friend.html',
-  styleUrl: './add-friend.scss'
+  styleUrl: './add-friend.scss',
 })
 export class AddFriendComponent {
   protected readonly Check = Check;
@@ -35,8 +35,8 @@ export class AddFriendComponent {
   protected filteredUsers = computed(() => {
     const list = this.users() ?? [];
     const q = this.search().trim().toLowerCase();
-    
-return q.length === 0 ? list : list.filter((u) => u.username.toLowerCase().includes(q));
+
+    return q.length === 0 ? list : list.filter((u) => u.username.toLowerCase().includes(q));
   });
 
   protected isSelected(userId: string): boolean {
@@ -49,8 +49,8 @@ return q.length === 0 ? list : list.filter((u) => u.username.toLowerCase().inclu
 
     if (index >= 0) {
       this.selectedUserIds.removeAt(index);
-      
-return;
+
+      return;
     }
 
     this.selectedUserIds.push(new FormControl(userId, { nonNullable: true }));
@@ -60,8 +60,8 @@ return;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       this.toastService.error('Select at least 2 friends', 'Invalid selection');
-      
-return;
+
+      return;
     }
 
     const count = this.selectedUserIds.value.length;

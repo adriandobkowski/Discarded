@@ -8,18 +8,26 @@ import { trimmedRequired } from '../../../validators/form-validators';
 
 @Component({
   selector: 'app-login',
-  standalone:true,
+  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
-  templateUrl:'./login.html',
+  templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class LoginComponent {
   protected loginForm = new FormGroup({
     email: new FormControl<string>('', {
-      validators: [(control) => Validators.required(control), trimmedRequired, (control) => Validators.email(control)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        (control) => Validators.email(control),
+      ],
     }),
     password: new FormControl<string>('', {
-      validators: [(control) => Validators.required(control), trimmedRequired, Validators.minLength(8)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        Validators.minLength(8),
+      ],
     }),
   });
   private router = inject(Router);

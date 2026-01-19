@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChangeUserStatusModal } from './change-user-status-modal';
+import { ChangeUserStatusModalComponent } from './change-user-status-modal';
 
-describe('ChangeUserStatusModal', () => {
-  let component: ChangeUserStatusModal;
-  let fixture: ComponentFixture<ChangeUserStatusModal>;
+describe('ChangeUserStatusModalComponent', () => {
+  let component: ChangeUserStatusModalComponent;
+  let fixture: ComponentFixture<ChangeUserStatusModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChangeUserStatusModal]
-    })
-    .compileComponents();
+      imports: [ChangeUserStatusModalComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ChangeUserStatusModal);
+    fixture = TestBed.createComponent(ChangeUserStatusModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

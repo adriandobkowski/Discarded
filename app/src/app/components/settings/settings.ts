@@ -12,7 +12,7 @@ import { trimmedRequired } from '../../validators/form-validators';
 @Component({
   selector: 'app-settings',
   imports: [ProfileImageComponent, LucideAngularModule, ReactiveFormsModule, RouterLink],
-  standalone:true,
+  standalone: true,
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })
@@ -35,10 +35,19 @@ export class SettingsComponent {
   protected updateForm = new FormGroup({
     username: new FormControl<string | undefined>(this.user.username, {
       nonNullable: true,
-      validators: [(control) => Validators.required(control), trimmedRequired, Validators.minLength(3), Validators.maxLength(24)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        Validators.minLength(3),
+        Validators.maxLength(24),
+      ],
     }),
     email: new FormControl<string | undefined>(this.user.email, {
-      validators: [(control) => Validators.required(control), trimmedRequired, (control) => Validators.email(control)],
+      validators: [
+        (control) => Validators.required(control),
+        trimmedRequired,
+        (control) => Validators.email(control),
+      ],
     }),
   });
 
@@ -50,8 +59,8 @@ export class SettingsComponent {
     if (this.updateForm.invalid) {
       this.updateForm.markAllAsTouched();
       this.toastService.error('Please fix validation errors', 'Invalid form');
-      
-return;
+
+      return;
     }
     this.userService.updateUser(this.updateForm.getRawValue() as UserProps).subscribe({
       next: (updatedUser) => {

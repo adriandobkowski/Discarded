@@ -8,12 +8,11 @@ import { ChannelAsideComponent } from '../../aside/channel-aside/channel-aside';
 import { ProfileFooterComponent } from '../../footer/profile-footer/profile-footer';
 import { MessageFooterComponent } from '../../footer/message-footer/message-footer';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { ChannelProps } from '../../../types';
 import { ToastService } from '../../../services/toast/toast-service';
 
 @Component({
   selector: 'app-channel-layout',
-  standalone:true,
+  standalone: true,
   imports: [
     ChannelHeaderComponent,
     ChannelSectionComponent,
@@ -24,7 +23,7 @@ import { ToastService } from '../../../services/toast/toast-service';
     ProfileFooterComponent,
     MessageFooterComponent,
   ],
-  templateUrl:'./channel-layout.html',
+  templateUrl: './channel-layout.html',
   styleUrl: './channel-layout.scss',
 })
 export class ChannelLayoutComponent implements OnInit {
@@ -36,16 +35,13 @@ export class ChannelLayoutComponent implements OnInit {
   protected channelId = this.channelService.channelId;
 
   public ngOnInit(): void {
-    this.route.firstChild?.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (!id) return;
 
       this.channelId.set(id);
-      
       this.channelService.findById().subscribe({
-        next: (response: ChannelProps) => {
-          this.currentChannel.set(response);
-        },
+        next: (channel) => this.currentChannel.set(channel),
         error: (err) => this.toastService.errorFrom(err, 'Could not load channel', 'Error'),
       });
     });

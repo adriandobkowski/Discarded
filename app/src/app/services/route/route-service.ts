@@ -21,4 +21,5 @@ export class RouteService {
   public messageDisabled = computed(
     () => this.currentRoute().includes('/channels') && !this.currentRoute().includes('/rooms'),
   );
+  public isActiveRoute = computed(() => this.currentRoute().includes('/active'));
 }

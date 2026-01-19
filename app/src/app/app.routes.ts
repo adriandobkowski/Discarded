@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
-import {  RootLayoutComponent } from './components/layouts/root-layout/root-layout';
+import { RootLayoutComponent } from './components/layouts/root-layout/root-layout';
 import { FriendsPage } from './components/main/friends-page/friends-page';
 import { NavbarAddFriendComponent } from './components/navbar/navbar-add-friend/navbar-add-friend';
 import { authGuard } from '../guards/guard';
 import { LoginComponent } from './components/auth/login/login';
 import { RegisterComponent } from './components/auth/register/register';
 import { authenticatedGuard } from '../guards/authenticatedGuard';
-import { friendsResolver } from './resolvers/friendsResolver';
 import { SettingsComponent } from './components/settings/settings';
 import { ChatLayoutComponent } from './components/layouts/chat-layout/chat-layout';
 import { ChannelLayoutComponent } from './components/layouts/channel-layout/channel-layout';
@@ -29,16 +28,10 @@ export const routes: Routes = [
       {
         path: 'active',
         component: FriendsPage,
-        resolve: {
-          friendsInput: friendsResolver,
-        },
       },
       {
         path: 'all',
         component: FriendsPage,
-        resolve: {
-          friendsInput: friendsResolver,
-        },
       },
       {
         path: 'add-friend',
@@ -58,11 +51,11 @@ export const routes: Routes = [
     canMatch: [authGuard],
   },
   {
-    path: 'channels',
+    path: 'channels/:id',
     component: ChannelLayoutComponent,
     children: [
-      { path: ':id', component: ChannelMessageComponent },
-      { path: ':id/rooms/:roomId', component: RoomMessageComponent },
+      { path: '', component: ChannelMessageComponent },
+      { path: 'rooms/:roomId', component: RoomMessageComponent },
     ],
     canMatch: [authGuard],
   },

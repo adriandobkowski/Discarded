@@ -3,16 +3,28 @@ import { ChatService } from '../../../services/chat/chat-service';
 import { ExtendedMessageProps } from '../../../types';
 import { MessageComponent } from '../message/message';
 import { ActivatedRoute } from '@angular/router';
-import { distinctUntilChanged, filter, interval, map, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  interval,
+  map,
+  startWith,
+  Subject,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 import isEqual from 'lodash/isEqual';
 @Component({
   selector: 'app-chat-message',
-  standalone:true,
+  standalone: true,
   imports: [MessageComponent],
   templateUrl: './chat-message.html',
   styleUrl: './chat-message.scss',
+  host: {
+    class: 'h-full',
+  },
 })
-export class ChatMessageComponent implements OnInit , OnDestroy{
+export class ChatMessageComponent implements OnInit, OnDestroy {
   private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
 
@@ -29,13 +41,12 @@ export class ChatMessageComponent implements OnInit , OnDestroy{
         filter(Boolean),
         switchMap((chatId) => {
           this.chatId.set(chatId);
-          
-return interval(2000).pipe(
+
+          return interval(2000).pipe(
             startWith(0),
             switchMap(() => this.chatService.findMessagesByChatId()),
-            distinctUntilChanged((previous, current)=> isEqual(previous, current)),
-            takeUntil(this.destroy$)
-          
+            distinctUntilChanged((previous, current) => isEqual(previous, current)),
+            takeUntil(this.destroy$),
           );
         }),
       )

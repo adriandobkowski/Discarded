@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RootNavbar } from './root-navbar';
+import { RootNavbarComponent } from './root-navbar';
 
-describe('RootNavbar', () => {
-  let component: RootNavbar;
-  let fixture: ComponentFixture<RootNavbar>;
+describe('RootNavbarComponent', () => {
+  let component: RootNavbarComponent;
+  let fixture: ComponentFixture<RootNavbarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RootNavbar]
-    })
-    .compileComponents();
+      imports: [RootNavbarComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RootNavbar);
+    fixture = TestBed.createComponent(RootNavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

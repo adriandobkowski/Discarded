@@ -20,8 +20,10 @@ export class ToastService {
 
   public toasts = signal<Toast[]>([]);
 
-  protected show(partial: Omit<Toast, 'id' | 'createdAt'> & { id?: string; createdAt?: number }): string {
-    const id = partial.id  ?? `${Date.now()}-${Math.random()}`;
+  protected show(
+    partial: Omit<Toast, 'id' | 'createdAt'> & { id?: string; createdAt?: number },
+  ): string {
+    const id = partial.id ?? `${Date.now()}-${Math.random()}`;
 
     const toast: Toast = {
       id,
@@ -42,22 +44,37 @@ export class ToastService {
   }
 
   public success(message: string, title?: string, durationMs?: number): string {
-    return this.show({ type: 'success', title, message, durationMs: durationMs ?? this.defaultDurationMs });
+    return this.show({
+      type: 'success',
+      title,
+      message,
+      durationMs: durationMs ?? this.defaultDurationMs,
+    });
   }
 
   public error(message: string, title?: string, durationMs?: number): string {
     return this.show({ type: 'error', title, message, durationMs: durationMs ?? 6000 });
   }
 
-  public errorFrom(error: unknown, fallbackMessage: string, title?: string, durationMs?: number): string {
+  public errorFrom(
+    error: unknown,
+    fallbackMessage: string,
+    title?: string,
+    durationMs?: number,
+  ): string {
     const detail = this.formatErrorDetail(error);
     const message = detail ? `${fallbackMessage}: ${detail}` : fallbackMessage;
-    
-return this.error(message, title, durationMs);
+
+    return this.error(message, title, durationMs);
   }
 
   public info(message: string, title?: string, durationMs?: number): string {
-    return this.show({ type: 'info', title, message, durationMs: durationMs ?? this.defaultDurationMs });
+    return this.show({
+      type: 'info',
+      title,
+      message,
+      durationMs: durationMs ?? this.defaultDurationMs,
+    });
   }
 
   public dismiss(id: string): void {
@@ -75,10 +92,10 @@ return this.error(message, title, durationMs);
       const statusPart = error.status ? `HTTP ${error.status}` : 'HTTP error';
       const serverMessage: unknown = error.error;
       const trimmed = (serverMessage as string).trim();
-      
-  return trimmed ? `${statusPart} - ${trimmed}` : statusPart;
+
+      return trimmed ? `${statusPart} - ${trimmed}` : statusPart;
     }
 
     return null;
-} 
+  }
 }

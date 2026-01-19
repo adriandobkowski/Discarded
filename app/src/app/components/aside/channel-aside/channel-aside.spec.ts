@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChannelAside } from './channel-aside';
+import { ChannelAsideComponent } from './channel-aside';
 
-describe('ChannelAside', () => {
-  let component: ChannelAside;
-  let fixture: ComponentFixture<ChannelAside>;
+describe('ChannelAsideComponent', () => {
+  let component: ChannelAsideComponent;
+  let fixture: ComponentFixture<ChannelAsideComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChannelAside]
-    })
-    .compileComponents();
+      imports: [ChannelAsideComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ChannelAside);
+    fixture = TestBed.createComponent(ChannelAsideComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

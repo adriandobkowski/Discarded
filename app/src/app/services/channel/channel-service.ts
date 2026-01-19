@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ChannelProps, UserProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
@@ -20,6 +20,8 @@ export class ChannelService {
 
   public inviteToChannelModalActive = signal<boolean>(false);
 
+  public createRoomClicked = signal<boolean>(false);
+
   public activeChannelUsers = computed(() =>
     this.channelUsers().filter((user: UserProps) => user.status === 'online'),
   );
@@ -37,14 +39,14 @@ export class ChannelService {
   public currentChannel = signal<ChannelProps | null>(null);
 
   public findAll(): Observable<ChannelProps[]> {
-    return this.http.get<UserProps>(`${url}/users/${this.user()?.id}`).pipe(
+    return this.http.get<UserProps>(`${url}/users/${this.user()!.id}`).pipe(
       map((user: UserProps) => user.channels),
       switchMap((channelIds: string[]) => {
         if (channelIds.length === 0) {
           return of([]);
         }
-        
-return forkJoin(
+
+        return forkJoin(
           channelIds.map((channelId: string) => {
             return this.http.get<ChannelProps>(`${url}/channels/${channelId}`);
           }),
@@ -56,8 +58,21 @@ return forkJoin(
     return this.http.get<ChannelProps>(`${url}/channels/${this.channelId()}`);
   }
 
-  public createChannel(channelData: ChannelProps): Observable<ChannelProps> {
-    return this.http.post<ChannelProps>(`${url}/channels`, { ...channelData, userIds: [this.user()!.id]});
+  public createChannel(channelData: ChannelProps): Observable<UserProps> {
+    const userId = this.user()!.id;
+
+    return this.http.post<ChannelProps>(`${url}/channels`, channelData).pipe(
+      switchMap((newChannel) =>
+        this.http.get<UserProps>(`${url}/users/${userId}`).pipe(
+          switchMap((user) =>
+            this.http.patch<UserProps>(`${url}/users/${userId}`, {
+              channels: [...user.channels, newChannel.id],
+            }),
+          ),
+          tap(() => this.channels.update((channels: ChannelProps[]) => [...channels, newChannel])),
+        ),
+      ),
+    );
   }
 
   public findChannelUsers(): Observable<UserProps[]> {
@@ -69,8 +84,8 @@ return forkJoin(
         if (userIds.length === 0) {
           return of([]);
         }
-        
-return forkJoin(
+
+        return forkJoin(
           userIds.map((userId: string) => {
             return this.http.get<UserProps>(`${url}/users/${userId}`);
           }),
@@ -87,21 +102,54 @@ return forkJoin(
 
         const updatedUserIds = [...channel.userIds, userId];
 
-        return this.http.patch<ChannelProps>(`${url}/channels/${this.channelId()}`, {
-          userIds: updatedUserIds,
-        });
+        return this.http
+          .patch<ChannelProps>(`${url}/channels/${this.channelId()}`, {
+            userIds: updatedUserIds,
+          })
+          .pipe(
+            switchMap((updatedChannel) =>
+              this.http
+                .get<UserProps>(`${url}/users/${userId}`)
+                .pipe(map((user) => ({ updatedChannel, user }))),
+            ),
+            switchMap(({ updatedChannel, user }) => {
+              const updatedChannels = user.channels.includes(updatedChannel.id!)
+                ? user.channels
+                : [...user.channels, updatedChannel.id];
+
+              return this.http
+                .patch<UserProps>(`${url}/users/${userId}`, {
+                  channels: updatedChannels,
+                })
+                .pipe(map(() => updatedChannel));
+            }),
+          );
       }),
     );
   }
+
   public findFriendsToInviteToChannel(): Observable<UserProps[]> {
+    const channel = this.currentChannel();
+    const user = this.user();
+
+    if (!channel || !user) {
+      return of([]);
+    }
+
+    const usersInChannel = new Set(channel.userIds);
+
+    const friendIdsToInvite = user.friends.filter(
+      (friendId: string) => !usersInChannel.has(friendId),
+    );
+
+    if (!friendIdsToInvite.length) {
+      return of([]);
+    }
+
     return this.http
-      .get<ChannelProps>(`${url}/channels/${this.channelId()}`)
+      .get<UserProps[]>(`${url}/users`)
       .pipe(
-        switchMap((channel: ChannelProps) =>
-          this.http
-            .get<UserProps[]>(`${url}/users`)
-            .pipe(map((users) => users.filter((user) => !channel.userIds.includes(user.id)))),
-        ),
+        map((users: UserProps[]) => users.filter((user) => friendIdsToInvite.includes(user.id))),
       );
   }
 }

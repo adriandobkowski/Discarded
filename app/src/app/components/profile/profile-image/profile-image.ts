@@ -4,7 +4,7 @@ import { Status } from '../../../types';
 @Component({
   selector: 'app-profile-image',
   imports: [],
-  standalone:true,
+  standalone: true,
   templateUrl: './profile-image.html',
   styleUrl: './profile-image.scss',
 })

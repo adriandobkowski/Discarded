@@ -8,11 +8,13 @@ import { ChangeUserStatusModalComponent } from './components/modal/change-user-s
 import { AuthService } from './services/auth/auth-service';
 import { InboxModalComponent } from './components/modal/inbox-modal/inbox-modal';
 import { InviteToChannelModalComponent } from './components/modal/invite-to-channel-modal/invite-to-channel-modal';
-import { DeleteAccountModalComponent } from "./components/modal/delete-account-modal/delete-account-modal";
+import { DeleteAccountModalComponent } from './components/modal/delete-account-modal/delete-account-modal';
+import { ToastComponentComponent } from './components/toast/toast-component/toast-component.component';
+import { CreateRoomModalComponent } from './components/modal/create-room-modal/create-room-modal.component';
 
 @Component({
   selector: 'app-root',
-  standalone:true,
+  standalone: true,
   imports: [
     RouterOutlet,
     CreateChannelModalComponent,
@@ -20,12 +22,13 @@ import { DeleteAccountModalComponent } from "./components/modal/delete-account-m
     ChangeUserStatusModalComponent,
     InboxModalComponent,
     InviteToChannelModalComponent,
-    DeleteAccountModalComponent
-],
+    DeleteAccountModalComponent,
+    ToastComponentComponent,
+    CreateRoomModalComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-
 export class AppComponent {
   protected readonly title = signal('app');
 
@@ -46,6 +49,8 @@ export class AppComponent {
   protected inviteToChannelModalActive = this.channelService.inviteToChannelModalActive;
 
   protected deleteAccountClicked = this.userService.deleteAccountClicked;
+
+  protected createRoomClicked = this.channelService.createRoomClicked;
 
   public constructor() {
     effect(() => {

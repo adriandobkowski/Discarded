@@ -8,10 +8,9 @@ import { ToastService } from '../../../services/toast/toast-service';
   selector: 'app-channel-aside',
   standalone: true,
   imports: [ProfileImageComponent],
-  templateUrl:'./channel-aside.html',
+  templateUrl: './channel-aside.html',
   styleUrl: './channel-aside.scss',
 })
-
 export class ChannelAsideComponent {
   private channelService = inject(ChannelService);
   private toastService = inject(ToastService);
@@ -26,17 +25,14 @@ export class ChannelAsideComponent {
 
   public constructor() {
     effect(() => {
-      const currentChatId = this.currentChannel()?.id;
-      if (currentChatId) {
-        this.channelService.findChannelUsers().subscribe({
-          next: (response: UserProps[]) => {
-            this.channelUsers.set(response);
-          },
-          error: (err) => {
-            this.toastService.errorFrom(err, 'Could not load channel users', 'Error');
-          },
-        });
-      }
+      this.channelService.findChannelUsers().subscribe({
+        next: (response: UserProps[]) => {
+          this.channelUsers.set(response);
+        },
+        error: (err) => {
+          this.toastService.errorFrom(err, 'Could not load channel users', 'Error');
+        },
+      });
     });
   }
 }

@@ -4,7 +4,7 @@ import { HatGlasses, LucideAngularModule } from 'lucide-angular';
 @Component({
   selector: 'app-chat-header',
   imports: [LucideAngularModule],
-  standalone:true,
+  standalone: true,
   templateUrl: './chat-header.html',
   styleUrl: './chat-header.scss',
 })

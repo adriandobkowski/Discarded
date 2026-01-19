@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @use 'tailwindcss';
 
 :root {
@@ -12,7 +11,6 @@
 }
 
 html.theme-light {
-  /* Slightly darker light theme to reduce glare */
   --app-bg: #e7ebf0;
   --app-surface: #f1f5f9;
   --app-surface-2: #e9eef5;
@@ -20,15 +18,12 @@ html.theme-light {
   --app-border-strong: #b6c2d3;
   --app-text: #0f172a;
   --app-muted: #334155;
+  --app-hover: rgba(15, 23, 42, 0.06);
+  --app-hover-strong: rgba(15, 23, 42, 0.1);
+  --app-input-bg: rgba(15, 23, 42, 0.08);
 }
 
-/*
-  Many components currently hardcode Tailwind colors (e.g. bg-[#313338], text-white).
-  These scoped overrides remap the most common ones in light theme so the UI stays readable
-  without having to refactor every component immediately.
-*/
 html.theme-light {
-  /* Text */
   .text-white,
   .text-gray-100,
   .text-gray-200,
@@ -44,12 +39,15 @@ html.theme-light {
     color: var(--app-muted) !important;
   }
 
-  /* Backgrounds (escaped Tailwind arbitrary values) */
   .bg-\[\#313338\] {
     background-color: var(--app-bg) !important;
   }
 
   .bg-\[\#2B2D31\] {
+    background-color: var(--app-surface) !important;
+  }
+
+  .bg-\[\#2b2d31\] {
     background-color: var(--app-surface) !important;
   }
 
@@ -59,12 +57,69 @@ html.theme-light {
     background-color: var(--app-surface-2) !important;
   }
 
-  /* Borders */
+  .bg-\[\#1e1f22\],
+  .bg-\[\#111214\],
+  .bg-\[\#1A1B1E\],
+  .bg-\[\#1a1b1e\] {
+    background-color: var(--app-surface-2) !important;
+  }
+
+  .bg-\[\#35373C\],
+  .bg-\[\#35373c\] {
+    background-color: var(--app-hover-strong) !important;
+  }
+
+  .hover\:bg-\[\#35373C\]:hover,
+  .hover\:bg-\[\#35373c\]:hover {
+    background-color: var(--app-hover) !important;
+  }
+
+  .bg-\[\#383A40\],
+  .bg-\[\#383a40\] {
+    background-color: var(--app-input-bg) !important;
+  }
+
+  .bg-\[\#3F4147\],
+  .bg-\[\#3f4147\],
+  .bg-\[\#41434A\],
+  .bg-\[\#41434a\] {
+    background-color: var(--app-hover-strong) !important;
+  }
+
+  .hover\:bg-\[\#3F4147\]:hover,
+  .hover\:bg-\[\#3f4147\]:hover {
+    background-color: var(--app-hover) !important;
+  }
+
+  .hover\:text-white:hover {
+    color: var(--app-text) !important;
+  }
+
+  .hover\:text-gray-100:hover,
+  .hover\:text-gray-200:hover,
+  .hover\:text-gray-300:hover {
+    color: var(--app-text) !important;
+  }
+
+  .group:hover .group-hover\:text-gray-100,
+  .group:hover .group-hover\:text-gray-200,
+  .group:hover .group-hover\:text-gray-300 {
+    color: var(--app-text) !important;
+  }
+
   .border-\[\#26272D\] {
     border-color: var(--app-border) !important;
   }
 
+  .border-\[\#26272d\] {
+    border-color: var(--app-border) !important;
+  }
+
   .border-\[\#1F2023\] {
+    border-color: var(--app-border-strong) !important;
+  }
+
+  .border-\[\#1f2023\] {
     border-color: var(--app-border-strong) !important;
   }
 }

@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InviteToChannelModal } from './invite-to-channel-modal';
+import { InviteToChannelModalComponent } from './invite-to-channel-modal';
 
-describe('InviteToChannelModal', () => {
-  let component: InviteToChannelModal;
-  let fixture: ComponentFixture<InviteToChannelModal>;
+describe('InviteToChannelModalComponent', () => {
+  let component: InviteToChannelModalComponent;
+  let fixture: ComponentFixture<InviteToChannelModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InviteToChannelModal]
-    })
-    .compileComponents();
+      imports: [InviteToChannelModalComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(InviteToChannelModal);
+    fixture = TestBed.createComponent(InviteToChannelModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

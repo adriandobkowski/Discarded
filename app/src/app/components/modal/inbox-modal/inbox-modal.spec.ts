@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InboxModal } from './inbox-modal';
+import { InboxModalComponent } from './inbox-modal';
 
-describe('InboxModal', () => {
-  let component: InboxModal;
-  let fixture: ComponentFixture<InboxModal>;
+describe('InboxModalComponent', () => {
+  let component: InboxModalComponent;
+  let fixture: ComponentFixture<InboxModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InboxModal]
-    })
-    .compileComponents();
+      imports: [InboxModalComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(InboxModal);
+    fixture = TestBed.createComponent(InboxModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

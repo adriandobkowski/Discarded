@@ -17,8 +17,8 @@ export class ChatNavbarComponent {
   protected readonly Search = Search;
   private route = inject(ActivatedRoute);
   private chatService = inject(ChatService);
-  
+
   protected chattedWithUser = this.chatService.chattedWithUser;
 
- protected id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
+  protected id = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
 }

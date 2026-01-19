@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChannelHeader } from './channel-header';
+import { ChannelHeaderComponent } from './channel-header';
 
-describe('ChannelHeader', () => {
-  let component: ChannelHeader;
-  let fixture: ComponentFixture<ChannelHeader>;
+describe('ChannelHeaderComponent', () => {
+  let component: ChannelHeaderComponent;
+  let fixture: ComponentFixture<ChannelHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChannelHeader]
-    })
-    .compileComponents();
+      imports: [ChannelHeaderComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ChannelHeader);
+    fixture = TestBed.createComponent(ChannelHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

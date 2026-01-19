@@ -29,8 +29,8 @@ export class ThemeService {
     if (stored === 'dark' || stored === 'light') return stored;
 
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    
-return prefersLight ? 'light' : 'dark';
+
+    return prefersLight ? 'light' : 'dark';
   }
 
   private applyTheme(theme: ThemeMode): void {

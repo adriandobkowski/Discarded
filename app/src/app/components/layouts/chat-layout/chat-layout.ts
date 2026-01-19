@@ -38,13 +38,12 @@ export class ChatLayoutComponent implements OnInit, OnDestroy {
         filter(Boolean),
         switchMap((chatId) => {
           this.chatId.set(chatId);
-          
-return forkJoin({
+
+          return forkJoin({
             user: this.chatService.findChattedWithUser(),
             chat: this.chatService.findChatById(),
           });
-          }
-        ),
+        }),
       )
       .subscribe(({ user, chat }) => {
         this.chatService.chattedWithUser.set(user);

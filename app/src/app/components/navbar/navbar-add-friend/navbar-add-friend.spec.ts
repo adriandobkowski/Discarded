@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarAddFriend } from './navbar-add-friend';
+import { NavbarAddFriendComponent } from './navbar-add-friend';
 
-describe('NavbarAddFriend', () => {
-  let component: NavbarAddFriend;
-  let fixture: ComponentFixture<NavbarAddFriend>;
+describe('NavbarAddFriendComponent', () => {
+  let component: NavbarAddFriendComponent;
+  let fixture: ComponentFixture<NavbarAddFriendComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarAddFriend]
-    })
-    .compileComponents();
+      imports: [NavbarAddFriendComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(NavbarAddFriend);
+    fixture = TestBed.createComponent(NavbarAddFriendComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -17,13 +17,14 @@ export class ChannelSectionComponent implements OnInit {
   private channelService = inject(ChannelService);
   private toastService = inject(ToastService);
 
-  protected channels = this.channelService.channels();
+  protected channels = this.channelService.channels;
 
   protected createChannelClicked = this.channelService.createChannelClicked;
+
   public ngOnInit(): void {
     this.channelService.findAll().subscribe({
       next: (response: ChannelProps[]) => {
-        this.channels = response;
+        this.channels.set(response);
       },
       error: (err) => {
         this.toastService.errorFrom(err, 'Could not load channels', 'Error');

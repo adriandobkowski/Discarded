@@ -10,7 +10,7 @@ import { ToastService } from '../../../services/toast/toast-service';
 @Component({
   selector: 'app-add-to-room',
   imports: [LucideAngularModule, SearchComponent, ProfileImageComponent],
-  standalone:true,
+  standalone: true,
   templateUrl: './add-to-room.html',
   styleUrl: './add-to-room.scss',
 })

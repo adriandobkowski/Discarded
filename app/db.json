@@ -1,1204 +1,418 @@
 {
   "users": [
     {
-      "email": "fdsfddf12@gmail.com",
-      "password": "$2a$10$YSqH.NG1x63Vd1Ydq5Ca6eNZG9E5ByvSvHE8Zxj3PRyA2/inGXSoe",
-      "id": "1",
-      "username": "dfsfdsfds",
-      "img": "https://randomuser.me/api/portraits/men/1.jpg",
+      "id": "u3",
+      "img": "https://randomuser.me/api/portraits/men/12.jpg",
+      "username": "samuel",
+      "password": "samuel",
+      "email": "samuel@example.com",
       "status": "online",
       "friends": [
-        "2",
-        "3",
-        "8"
-      ],
-      "channels": [
-        "1",
-        "4"
+        "u1",
+        "u2"
       ],
       "chats": [
-        "chat1",
-        "chat6"
+        "chat1"
       ],
-      "createdAt": "2026-01-06T21:12:50.555Z"
+      "channels": [
+        "ch1",
+        "ch3"
+      ],
+      "friendRequests": [],
+      "createdAt": "2024-01-15T12:00:00.000Z"
     },
     {
-      "email": "adi123@gmail.com",
-      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "id": "2",
-      "username": "adi123",
-      "img": "https://randomuser.me/api/portraits/men/2.jpg",
+      "id": "u4",
+      "img": "https://randomuser.me/api/portraits/women/20.jpg",
+      "username": "lena",
+      "password": "lena",
+      "email": "lena@example.com",
+      "status": "busy",
+      "friends": [
+        "u1",
+        "u2"
+      ],
+      "chats": [],
+      "channels": [
+        "ch1",
+        "ch3"
+      ],
+      "friendRequests": [],
+      "createdAt": "2023-08-21T08:15:00.000Z"
+    },
+    {
+      "id": "u5",
+      "img": "https://randomuser.me/api/portraits/men/22.jpg",
+      "username": "mike",
+      "password": "mike",
+      "email": "mike@example.com",
       "status": "online",
       "friends": [
-        "1",
-        "4",
-        "5"
-      ],
-      "channels": [
-        "1",
-        "2",
-        "4"
+        "u1",
+        "u2"
       ],
       "chats": [
-        "chat1",
-        "chat2",
-        "chat4"
+        "chat2"
       ],
-      "createdAt": "2026-01-07T19:07:53.686Z"
+      "channels": [
+        "ch2"
+      ],
+      "friendRequests": [],
+      "createdAt": "2023-12-02T14:20:00.000Z"
     },
     {
-      "email": "adi1234@gmail.com",
-      "password": "$2a$10$DeyiOnhCvbgmMVCTo3DaKOLCwM2KmmYiR/diqO2IKqeALh2BY1Sc6",
-      "id": "3",
-      "img": "https://randomuser.me/api/portraits/women/1.jpg",
-      "username": "adi1234",
+      "id": "u6",
+      "img": "https://randomuser.me/api/portraits/women/33.jpg",
+      "username": "anna",
+      "password": "anna",
+      "email": "anna@example.com",
+      "status": "online",
+      "friends": [
+        "u1",
+        "u2"
+      ],
+      "chats": [],
+      "channels": [
+        "ch3"
+      ],
+      "friendRequests": [],
+      "createdAt": "2024-02-10T07:45:00.000Z"
+    },
+    {
+      "id": "u7",
+      "img": "https://randomuser.me/api/portraits/men/54.jpg",
+      "username": "peter",
+      "password": "peter",
+      "email": "peter@example.com",
       "status": "offline",
       "friends": [
-        "1"
+        "u2"
       ],
-      "channels": [
-        "1"
-      ],
-      "chats": [
-        "chat3"
-      ],
-      "createdAt": "2026-01-07T19:19:14.432Z"
+      "chats": [],
+      "channels": [],
+      "friendRequests": [],
+      "createdAt": "2022-06-01T11:11:00.000Z"
+    },
+    {
+      "id": "u8",
+      "img": "https://randomuser.me/api/portraits/women/55.jpg",
+      "username": "olga",
+      "password": "olga",
+      "email": "olga@example.com",
+      "status": "busy",
+      "friends": [],
+      "chats": [],
+      "channels": [],
+      "friendRequests": [],
+      "createdAt": "2024-03-11T16:55:00.000Z"
     },
     {
       "email": "adi12345@gmail.com",
-      "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
-      "id": "4",
-      "img": "https://randomuser.me/api/portraits/men/3.jpg",
-      "username": "adi1234567",
-      "status": "online",
-      "friends": [],
-      "channels": [
-        "2"
-      ],
-      "chats": [
-        "chat2",
-        "chat5"
-      ],
-      "createdAt": "2026-01-07T19:20:52.639Z",
-      "friendRequests": [
-        "2",
-        "2",
-        "2",
-        "2",
-        "2",
-        "2",
-        "2",
-        "2",
-        "2",
-        "2"
-      ]
-    },
-    {
-      "email": "john.doe@gmail.com",
-      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "img": "https://randomuser.me/api/portraits/men/4.jpg",
-      "id": "5",
-      "username": "johndoe",
-      "status": "online",
-      "friends": [
-        "2",
-        "6",
-        "7",
-        "10"
-      ],
-      "channels": [
-        "3",
-        "4"
-      ],
-      "chats": [
-        "chat4",
-        "chat7"
-      ],
-      "createdAt": "2026-01-07T08:00:00.000Z"
-    },
-    {
-      "email": "jane.smith@gmail.com",
-      "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
-      "img": "https://randomuser.me/api/portraits/women/2.jpg",
-      "id": "6",
-      "username": "janesmith",
-      "status": "online",
-      "friends": [
-        "5"
-      ],
-      "channels": [
-        "3"
-      ],
-      "chats": [
-        "chat7"
-      ],
-      "createdAt": "2026-01-07T09:00:00.000Z"
-    },
-    {
-      "email": "mike.wilson@gmail.com",
-      "img": "https://randomuser.me/api/portraits/men/5.jpg",
-      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "id": "7",
-      "username": "mikewilson",
-      "status": "offline",
-      "friends": [
-        "5"
-      ],
-      "channels": [],
-      "chats": [],
-      "createdAt": "2026-01-07T10:00:00.000Z"
-    },
-    {
-      "email": "sarah.connor@gmail.com",
-      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "id": "8",
-      "username": "sconnor",
-      "img": "https://randomuser.me/api/portraits/women/4.jpg",
-      "status": "online",
-      "friends": [
-        "1",
-        "9"
-      ],
-      "channels": [
-        "4"
-      ],
-      "chats": [
-        "chat6"
-      ],
-      "createdAt": "2026-01-08T12:00:00.000Z"
-    },
-    {
-      "email": "bruce.wayne@gmail.com",
-      "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
-      "id": "9",
-      "username": "bwayne",
-      "img": "https://randomuser.me/api/portraits/men/6.jpg",
+      "password": "$2a$10$Ws69Hth.yYf8WRzkVqOxSejB/q/FYS4I0BUWgtHuuSmJApQA7HWle",
+      "id": "u1",
+      "username": "adi12345",
       "status": "busy",
       "friends": [
-        "4",
-        "8"
-      ],
-      "channels": [
-        "2"
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u2"
       ],
       "chats": [
-        "chat5"
+        "chat1",
+        "chat2",
+        "chat3"
       ],
-      "createdAt": "2026-01-08T13:00:00.000Z"
+      "channels": [
+        "ch1",
+        "ch2"
+      ],
+      "friendRequests": [],
+      "img": "https://randomuser.me/api/portraits/men/45.jpg",
+      "createdAt": "2026-01-18T18:05:25.650Z"
     },
     {
-      "email": "clark.kent@gmail.com",
-      "password": "$2a$10$YSqH.NG1x63Vd1Ydq5Ca6eNZG9E5ByvSvHE8Zxj3PRyA2/inGXSoe",
-      "id": "10",
-      "username": "ckent",
-      "img": "https://randomuser.me/api/portraits/men/7.jpg",
+      "email": "adi123456@gmail.com",
+      "password": "$2a$10$dZ1vv0xJ4/wq2idv5bbpduJmvzI0ck8pXpJy.kjE0r.HWjrvOFcGS",
+      "id": "u2",
+      "username": "adi123456",
       "status": "online",
       "friends": [
-        "5"
-      ],
-      "channels": [
-        "4"
-      ],
-      "chats": [],
-      "createdAt": "2026-01-08T14:00:00.000Z"
-    },
-    {
-      "email": "tony.stark@gmail.com",
-      "password": "$2a$10$wHLIeCLd4Veuafe9LeSgpuQfFkFBMaLgYTQIwd8.pVlyJ5uH3bChq",
-      "id": "11",
-      "username": "tstark",
-      "img": "https://randomuser.me/api/portraits/men/8.jpg",
-      "status": "online",
-      "friends": [
-        "12"
-      ],
-      "channels": [
-        "2"
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u1"
       ],
       "chats": [
-        "chat8"
-      ],
-      "createdAt": "2026-01-08T15:00:00.000Z"
-    },
-    {
-      "email": "natasha.romanoff@gmail.com",
-      "password": "$2a$10$01QRNFh/pKAEfohd3zNUP.gaeHYNqONCGvu9ub2rnGXbXF3VSLTgS",
-      "id": "12",
-      "username": "nromanoff",
-      "img": "https://randomuser.me/api/portraits/women/6.jpg",
-      "status": "offline",
-      "friends": [
-        "11"
+        "chat1",
+        "chat4",
+        "98a2432c-3246-45ac-a96f-fb69d1189b7f"
       ],
       "channels": [
-        "2"
+        "ch1",
+        "ch3"
       ],
-      "chats": [
-        "chat8"
-      ],
-      "createdAt": "2026-01-08T16:00:00.000Z"
+      "friendRequests": [],
+      "img": "https://randomuser.me/api/portraits/women/46.jpg",
+      "createdAt": "2026-01-18T18:05:40.432Z"
     }
   ],
   "channels": [
     {
-      "id": "1",
+      "id": "ch1",
+      "img": "https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=400&q=80",
       "name": "General",
-      "img": "https://randomuser.me/api/portraits/men/10.jpg",
       "rooms": [
-        "room1"
+        "r1",
+        "r2"
       ],
       "userIds": [
-        "1",
-        "2",
-        "3"
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
       ]
     },
     {
-      "id": "2",
-      "name": "Development",
-      "img": "https://randomuser.me/api/portraits/men/11.jpg",
+      "id": "ch2",
+      "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
+      "name": "Gaming",
       "rooms": [
-        "room2",
-        "room3",
-        "room5",
-        "room6"
+        "r3"
       ],
       "userIds": [
-        "2",
-        "4",
-        "9",
-        "11",
-        "12"
+        "u1",
+        "u3",
+        "u5"
       ]
     },
     {
-      "id": "3",
-      "name": "Marketing",
-      "img": "https://randomuser.me/api/portraits/women/10.jpg",
+      "id": "ch3",
+      "img": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&q=80",
+      "name": "Dev",
       "rooms": [
-        "room4"
+        "r4"
       ],
       "userIds": [
-        "5",
-        "6"
+        "u2",
+        "u4",
+        "u6",
+        "u3"
       ]
-    },
-    {
-      "id": "4",
-      "name": "Hangout",
-      "img": "https://randomuser.me/api/portraits/men/12.jpg",
-      "rooms": [
-        "room7",
-        "room8"
-      ],
-      "userIds": [
-        "1",
-        "2",
-        "5",
-        "8",
-        "10"
-      ]
-    },
-    {
-      "img": null,
-      "name": "test",
-      "id": "LUupiuIbw"
-    },
-    {
-      "img": null,
-      "name": "test",
-      "userIds": [
-        "4"
-      ],
-      "id": "nTGj_-mqW"
     }
   ],
   "rooms": [
     {
-      "id": "room1",
+      "id": "r1",
+      "name": "general-room",
+      "type": "text",
+      "messages": [
+        {
+          "id": "m1",
+          "userId": "u3",
+          "roomId": "r1",
+          "chatId": null,
+          "message": "Witajcie w kanale General!",
+          "media": null,
+          "createdAt": "2025-01-01T09:00:00.000Z"
+        },
+        {
+          "id": "m2",
+          "userId": "u1",
+          "roomId": "r1",
+          "chatId": null,
+          "message": "Cześć wszystkim, jestem adi123.",
+          "media": null,
+          "createdAt": "2025-01-01T09:05:00.000Z"
+        },
+        {
+          "id": "bf3a1351-df4c-4989-af3f-a2bd6ed88e75",
+          "message": "hello",
+          "media": null,
+          "userId": "u1",
+          "createdAt": "2026-01-19T00:45:32.271Z",
+          "chatId": "chat3",
+          "roomId": "r1"
+        },
+        {
+          "id": "47ddb285-924d-427b-b436-660cae7dae69",
+          "message": "witam",
+          "media": null,
+          "userId": "u2",
+          "createdAt": "2026-01-19T00:45:37.926Z",
+          "chatId": null,
+          "roomId": "r1"
+        }
+      ]
+    },
+    {
+      "id": "r2",
       "name": "announcements",
       "type": "text",
       "messages": [
         {
-          "id": "msg_room1_1",
-          "userId": "1",
-          "roomId": "room1",
-          "message": "Welcome to the channel!",
-          "createdAt": "2026-01-06T21:12:50.555Z"
-        },
-        {
-          "id": "msg_room1_2",
-          "userId": "2",
-          "roomId": "room1",
-          "message": "Hej! Sprawdźcie proszę nowe pokoje :) ",
-          "createdAt": "2026-01-07T09:20:00.000Z"
+          "id": "m3",
+          "userId": "u4",
+          "roomId": "r2",
+          "chatId": null,
+          "message": "Nowe aktualizacje będą wdrożone w piątek.",
+          "media": null,
+          "createdAt": "2025-01-02T10:00:00.000Z"
         }
       ]
     },
     {
-      "id": "room2",
-      "name": "frontend",
+      "id": "r3",
+      "name": "gaming-chat",
       "type": "text",
       "messages": [
         {
-          "id": "msg_room2_1",
-          "userId": "2",
-          "roomId": "room2",
-          "message": "Who's working on the UI?",
-          "createdAt": "2026-01-07T10:30:00.000Z"
-        },
-        {
-          "id": "msg_room2_2",
-          "userId": "11",
-          "roomId": "room2",
-          "message": "Mam pomysł na layout — wrzucę PR wieczorem.",
-          "createdAt": "2026-01-08T18:10:00.000Z"
-        },
-        {
-          "id": "797744c4-01b0-4847-b303-20fa0cc105ad",
-          "message": "",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:44:01 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "id": "m4",
+          "userId": "u5",
+          "roomId": "r3",
           "chatId": null,
-          "roomId": "room2"
-        },
-        {
-          "id": "72c09865-ffdf-444b-a85f-290afcb2dfaf",
-          "message": "",
+          "message": "Kto dziś gra w wieczorny rajd?",
           "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:44:08 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": null,
-          "roomId": "room2"
-        },
-        {
-          "id": "328fe732-63c3-453e-9545-7df373350d47",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:46:13 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": null,
-          "roomId": "room2"
-        },
-        {
-          "id": "aad7264b-e697-4f76-beaf-c1223eeb1448",
-          "message": "skibidi",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:46:20 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": null,
-          "roomId": "room2"
-        },
-        {
-          "id": "f11f0174-f37b-4c6b-9715-fecc56584d1a",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:47:02 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room2"
-        },
-        {
-          "id": "2a78f76c-c2cb-49e6-b5c3-333af13c96da",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:30:51 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room2"
-        },
-        {
-          "id": "d9b92d70-2714-4b54-a475-7b111309a5cc",
-          "message": "yooo",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:30:56 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room2"
-        },
-        {
-          "id": "6a16e5c9-b2e1-4b7a-b8ae-444c9e5a6f5d",
-          "message": "ye",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:05:04.084Z",
-          "chatId": "chat5",
-          "roomId": "room2"
+          "createdAt": "2025-01-03T20:15:00.000Z"
         }
       ]
     },
     {
-      "id": "room3",
-      "name": "backend",
+      "id": "r4",
+      "name": "dev-discussion",
       "type": "text",
       "messages": [
         {
-          "id": "msg_room3_1",
-          "userId": "4",
-          "roomId": "room3",
-          "message": "API is ready for testing",
-          "createdAt": "2026-01-07T13:00:00.000Z"
-        },
-        {
-          "id": "msg_room3_2",
-          "userId": "12",
-          "roomId": "room3",
-          "message": "Dorzucę dziś poprawki do endpointów rooms/messages.",
-          "createdAt": "2026-01-08T19:05:00.000Z"
-        },
-        {
-          "id": "508c5af0-d28f-4f4a-9701-520f1997c1dd",
-          "message": "yp",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:01:45 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room3"
-        },
-        {
-          "id": "b7e8dc3b-1c1d-43b6-a5f0-672037cfb6ce",
-          "message": "hmm",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:01:48 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room3"
-        },
-        {
-          "id": "35a503ce-639c-4f5a-99c8-0fb8e1392b96",
-          "message": "mock",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:01:54 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat5",
-          "roomId": "room3"
-        },
-        {
-          "id": "94786bfa-e209-4d15-a39a-543ca7a02834",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:58:07 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room3"
-        }
-      ]
-    },
-    {
-      "id": "room4",
-      "name": "campaigns",
-      "type": "text",
-      "messages": [
-        {
-          "id": "msg_room4_1",
-          "userId": "5",
-          "roomId": "room4",
-          "message": "New campaign launched!",
-          "createdAt": "2026-01-07T08:00:00.000Z"
-        },
-        {
-          "id": "msg_room4_2",
-          "userId": "6",
-          "roomId": "room4",
-          "message": "Przygotowałam copy na social media.",
-          "createdAt": "2026-01-07T11:15:00.000Z"
-        }
-      ]
-    },
-    {
-      "id": "room5",
-      "name": "devops",
-      "type": "text",
-      "messages": [
-        {
-          "id": "msg_room5_1",
-          "userId": "9",
-          "roomId": "room5",
-          "message": "CI działa, ale brakuje cache dla node_modules.",
-          "createdAt": "2026-01-08T09:40:00.000Z"
-        },
-        {
-          "id": "afdeb3aa-c979-4430-8a77-5acf6a8eb43b",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:02:05 GMT+0100 (czas środkowoeuropejski standardowy)",
+          "id": "m5",
+          "userId": "u2",
+          "roomId": "r4",
           "chatId": null,
-          "roomId": "room5"
+          "message": "Proponuję PR dla refaktoryzacji komponentu header.",
+          "media": null,
+          "createdAt": "2025-01-04T13:10:00.000Z"
         }
       ]
-    },
-    {
-      "id": "room6",
-      "name": "Standup",
-      "type": "voice",
-      "messages": []
-    },
-    {
-      "id": "room7",
-      "name": "chill",
-      "type": "text",
-      "messages": [
-        {
-          "id": "msg_room7_1",
-          "userId": "8",
-          "roomId": "room7",
-          "message": "Kto dziś gra w coś po pracy?",
-          "createdAt": "2026-01-08T20:10:00.000Z"
-        },
-        {
-          "id": "msg_room7_2",
-          "userId": "1",
-          "roomId": "room7",
-          "message": "Ja mogę wbić około 21.",
-          "createdAt": "2026-01-08T20:12:00.000Z"
-        }
-      ]
-    },
-    {
-      "id": "room8",
-      "name": "music",
-      "type": "voice",
-      "messages": []
     }
   ],
   "chats": [
     {
       "id": "chat1",
       "userIds": [
-        "1",
-        "2"
+        "u1",
+        "u2",
+        "u3"
       ],
       "messages": [
         {
-          "id": "msg_chat1_1",
-          "userId": "1",
+          "id": "cm1",
+          "userId": "u1",
+          "roomId": null,
           "chatId": "chat1",
-          "message": "Hey, how are you?",
-          "createdAt": "2026-01-06T22:00:00.000Z"
+          "message": "Hej, chcesz pogadać?",
+          "media": null,
+          "createdAt": "2025-01-05T08:00:00.000Z"
         },
         {
-          "id": "msg_chat1_2",
-          "userId": "2",
+          "id": "cm2",
+          "userId": "u2",
+          "roomId": null,
           "chatId": "chat1",
-          "message": "I'm doing great!",
-          "createdAt": "2026-01-06T22:05:00.000Z"
+          "message": "Jasne, o co chodzi?",
+          "media": null,
+          "createdAt": "2025-01-05T08:01:00.000Z"
         }
       ]
     },
     {
       "id": "chat2",
       "userIds": [
-        "2",
-        "4"
+        "u1",
+        "u5"
       ],
       "messages": [
         {
-          "id": "msg_chat2_1",
-          "userId": "2",
+          "id": "cm3",
+          "userId": "u5",
+          "roomId": null,
           "chatId": "chat2",
-          "message": "Let's grab coffee?",
-          "createdAt": "2026-01-07T14:00:00.000Z"
-        },
-        {
-          "id": "msg_chat2_2",
-          "userId": "4",
-          "chatId": "chat2",
-          "message": "Sure! When?",
-          "createdAt": "2026-01-07T14:05:00.000Z"
-        },
-        {
-          "id": "msg_chat2_3",
-          "userId": "2",
-          "chatId": "chat2",
-          "message": "Dziś 16:30?",
-          "createdAt": "2026-01-07T14:06:00.000Z"
-        },
-        {
-          "id": "f11f0174-f37b-4c6b-9715-fecc56584d1a",
-          "message": "test",
+          "message": "Masz link do dzisiejszego streamu?",
           "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:47:02 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room2"
-        },
-        {
-          "id": "edf69860-84af-404a-b3f7-9e7d27ac27cb",
-          "message": "drugi test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:53:45 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "e3673e51-bb82-4efa-8494-abf0bdd78693",
-          "message": "tescik",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 18:53:54 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "508c5af0-d28f-4f4a-9701-520f1997c1dd",
-          "message": "yp",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:01:45 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room3"
-        },
-        {
-          "id": "b7e8dc3b-1c1d-43b6-a5f0-672037cfb6ce",
-          "message": "hmm",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:01:48 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room3"
-        },
-        {
-          "id": "2a78f76c-c2cb-49e6-b5c3-333af13c96da",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:30:51 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room2"
-        },
-        {
-          "id": "d9b92d70-2714-4b54-a475-7b111309a5cc",
-          "message": "yooo",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:30:56 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room2"
-        },
-        {
-          "id": "94786bfa-e209-4d15-a39a-543ca7a02834",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:58:07 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat2",
-          "roomId": "room3"
-        },
-        {
-          "id": "6ff4c967-6b77-4772-a933-a9b3baf37633",
-          "message": "test",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:09:02.604Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "70778e47-af9c-4690-9a1f-65961bf3fc88",
-          "message": "yooo",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:09:05.346Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "75092c39-fd1e-4e86-bc08-0275cdc15697",
-          "message": "hghg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:40.762Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "0d32e8be-cc66-49dc-8347-068ebd45e9fe",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:41.271Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "24a7d090-f763-43f8-847b-c5a8e62ec97b",
-          "message": "hg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:41.589Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "93248690-5688-490c-b089-0b7577369ece",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:42.170Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "b134f1e1-18b3-40d8-8b05-ae313e128095",
-          "message": "y",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:42.946Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "53d2ffa1-2d77-43ff-bfdc-a4aefef982ac",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:44.306Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "36454050-a7a0-4d2b-ae9d-7256c7cf15ea",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:44.833Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "baa4efa1-38b4-4573-bc0a-f3354d052e6b",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:44.993Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "146d5392-82f9-4a7b-afc1-089bb050ac52",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:45.149Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "7b4f1934-3a93-4219-93b0-b647376ff52a",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:45.303Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "8c9c58d4-d521-471d-8893-8416475264fa",
-          "message": "hello",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:24:09.844Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "0d476596-8d62-40a8-9aee-d6f2488e23bf",
-          "message": "hi",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:25:35.044Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "9458b4e4-9acf-49d1-ba31-daf74d43b454",
-          "message": "hello",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:26:20.805Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "2ef8a3bc-5fbf-4b84-a232-4f972bdf0cdf",
-          "message": "hi",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:30:12.892Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "654109ad-66fb-4289-85a8-7610e2ea286d",
-          "message": "hello",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:32:50.567Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "64ac360d-596e-421b-b654-e94396deb229",
-          "message": "hi",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:32:56.151Z",
-          "chatId": "chat2",
-          "roomId": null
-        },
-        {
-          "id": "42203177-d712-4f6d-8770-2f9f2599185a",
-          "message": "hello",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T20:35:11.731Z",
-          "chatId": "chat2",
-          "roomId": null
+          "createdAt": "2025-01-06T19:00:00.000Z"
         }
       ]
     },
     {
       "id": "chat3",
       "userIds": [
-        "1",
-        "3"
+        "u1",
+        "u3"
       ],
       "messages": [
         {
-          "id": "msg_chat3_1",
-          "userId": "3",
+          "id": "bf3a1351-df4c-4989-af3f-a2bd6ed88e75",
+          "message": "hello",
+          "media": null,
+          "userId": "u1",
+          "createdAt": "2026-01-19T00:45:32.271Z",
           "chatId": "chat3",
-          "message": "Masz chwilę?",
-          "createdAt": "2026-01-07T20:00:00.000Z"
+          "roomId": "r1"
         }
       ]
     },
     {
       "id": "chat4",
       "userIds": [
-        "2",
-        "5"
+        "u2",
+        "u7"
       ],
       "messages": [
         {
-          "id": "msg_chat4_1",
-          "userId": "5",
+          "id": "cm4",
+          "userId": "u7",
+          "roomId": null,
           "chatId": "chat4",
-          "message": "Podeślesz mi link do kanału Development?",
-          "createdAt": "2026-01-08T08:30:00.000Z"
-        },
-        {
-          "id": "msg_chat4_2",
-          "userId": "2",
-          "chatId": "chat4",
-          "message": "Jasne — już masz zaproszenie.",
-          "createdAt": "2026-01-08T08:31:00.000Z"
+          "message": "Cześć, możemy się skontaktować w sprawie projektu?",
+          "media": null,
+          "createdAt": "2025-01-07T12:00:00.000Z"
         }
       ]
     },
     {
-      "id": "chat5",
+      "id": "14e9f787-48c7-41bc-b1c2-c9d43a1930ff",
       "userIds": [
-        "4",
-        "9"
+        "u2",
+        "u1"
       ],
-      "messages": [
-        {
-          "id": "msg_chat5_1",
-          "userId": "9",
-          "chatId": "chat5",
-          "message": "Masz jeszcze dostęp do starego repo?",
-          "createdAt": "2026-01-08T13:10:00.000Z"
-        },
-        {
-          "id": "msg_chat5_2",
-          "userId": "4",
-          "chatId": "chat5",
-          "message": "Tak, podeślę Ci.",
-          "createdAt": "2026-01-08T13:11:00.000Z"
-        },
-        {
-          "id": "35a503ce-639c-4f5a-99c8-0fb8e1392b96",
-          "message": "mock",
-          "media": null,
-          "userId": "4",
-          "createdAt": "Thu Jan 15 2026 19:01:54 GMT+0100 (czas środkowoeuropejski standardowy)",
-          "chatId": "chat5",
-          "roomId": "room3"
-        },
-        {
-          "id": "6a16e5c9-b2e1-4b7a-b8ae-444c9e5a6f5d",
-          "message": "ye",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:05:04.084Z",
-          "chatId": "chat5",
-          "roomId": "room2"
-        },
-        {
-          "id": "3e1856c7-96a3-43f4-adee-e029a706d0d8",
-          "message": "yoo",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:07.709Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "7455ca58-35f7-459a-a2f1-04ccfddb89ce",
-          "message": "elo",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:11.020Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "ad471552-a60a-4b4c-9b5f-5809f63da65b",
-          "message": "aaa",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:14.289Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "5dc168ee-b88f-4716-b3db-3981d00b5983",
-          "message": "a",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:15.195Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "bb05b0f2-bb8d-47de-8e90-52ee679e6767",
-          "message": "a",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:15.378Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "3ccc2f91-1704-4976-a7fe-9e17e16faa81",
-          "message": "a",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:15.553Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "1e15f432-6ad7-45f6-ad9c-ef3b3d85430a",
-          "message": "a",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:15.721Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "4d3908b1-25f6-4499-9f2a-876acf6258b3",
-          "message": "a",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:25:15.890Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "5b78adac-b1cc-4851-9526-ebf2c1a91ae5",
-          "message": "jhghjhjg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:30.876Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "03ef9563-30bc-419d-a26d-84f9511f176c",
-          "message": "hgj",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:31.077Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "9a3f55f0-a55a-4449-b2b5-8bb26f3b13a4",
-          "message": "hjg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:31.210Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "db33f9bb-ec92-448c-b932-ab42fe19cad9",
-          "message": "jhg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:31.358Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "abb30695-93f1-44f5-ab3e-85bc045247c6",
-          "message": "ghj",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:31.493Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "d7004f62-12d4-40b2-a7ff-6d1cff4d1d16",
-          "message": "ghj",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:31.632Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "a71de45c-ac10-47ca-af97-5d34ad07da36",
-          "message": "jgg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:31.950Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "ae32a1f6-18f3-42d4-bd57-b73decf8c0aa",
-          "message": "jgh",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:32.093Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "2101545e-9bc2-4516-8e61-b169e9931375",
-          "message": "jhg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:32.227Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "46b7079e-3e77-4270-b19c-25c99e1241c4",
-          "message": "jhg",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:32.388Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "3f8e7ac5-71e8-4e13-9a4e-587fbaa6e254",
-          "message": "hj",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:32.533Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "dae99f4f-07ab-4d19-9f5e-e6abf677fafd",
-          "message": "j",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:32.837Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "6dcfb541-7e30-4cd2-9081-c35fc87b134e",
-          "message": "jh",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:32.992Z",
-          "chatId": "chat5",
-          "roomId": null
-        },
-        {
-          "id": "bf8173d1-7589-45ce-8950-9746138e1647",
-          "message": "h",
-          "media": null,
-          "userId": "4",
-          "createdAt": "2026-01-16T16:33:33.144Z",
-          "chatId": "chat5",
-          "roomId": null
-        }
-      ]
+      "messages": []
     },
     {
-      "id": "chat6",
+      "id": "a4a3d1e4-85c8-40eb-b460-203e59551140",
       "userIds": [
-        "1",
-        "8"
+        "u1",
+        "u2"
       ],
-      "messages": [
-        {
-          "id": "msg_chat6_1",
-          "userId": "8",
-          "chatId": "chat6",
-          "message": "Wpadniesz dziś na kanał Hangout?",
-          "createdAt": "2026-01-08T17:45:00.000Z"
-        },
-        {
-          "id": "msg_chat6_2",
-          "userId": "1",
-          "chatId": "chat6",
-          "message": "Pewnie, wieczorem.",
-          "createdAt": "2026-01-08T17:46:00.000Z"
-        }
-      ]
+      "messages": []
     },
     {
-      "id": "chat7",
+      "id": "eb0004ad-8b05-4b35-afdc-7e368010e49c",
       "userIds": [
-        "5",
-        "6"
+        "u2",
+        "u8"
       ],
-      "messages": [
-        {
-          "id": "msg_chat7_1",
-          "userId": "6",
-          "chatId": "chat7",
-          "message": "Sprawdzisz moje grafiki?",
-          "createdAt": "2026-01-07T09:15:00.000Z"
-        }
-      ]
+      "messages": []
     },
     {
-      "id": "chat8",
+      "id": "98a2432c-3246-45ac-a96f-fb69d1189b7f",
       "userIds": [
-        "11",
-        "12"
+        "u2",
+        "u5"
       ],
-      "messages": [
-        {
-          "id": "msg_chat8_1",
-          "userId": "11",
-          "chatId": "chat8",
-          "message": "Deploy dziś czy jutro?",
-          "createdAt": "2026-01-08T21:05:00.000Z"
-        },
-        {
-          "id": "msg_chat8_2",
-          "userId": "12",
-          "chatId": "chat8",
-          "message": "Jutro rano będzie bezpieczniej.",
-          "createdAt": "2026-01-08T21:06:00.000Z"
-        }
-      ]
+      "messages": []
     }
   ]
 }

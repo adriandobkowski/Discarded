@@ -7,7 +7,7 @@ import { ToastService } from '../../../services/toast/toast-service';
   styleUrl: './toast-component.component.scss',
 })
 export class ToastComponentComponent {
-private toastService = inject(ToastService);
+  private toastService = inject(ToastService);
 
   protected toasts = computed(() => this.toastService.toasts());
 

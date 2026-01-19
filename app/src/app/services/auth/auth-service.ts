@@ -15,9 +15,11 @@ export class AuthService {
 
   public token = signal<string | null>(localStorage.getItem('token'));
 
-  
-  public user = signal<UserProps | null>(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "null") as UserProps : null);
-
+  public user = signal<UserProps | null>(
+    localStorage.getItem('user')
+      ? (JSON.parse(localStorage.getItem('user') || 'null') as UserProps)
+      : null,
+  );
 
   public user$ = toObservable(this.user);
 
@@ -31,17 +33,14 @@ export class AuthService {
         switchMap((res) => {
           const userId = res.user.id;
 
-          return this.http.patch<UserProps>(
-            `${url}/users/${userId}`,
-            {
-              username: user.username,
-              friends: [],
-              channels: [],
-              chats: [],
-              img: '',
-              createdAt: new Date().toISOString(),
-            },
-          );
+          return this.http.patch<UserProps>(`${url}/users/${userId}`, {
+            username: user.username,
+            friends: [],
+            channels: [],
+            chats: [],
+            img: '',
+            createdAt: new Date().toISOString(),
+          });
         }),
       );
   }
@@ -63,8 +62,8 @@ export class AuthService {
         };
         localStorage.setItem('user', JSON.stringify(currentUser));
         this.user.set(currentUser);
-        
-return currentUser;
+
+        return currentUser;
       }),
     );
   }

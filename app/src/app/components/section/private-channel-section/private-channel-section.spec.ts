@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrivateChannelSection } from './private-channel-section';
+import { PrivateChannelSectionComponent } from './private-channel-section';
 
-describe('PrivateChannelSection', () => {
-  let component: PrivateChannelSection;
-  let fixture: ComponentFixture<PrivateChannelSection>;
+describe('PrivateChannelSectionComponent', () => {
+  let component: PrivateChannelSectionComponent;
+  let fixture: ComponentFixture<PrivateChannelSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PrivateChannelSection]
-    })
-    .compileComponents();
+      imports: [PrivateChannelSectionComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(PrivateChannelSection);
+    fixture = TestBed.createComponent(PrivateChannelSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

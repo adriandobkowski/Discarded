@@ -1,4 +1,4 @@
-import {  AfterViewChecked, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { DatePipe } from '@angular/common';
 import { ExtendedMessageProps } from '../../../types';
@@ -9,26 +9,21 @@ import { ExtendedMessageProps } from '../../../types';
   imports: [ProfileImageComponent, DatePipe],
   templateUrl: './message.html',
   styleUrl: './message.scss',
+  host: {
+    class: 'overflow-auto',
+  },
 })
-export class MessageComponent  implements AfterViewChecked{
-
+export class MessageComponent implements OnChanges {
   @ViewChild('scrollContainer') protected scrollContainer!: ElementRef;
 
   @Input() public messages: ExtendedMessageProps[] = [];
 
-  protected scrollToBottom():void {
-  const el = this.scrollContainer.nativeElement as HTMLElement;
-  el.scrollTop = el.scrollHeight;
-}
-protected isScrolledToBottom(): boolean {
-  const el = this.scrollContainer.nativeElement as HTMLElement;
-  
-return el.scrollHeight - el.scrollTop - el.clientHeight < 10;
-}
-public ngAfterViewChecked(): void {
-  if (!this.isScrolledToBottom()) {
-    this.scrollToBottom();
-
+  protected scrollToBottom(): void {
+    const el = this.scrollContainer.nativeElement as HTMLElement;
+    el.scrollTop = el.scrollHeight;
   }
-}
+
+  public ngOnChanges(): void {
+    queueMicrotask(() => this.scrollToBottom());
+  }
 }

@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChatLayout } from './chat-layout';
+import { ChatLayoutComponent } from './chat-layout';
 
-describe('ChatLayout', () => {
-  let component: ChatLayout;
-  let fixture: ComponentFixture<ChatLayout>;
+describe('ChatLayoutComponent', () => {
+  let component: ChatLayoutComponent;
+  let fixture: ComponentFixture<ChatLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChatLayout]
-    })
-    .compileComponents();
+      imports: [ChatLayoutComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ChatLayout);
+    fixture = TestBed.createComponent(ChatLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

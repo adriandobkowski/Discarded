@@ -5,7 +5,7 @@ import { ProfileImageComponent } from '../../profile/profile-image/profile-image
 @Component({
   selector: 'app-channel-header',
   imports: [ProfileImageComponent],
-  standalone:true,
+  standalone: true,
   templateUrl: './channel-header.html',
   styleUrl: './channel-header.scss',
 })
