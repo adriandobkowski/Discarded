@@ -1,0 +1,24 @@
+// Theme-aware styling for inbox modal. Uses global CSS variables set in src/styles.scss
+
+:host {
+  display: contents;
+}
+
+.inbox-modal__card {
+  color: var(--app-text);
+  border: 1px solid color-mix(in srgb, var(--app-border) 85%, transparent);
+  background-color: color-mix(in srgb, var(--app-surface) 92%, transparent);
+}
+
+.inbox-modal__icon-box {
+  border: 1px solid var(--app-border);
+  background-color: color-mix(in srgb, var(--app-surface-2) 85%, transparent);
+}
+
+.inbox-modal__divider {
+  background-color: color-mix(in srgb, var(--app-border) 70%, transparent);
+}
+
+.inbox-modal__item:hover {
+  background-color: var(--app-hover, rgba(255, 255, 255, 0.06));
+}

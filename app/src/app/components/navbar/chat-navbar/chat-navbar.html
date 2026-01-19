@@ -9,14 +9,4 @@
       {{ chattedWithUser()?.username }}
     </div>
   </div>
-  <div
-    class="bg-[#1E1F22] rounded flex items-center px-2 py-0.5 transition-all focus-within:w-64 w-36"
-  >
-    <input
-      type="text"
-      [placeholder]="'Search ' + (chattedWithUser()?.username || '')"
-      class="truncate outline-none text-gray-200 text-sm h-8 w-full placeholder-gray-400"
-    />
-    <lucide-icon [img]="Search" class="w-4 h-4 text-gray-400" />
-  </div>
 </nav>

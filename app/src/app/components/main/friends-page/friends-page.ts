@@ -58,7 +58,7 @@ export class FriendsPage {
 
   protected menuPosition = this.friendMenuService.menuPosition;
 
-  protected toggleMenu = this.friendMenuService.toggleMenu.bind(this.friendService);
+  protected toggleMenu = this.friendMenuService.toggleMenu.bind(this.friendMenuService);
 
   public constructor() {
     effect(() => {

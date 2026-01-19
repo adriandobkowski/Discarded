@@ -1,139 +1,173 @@
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-  <div
-    class="flex w-[1000px] h-[80vh] bg-[#313338] text-gray-100 font-sans rounded-xl overflow-hidden shadow-2xl"
-  >
-    <section class="flex flex-col w-[280px] bg-[#2B2D31] pt-14 px-4 items-end shrink-0">
-      <main class="w-[200px]">
-        <label for="user-settings" class="text-xs font-bold text-gray-400 uppercase mb-2 block px-2"
-          >User Settings</label
-        >
-        <div class="flex flex-col gap-1">
-          <div
-            class="flex items-center gap-2 px-2 py-1.5 rounded bg-[#404249] text-white cursor-pointer"
+<div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm">
+  <div class="flex min-h-[100dvh] items-start justify-center p-3 sm:p-6">
+    <div
+      class="flex w-full max-w-6xl flex-col overflow-hidden rounded-xl bg-[#313338] text-gray-100 shadow-2xl md:flex-row md:max-h-[88dvh]"
+    >
+      <section
+        class="w-full shrink-0 bg-[#2B2D31] px-4 py-4 sm:px-6 md:w-72 md:py-10 md:pr-4 md:pl-6"
+      >
+        <main class="mx-auto w-full max-w-sm md:mx-0">
+          <label
+            for="user-settings"
+            class="text-xs font-bold text-gray-400 uppercase mb-2 block px-2"
+            >User Settings</label
           >
-            <lucide-icon [img]="UserPen" class="w-5 h-5" />
-            <div class="font-medium">My account</div>
-          </div>
-          <button
-            class="flex items-center cursor-pointer gap-2 px-2 py-1.5 rounded hover:bg-[#35373C] text-gray-400 hover:text-gray-200 w-full text-left transition-colors"
-            (click)="onLogout()"
-          >
-            <lucide-icon [img]="LogOut" class="w-5 h-5" />
-            <div class="font-medium">Log out</div>
-          </button>
-        </div>
-      </main>
-    </section>
-    <main class="flex-1 px-10 py-4 bg-[#313338] overflow-y-auto">
-      <nav class="flex justify-between items-start mb-6 max-w-3xl">
-        <div class="text-xl font-bold text-white">My account</div>
-        <div class="flex flex-col items-center group cursor-pointer">
-          <a
-            routerLink="/"
-            class="flex justify-center items-center w-9 h-9 text-gray-400 group-hover:text-white group-hover:border-white rounded-full transition-all"
-          >
-            <lucide-icon [img]="X" class="w-8 h-8" />
-          </a>
-        </div>
-      </nav>
-      <form [formGroup]="updateForm" class="max-w-3xl" (ngSubmit)="onSubmit()">
-        <div class="bg-[#202225] rounded-t-lg min-h-[100px] mb-12 relative p-4">
-          <div class="bg-[#5865F2] h-24 w-full absolute top-0 left-0 rounded-t-lg"></div>
-          <div class="relative top-12 left-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="p-1.5 bg-[#202225] rounded-full relative">
-                <app-profile-image [src]="user.img" [status]="user.status" />
-              </div>
-              <div class="text-xl font-bold mt-2">{{ user.username }}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-[#2B2D31] rounded-lg p-4">
-          <div class="flex justify-between items-end py-4 border-b border-[#1E1F22]">
-            <div class="flex-1">
-              <label for="username" class="text-xs font-bold text-gray-400 uppercase mb-1 block"
-                >Username</label
-              >
-              @if (!updateUsernameClicked) {
-                <div class="text-white h-10 px-2 flex items-center">{{ activeUsername }}</div>
-              } @else {
-                <input
-                  type="text"
-                  formControlName="username"
-                  [defaultValue]="activeUsername"
-                  class="bg-[#1E1F22] text-white h-10 px-2 rounded w-full outline-none font-medium"
-                />
-              }
+          <div class="flex flex-col gap-1">
+            <div
+              class="flex items-center gap-2 px-2 py-1.5 rounded bg-[#404249] text-white cursor-pointer"
+            >
+              <lucide-icon [img]="UserPen" class="w-5 h-5" />
+              <div class="font-medium">My account</div>
             </div>
             <button
-              type="button"
-              (click)="updateUsernameClicked = !updateUsernameClicked"
-              class="bg-[#4E5058] hover:bg-[#6D6F78] text-white px-4 py-2.5 mx-4 rounded text-sm transition-colors"
+              class="flex items-center cursor-pointer gap-2 px-2 py-1.5 rounded hover:bg-[#35373C] text-gray-400 hover:text-gray-200 w-full text-left transition-colors"
+              (click)="onLogout()"
             >
-              {{ updateUsernameClicked ? 'Done' : 'Edit' }}
+              <lucide-icon [img]="LogOut" class="w-5 h-5" />
+              <div class="font-medium">Log out</div>
             </button>
           </div>
+        </main>
+      </section>
 
-          <div class="flex justify-between items-end py-4">
-            <div class="flex-1">
-              <label for="email" class="text-xs font-bold text-gray-400 uppercase mb-1 block"
-                >E-mail</label
-              >
-              @if (!updateEmailClicked) {
-                <div class="text-white h-10 px-2 flex items-center">{{ activeEmail }}</div>
-              } @else {
+      <main class="flex-1 overflow-y-auto bg-[#313338] p-4 sm:p-6 lg:p-8">
+        <nav class="mb-6 flex items-start justify-between gap-4 max-w-3xl">
+          <div class="min-w-0 text-lg font-bold text-white sm:text-xl">My account</div>
+          <div class="flex flex-col items-center group cursor-pointer shrink-0">
+            <a
+              routerLink="/"
+              class="flex justify-center items-center w-10 h-10 text-gray-400 group-hover:text-white rounded-full transition-colors"
+            >
+              <lucide-icon [img]="X" class="w-8 h-8" />
+            </a>
+          </div>
+        </nav>
+
+        <form [formGroup]="updateForm" class="max-w-3xl" (ngSubmit)="onSubmit()">
+          <div class="relative mb-10 overflow-hidden rounded-t-lg bg-[#202225] p-4 sm:p-5">
+            <div class="absolute inset-x-0 top-0 h-24 bg-[#5865F2]"></div>
+            <div class="relative pt-12 sm:pt-14">
+              <div class="flex items-center gap-3">
                 <input
-                  type="text"
-                  formControlName="email"
-                  [defaultValue]="activeEmail"
-                  class="bg-[#1E1F22] text-white h-10 px-2 rounded w-full outline-none font-medium"
+                  id="settings-avatar-upload"
+                  type="file"
+                  accept="image/*"
+                  class="sr-only"
+                  (change)="onFileSelected($event)"
                 />
-              }
-            </div>
-            <button
-              type="button"
-              (click)="updateEmailClicked = !updateEmailClicked"
-              class="bg-[#4E5058] hover:bg-[#6D6F78] text-white px-4 py-2.5 mx-4 rounded text-sm transition-colors"
-            >
-              {{ updateEmailClicked ? 'Done' : 'Edit' }}
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-8 flex justify-center">
-          <button
-            type="submit"
-            [disabled]="!updateForm.dirty"
-            class="bg-[#248046] hover:enabled:bg-[#1A6334] text-white px-6 py-2 rounded font-medium transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Save Changes
-          </button>
-        </div>
-
-        <div class="mt-10">
-          <div class="text-xs font-bold text-gray-400 uppercase mb-2">Danger zone</div>
-          <div class="rounded-lg border border-red-500/20 bg-[#2B2D31] p-4">
-            <div class="flex items-center justify-between gap-4">
-              <div class="min-w-0">
-                <div class="text-white font-semibold">Delete account</div>
-                <div class="text-sm text-gray-400 mt-1">
-                  Permanently deletes your account and user data. This action cannot be undone.
+                <label
+                  for="settings-avatar-upload"
+                  class="relative rounded-full bg-[#202225] cursor-pointer select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-[#5865F2] focus-within:ring-offset-2 focus-within:ring-offset-[#202225]"
+                  aria-label="Change profile image"
+                >
+                  @if (!updateForm.value.img) {
+                    <app-profile-image [src]="user.img" />
+                  } @else {
+                    <app-profile-image [src]="updateForm.value.img" />
+                  }
+                </label>
+                <div class="min-w-0">
+                  <div class="mt-4 truncate text-lg font-bold text-white sm:text-xl">
+                    {{ user.username }}
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg bg-[#2B2D31] p-4 sm:p-5">
+            <div
+              class="grid gap-3 border-b border-[#1E1F22] py-4 sm:grid-cols-[1fr_auto] sm:items-end"
+            >
+              <div class="min-w-0">
+                <label for="username" class="text-xs font-bold text-gray-400 uppercase mb-1 block"
+                  >Username</label
+                >
+                @if (!updateUsernameClicked) {
+                  <div class="flex min-h-11 items-center px-2 text-white">
+                    <span class="truncate">{{ activeUsername }}</span>
+                  </div>
+                } @else {
+                  <input
+                    type="text"
+                    formControlName="username"
+                    [defaultValue]="activeUsername"
+                    class="w-full rounded bg-[#1E1F22] px-3 py-3 text-white outline-none font-medium min-h-11"
+                  />
+                }
               </div>
 
               <button
                 type="button"
-                (click)="openDeleteAccount()"
-                class="flex items-center gap-2 rounded bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-sm font-semibold transition-colors shadow-sm flex-shrink-0"
+                (click)="updateUsernameClicked = !updateUsernameClicked"
+                class="w-full rounded bg-[#4E5058] px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-[#6D6F78] sm:w-auto sm:px-5"
               >
-                <lucide-icon [img]="Trash" class="w-4 h-4" />
-                Delete
+                {{ updateUsernameClicked ? 'Done' : 'Edit' }}
+              </button>
+            </div>
+
+            <div class="grid gap-3 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
+              <div class="min-w-0">
+                <label for="email" class="text-xs font-bold text-gray-400 uppercase mb-1 block"
+                  >E-mail</label
+                >
+                @if (!updateEmailClicked) {
+                  <div class="flex min-h-11 items-center px-2 text-white">
+                    <span class="truncate">{{ activeEmail }}</span>
+                  </div>
+                } @else {
+                  <input
+                    type="text"
+                    formControlName="email"
+                    [defaultValue]="activeEmail"
+                    class="w-full rounded bg-[#1E1F22] px-3 py-3 text-white outline-none font-medium min-h-11"
+                  />
+                }
+              </div>
+              <button
+                type="button"
+                (click)="updateEmailClicked = !updateEmailClicked"
+                class="w-full rounded bg-[#4E5058] px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-[#6D6F78] sm:w-auto sm:px-5"
+              >
+                {{ updateEmailClicked ? 'Done' : 'Edit' }}
               </button>
             </div>
           </div>
-        </div>
-      </form>
-    </main>
+
+          <div class="mt-8 flex flex-col items-center">
+            <button
+              type="submit"
+              [disabled]="!updateForm.dirty"
+              class="w-full rounded bg-[#248046] px-6 py-3 font-medium text-white shadow-md transition-colors disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-[#1A6334] sm:w-auto"
+            >
+              Save Changes
+            </button>
+          </div>
+
+          <div class="mt-10">
+            <div class="mb-2 text-xs font-bold text-gray-400 uppercase">Danger zone</div>
+            <div class="rounded-lg border border-red-500/20 bg-[#2B2D31] p-4 sm:p-5">
+              <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="min-w-0">
+                  <div class="font-semibold text-white">Delete account</div>
+                  <div class="mt-1 text-sm text-gray-400">
+                    Permanently deletes your account and user data. This action cannot be undone.
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  (click)="openDeleteAccount()"
+                  class="flex w-full items-center justify-center gap-2 rounded bg-red-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-700 sm:w-auto"
+                >
+                  <lucide-icon [img]="Trash" class="w-4 h-4" />
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
   </div>
 </div>

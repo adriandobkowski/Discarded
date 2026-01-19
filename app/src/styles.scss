@@ -86,6 +86,22 @@ html.theme-light {
     background-color: var(--app-hover-strong) !important;
   }
 
+  .bg-\[\#404249\] {
+    background-color: var(--app-hover-strong) !important;
+  }
+
+  .hover\:bg-\[\#404249\]:hover {
+    background-color: var(--app-hover) !important;
+  }
+
+  .bg-\[\#4E5058\] {
+    background-color: var(--app-hover-strong) !important;
+  }
+
+  .hover\:bg-\[\#6D6F78\]:hover {
+    background-color: var(--app-hover) !important;
+  }
+
   .hover\:bg-\[\#3F4147\]:hover,
   .hover\:bg-\[\#3f4147\]:hover {
     background-color: var(--app-hover) !important;
@@ -120,6 +136,11 @@ html.theme-light {
   }
 
   .border-\[\#1f2023\] {
+    border-color: var(--app-border-strong) !important;
+  }
+
+  .border-\[\#1E1F22\],
+  .border-\[\#1e1f22\] {
     border-color: var(--app-border-strong) !important;
   }
 }

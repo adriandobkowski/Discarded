@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, House, Plus } from 'lucide-angular';
+import { LucideAngularModule, House, Plus, Volume2 } from 'lucide-angular';
 import { ChannelProps } from '../../../types';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { ToastService } from '../../../services/toast/toast-service';
@@ -14,6 +14,7 @@ import { ToastService } from '../../../services/toast/toast-service';
 export class ChannelSectionComponent implements OnInit {
   protected readonly House = House;
   protected readonly Plus = Plus;
+  protected readonly Volume2 = Volume2;
   private channelService = inject(ChannelService);
   private toastService = inject(ToastService);
 

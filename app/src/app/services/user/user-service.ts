@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, forkJoin, map, of, switchMap, tap, throwError } from 'rxjs';
-import { ChatProps, ExtendedUserProps, UserProps } from '../../types';
+import { Observable, concat, forkJoin, map, of, switchMap, tap, throwError } from 'rxjs';
+import { ChannelProps, ChatProps, ExtendedUserProps, UserProps } from '../../types';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
 import { v4 as uuidv4 } from 'uuid';
@@ -277,12 +277,75 @@ export class UserService {
       }),
     );
   }
+
+  protected removeUserFromChannels(userId: string): Observable<void> {
+    return this.http.get<ChannelProps[]>(`${url}/channels`).pipe(
+      map((channels) => channels.filter((channel) => channel.userIds.includes(userId))),
+      switchMap((channels) =>
+        channels.length
+          ? forkJoin(
+              channels.map((channel) =>
+                this.http.patch(`${url}/channels/${channel.id}`, {
+                  userIds: channel.userIds.filter((id) => id !== userId),
+                }),
+              ),
+            )
+          : of([]),
+      ),
+      map(() => void 0),
+    );
+  }
+  protected removeUserFromChats(userId: string): Observable<void> {
+    return this.http.get<ChatProps[]>(`${url}/chats`).pipe(
+      map((chats) => chats.filter((chat) => chat.userIds.includes(userId))),
+      switchMap((chats) =>
+        chats.length
+          ? forkJoin(
+              chats.map((chat) =>
+                this.http.patch(`${url}/chats/${chat.id}`, {
+                  userIds: chat.userIds.filter((id) => id !== userId),
+                }),
+              ),
+            )
+          : of([]),
+      ),
+      map(() => void 0),
+    );
+  }
+  protected removeUserFromFriends(userId: string): Observable<void> {
+    return this.http.get<UserProps[]>(`${url}/users`).pipe(
+      map((users) =>
+        users.filter(
+          (user) => user.friends.includes(userId) || user.friendRequests.includes(userId),
+        ),
+      ),
+      switchMap((users) =>
+        users.length
+          ? forkJoin(
+              users.map((user) =>
+                this.http.patch(`${url}/users/${user.id}`, {
+                  friends: user.friends.filter((id) => id !== userId),
+                  friendRequests: user.friendRequests.filter((id) => id !== userId),
+                }),
+              ),
+            )
+          : of([]),
+      ),
+      map(() => void 0),
+    );
+  }
+
   public deleteAccount(): Observable<void> {
     const currentUser = this.user();
     if (!currentUser) {
       return throwError(() => new Error('Not authenticated'));
     }
 
-    return this.http.delete<void>(`${url}/users/${currentUser.id}`);
+    return concat(
+      this.removeUserFromChannels(currentUser.id),
+      this.removeUserFromChats(currentUser.id),
+      this.removeUserFromFriends(currentUser.id),
+      this.http.delete<void>(`${url}/users/${currentUser.id}`),
+    ).pipe(map(() => void 0));
   }
 }

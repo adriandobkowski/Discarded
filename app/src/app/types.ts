@@ -12,6 +12,11 @@ export interface UserProps {
   friendRequests: string[];
   createdAt: string;
 }
+export interface RegisterPayload {
+  username: string;
+  email: string;
+  password: string;
+}
 export interface LoginProps {
   email: string;
   password: string;

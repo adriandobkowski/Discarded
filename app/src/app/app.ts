@@ -1,6 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CreateChannelModalComponent } from './components/modal/create-channel-modal/create-channel-modal';
 import { ChannelService } from './services/channel/channel-service';
 import { UserService } from './services/user/user-service';
 import { AddFriendComponent } from './components/modal/add-friend/add-friend';
@@ -17,7 +16,6 @@ import { CreateRoomModalComponent } from './components/modal/create-room-modal/c
   standalone: true,
   imports: [
     RouterOutlet,
-    CreateChannelModalComponent,
     AddFriendComponent,
     ChangeUserStatusModalComponent,
     InboxModalComponent,

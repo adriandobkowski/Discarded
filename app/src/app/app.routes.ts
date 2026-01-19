@@ -13,10 +13,13 @@ import { ChannelMessageComponent } from './components/main/channel-message/chann
 import { PageNotFoundComponent } from './components/main/page-not-found/page-not-found';
 import { RoomMessageComponent } from './components/main/room-message/room-message';
 import { ChatMessageComponent } from './components/main/chat-message/chat-message';
-
+import { ChannelFormComponent } from './components/main/channel-form/channel-form';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canMatch: [authenticatedGuard] },
   { path: 'register', component: RegisterComponent, canMatch: [authenticatedGuard] },
+
+  { path: 'channels/new', component: ChannelFormComponent, canMatch: [authGuard] },
+  { path: 'channels/:id/edit', component: ChannelFormComponent, canMatch: [authGuard] },
 
   {
     path: '',

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth-service';
-import { LoginProps, UserProps } from '../../../types';
+import { RegisterPayload } from '../../../types';
 import { ToastService } from '../../../services/toast/toast-service';
 import { trimmedRequired } from '../../../validators/form-validators';
 
@@ -21,21 +21,26 @@ export class RegisterComponent {
         trimmedRequired,
         (control) => Validators.email(control),
       ],
+      nonNullable: true,
     }),
-    username: new FormControl<string>('', {
-      validators: [
-        (control) => Validators.required(control),
-        trimmedRequired,
-        Validators.minLength(3),
-        Validators.maxLength(24),
-      ],
-    }),
-    password: new FormControl<string>('', {
-      validators: [
-        (control) => Validators.required(control),
-        trimmedRequired,
-        Validators.minLength(8),
-      ],
+    credentials: new FormGroup({
+      username: new FormControl<string>('', {
+        validators: [
+          (control) => Validators.required(control),
+          trimmedRequired,
+          Validators.minLength(3),
+          Validators.maxLength(24),
+        ],
+        nonNullable: true,
+      }),
+      password: new FormControl<string>('', {
+        validators: [
+          (control) => Validators.required(control),
+          trimmedRequired,
+          Validators.minLength(8),
+        ],
+        nonNullable: true,
+      }),
     }),
   });
   private authService = inject(AuthService);
@@ -44,18 +49,22 @@ export class RegisterComponent {
 
   protected onSubmit(): void {
     if (this.registerForm.valid) {
-      this.authService
-        .register(this.registerForm.getRawValue() as UserProps & LoginProps)
-        .subscribe({
-          next: () => {
-            this.registerForm.reset();
-            this.toastService.success('Account created. You can log in now.', 'Success');
-            void this.router.navigate(['/login']);
-          },
-          error: (err) => {
-            this.toastService.errorFrom(err, 'Could not create account', 'Register failed');
-          },
-        });
+      const { email, credentials } = this.registerForm.getRawValue();
+      const newUser: RegisterPayload = {
+        email: email,
+        username: credentials.username,
+        password: credentials.password,
+      };
+      this.authService.register(newUser).subscribe({
+        next: () => {
+          this.registerForm.reset();
+          this.toastService.success('Account created. You can log in now.', 'Success');
+          void this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.toastService.errorFrom(err, 'Could not create account', 'Register failed');
+        },
+      });
     }
   }
 }

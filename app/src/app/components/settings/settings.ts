@@ -8,6 +8,7 @@ import { UserProps } from '../../types';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../services/toast/toast-service';
 import { trimmedRequired } from '../../validators/form-validators';
+import { FileSaverService } from '../../services/fileSaver/file-saver.service';
 
 @Component({
   selector: 'app-settings',
@@ -26,6 +27,8 @@ export class SettingsComponent {
   private userService = inject(UserService);
   private toastService = inject(ToastService);
 
+  private fileSaverService = inject(FileSaverService);
+
   private router = inject(Router);
 
   protected user = this.authService.user()!;
@@ -33,6 +36,9 @@ export class SettingsComponent {
   protected deleteAccountClicked = this.userService.deleteAccountClicked;
 
   protected updateForm = new FormGroup({
+    img: new FormControl<string | undefined>(this.user.img, {
+      validators: [trimmedRequired, Validators.minLength(1)],
+    }),
     username: new FormControl<string | undefined>(this.user.username, {
       nonNullable: true,
       validators: [
@@ -54,6 +60,20 @@ export class SettingsComponent {
   protected updateUsernameClicked: boolean = false;
   protected updateEmailClicked: boolean = false;
   protected logoutClicked: boolean = false;
+
+  protected onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const files = input.files!;
+    this.fileSaverService.fileToBase64(files[0]).subscribe({
+      next: (response: string) => {
+        this.updateForm.patchValue({ img: response });
+        this.updateForm.markAsDirty();
+      },
+      error: (err) => {
+        this.toastService.errorFrom(err, "Couldn't upload image");
+      },
+    });
+  }
 
   protected onSubmit(): void {
     if (this.updateForm.invalid) {
@@ -81,6 +101,9 @@ export class SettingsComponent {
 
   protected openDeleteAccount(): void {
     this.deleteAccountClicked.set(true);
+  }
+  protected get activeImg(): string {
+    return this.updateForm.get('img')?.value ?? this.user.img!;
   }
   protected get activeUsername(): string {
     return this.updateForm.get('username')?.value ?? this.user.username;

@@ -18,8 +18,13 @@ export class NavbarAddFriendComponent {
 
   protected sendFriendRequest(username: string): void {
     this.userService.sendFriendRequest(username).subscribe({
-      next: () => this.toastService.success('Friend request sent'),
-      error: (err) => this.toastService.errorFrom(err, 'Could not send friend request', 'Error'),
+      next: () => {
+        this.toastService.success('Friend request sent');
+        this.search.set('');
+      },
+      error: (err) => {
+        this.toastService.errorFrom(err, 'Could not send friend request', 'Error');
+      },
     });
   }
 }

@@ -21,6 +21,7 @@ export class LoginComponent {
         trimmedRequired,
         (control) => Validators.email(control),
       ],
+      nonNullable: true,
     }),
     password: new FormControl<string>('', {
       validators: [
@@ -28,6 +29,7 @@ export class LoginComponent {
         trimmedRequired,
         Validators.minLength(8),
       ],
+      nonNullable: true,
     }),
   });
   private router = inject(Router);
@@ -36,7 +38,13 @@ export class LoginComponent {
 
   protected onSubmit(): void {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.getRawValue() as LoginProps).subscribe({
+      const { email, password } = this.loginForm.getRawValue();
+      const newLogin: LoginProps = {
+        email: email,
+        password: password,
+      };
+
+      this.authService.login(newLogin).subscribe({
         next: (response: UserProps) => {
           this.authService.user.set(response);
           this.toastService.success('Logged in successfully');

@@ -58,6 +58,10 @@ export class ChannelService {
     return this.http.get<ChannelProps>(`${url}/channels/${this.channelId()}`);
   }
 
+  public getById(id: string): Observable<ChannelProps> {
+    return this.http.get<ChannelProps>(`${url}/channels/${id}`);
+  }
+
   public createChannel(channelData: ChannelProps): Observable<UserProps> {
     const userId = this.user()!.id;
 
@@ -72,6 +76,37 @@ export class ChannelService {
           tap(() => this.channels.update((channels: ChannelProps[]) => [...channels, newChannel])),
         ),
       ),
+    );
+  }
+
+  public createChannelAndReturnChannel(channelData: ChannelProps): Observable<ChannelProps> {
+    const userId = this.user()!.id;
+
+    return this.http.post<ChannelProps>(`${url}/channels`, channelData).pipe(
+      switchMap((newChannel) =>
+        this.http.get<UserProps>(`${url}/users/${userId}`).pipe(
+          switchMap((user) =>
+            this.http.patch<UserProps>(`${url}/users/${userId}`, {
+              channels: [...user.channels, newChannel.id],
+            }),
+          ),
+          tap(() => this.channels.update((channels: ChannelProps[]) => [...channels, newChannel])),
+          map(() => newChannel),
+        ),
+      ),
+    );
+  }
+
+  public updateChannel(id: string, patch: Partial<ChannelProps>): Observable<ChannelProps> {
+    return this.http.patch<ChannelProps>(`${url}/channels/${id}`, patch).pipe(
+      tap((updated) => {
+        this.channels.update((list) => list.map((c) => (c.id === updated.id ? updated : c)));
+
+        const current = this.currentChannel();
+        if (current?.id === updated.id) {
+          this.currentChannel.set(updated);
+        }
+      }),
     );
   }
 
