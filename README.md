@@ -66,8 +66,3 @@ Przy pierwszym uruchomieniu, jeśli wolumen jest pusty, `db.json` zostanie autom
 - Formularz wieloetapowy (wizard)
 - Dynamiczne pola formularza
 - Obsługa błędów backendu
-
-### Dodatkowe
-
-- Internacjonalizacja (i18n) bez przeładowania strony
-- Zarządzanie stanem NgRx
