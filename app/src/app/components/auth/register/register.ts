@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth-service';
-import { RegisterPayload } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { RegisterPayload } from '../../../types/auth';
 import { trimmedRequired } from '../../../validators/form-validators';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-register',

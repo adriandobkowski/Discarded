@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ChatService } from '../../../services/chat/chat-service';
-import { ExtendedMessageProps } from '../../../types';
+import { ExtendedMessageProps } from '../../../types/message';
 import { MessageComponent } from '../message/message';
 import { ActivatedRoute } from '@angular/router';
 import {

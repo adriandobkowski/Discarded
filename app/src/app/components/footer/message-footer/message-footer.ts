@@ -1,14 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LucideAngularModule, Plus } from 'lucide-angular';
-import { MessageProps } from '../../../types';
+import { MessageProps } from '../../../types/message';
 import { RouteService } from '../../../services/route/route-service';
 import { AuthService } from '../../../services/auth/auth-service';
 import { v4 as uuidv4 } from 'uuid';
 import { ChatService } from '../../../services/chat/chat-service';
 import { RoomService } from '../../../services/room/room-service';
 import { messageOrMediaRequired } from '../../../validators/form-validators';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
+
 @Component({
   selector: 'app-message-footer',
   standalone: true,

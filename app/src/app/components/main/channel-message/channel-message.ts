@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { ActivatedRoute } from '@angular/router';
-import { ChannelProps } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ChannelProps } from '../../../types/channel';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-channel-message',

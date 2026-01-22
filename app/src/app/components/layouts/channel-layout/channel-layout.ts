@@ -8,7 +8,7 @@ import { ChannelAsideComponent } from '../../aside/channel-aside/channel-aside';
 import { ProfileFooterComponent } from '../../footer/profile-footer/profile-footer';
 import { MessageFooterComponent } from '../../footer/message-footer/message-footer';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-channel-layout',

@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { UserProps } from '../../../types';
+import { UserProps } from '../../../types/user';
 
 @Injectable({
   providedIn: 'root',

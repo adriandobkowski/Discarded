@@ -1,11 +1,12 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { UserProps } from '../../../types';
+import { UserProps } from '../../../types/user';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { Check, LucideAngularModule, X } from 'lucide-angular';
 import { UserService } from '../../../services/user/user-service';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { minSelected } from '../../../validators/form-validators';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
+
 @Component({
   selector: 'app-add-friend',
   standalone: true,

@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule, Inbox, ContactRound, Settings, Handshake } from 'lucide-angular';
 import { map } from 'rxjs';
-import { ChannelProps } from '../../../types';
+import { ChannelProps } from '../../../types/channel';
 import { UserService } from '../../../services/user/user-service';
 
 @Component({

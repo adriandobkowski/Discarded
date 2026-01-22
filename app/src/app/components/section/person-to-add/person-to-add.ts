@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { UserProps } from '../../../types';
+import { UserProps } from '../../../types/user';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 
 @Component({

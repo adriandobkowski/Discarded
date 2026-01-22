@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { SearchComponent } from '../../main/search/search';
 import { UserService } from '../../../services/user/user-service';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-navbar-add-friend',

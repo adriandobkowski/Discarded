@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Status, UserProps } from '../../../types';
+import { Status, UserProps } from '../../../types/user';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, LogOut, Pencil, ChevronRight } from 'lucide-angular';
 import { AuthService } from '../../../services/auth/auth-service';

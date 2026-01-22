@@ -2,9 +2,9 @@ import { Component, computed, effect, inject } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { LucideAngularModule, Hash, Plus, Pencil } from 'lucide-angular';
 import { RoomService } from '../../../services/room/room-service';
-import { RoomProps } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { RoomProps } from '../../../types/room';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-channel-navbar',

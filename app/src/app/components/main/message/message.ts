@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { DatePipe } from '@angular/common';
-import { ExtendedMessageProps } from '../../../types';
+import { ExtendedMessageProps } from '../../../types/message';
 
 @Component({
   selector: 'app-message',

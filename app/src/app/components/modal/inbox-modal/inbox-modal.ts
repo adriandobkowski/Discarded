@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user/user-service';
 import { Check, Inbox, LucideAngularModule, X } from 'lucide-angular';
-import { UserProps } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { UserProps } from '../../../types/user';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { FriendStoreService } from '../../../services/friends/friendStore/friend-store.service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-inbox-modal',

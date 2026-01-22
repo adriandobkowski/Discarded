@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { LoginProps, LoginResponse, RegisterPayload, UserProps } from '../../types';
 import { map, Observable, switchMap, tap, throwError } from 'rxjs';
 import { url } from '../../../api';
+import { UserProps } from '../../types/user';
+import { LoginProps, LoginResponse, RegisterPayload } from '../../types/auth';
 
 @Injectable({
   providedIn: 'root',

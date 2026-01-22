@@ -1,8 +1,8 @@
 import { Component, effect, inject } from '@angular/core';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { UserProps } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { UserProps } from '../../../types/user';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-channel-aside',

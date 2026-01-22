@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth-service';
-import { LoginProps, UserProps } from '../../../types';
+import { UserProps } from '../../../types/user';
 import { Router, RouterLink } from '@angular/router';
-import { ToastService } from '../../../services/toast/toast-service';
 import { trimmedRequired } from '../../../validators/form-validators';
+import { ToastService } from '../../../services/toast/toast.service';
+import { LoginProps } from '../../../types/auth';
 
 @Component({
   selector: 'app-login',

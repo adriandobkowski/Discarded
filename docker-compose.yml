@@ -1,0 +1,29 @@
+services:
+  frontend:
+    build:
+      context: ./app
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - discarded_net
+
+  api:
+    build:
+      context: ./app
+      dockerfile: docker/api/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - json_data:/data
+    networks:
+      - discarded_net
+
+networks:
+  discarded_net:
+    driver: bridge
+
+volumes:
+  json_data:

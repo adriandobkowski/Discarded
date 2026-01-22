@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, House, Plus, Volume2 } from 'lucide-angular';
-import { ChannelProps } from '../../../types';
+import { ChannelProps } from '../../../types/channel';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
+
 @Component({
   selector: 'app-channel-section',
   standalone: true,

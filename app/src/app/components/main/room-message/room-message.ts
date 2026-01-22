@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RoomService } from '../../../services/room/room-service';
 import { ActivatedRoute } from '@angular/router';
-import { ExtendedMessageProps } from '../../../types';
+import { ExtendedMessageProps } from '../../../types/message';
 import { MessageComponent } from '../message/message';
 import {
   distinctUntilChanged,

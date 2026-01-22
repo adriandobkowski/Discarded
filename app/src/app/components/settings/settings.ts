@@ -4,11 +4,11 @@ import { ProfileImageComponent } from '../profile/profile-image/profile-image';
 import { LucideAngularModule, Pencil, UserPen, LogOut, X, Trash } from 'lucide-angular';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user/user-service';
-import { UserProps } from '../../types';
+import { UserProps } from '../../types/user';
 import { Router, RouterLink } from '@angular/router';
-import { ToastService } from '../../services/toast/toast-service';
 import { trimmedRequired } from '../../validators/form-validators';
 import { FileSaverService } from '../../services/fileSaver/file-saver.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-settings',

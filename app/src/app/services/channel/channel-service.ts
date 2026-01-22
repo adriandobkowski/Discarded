@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
-import { ChannelProps, UserProps } from '../../types';
+import { ChannelProps } from '../../types/channel';
+import { UserProps } from '../../types/user';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
 

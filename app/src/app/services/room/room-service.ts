@@ -1,11 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import {
-  ChannelProps,
-  ExtendedMessageProps,
-  MessageProps,
-  RoomProps,
-  UserProps,
-} from '../../types';
+import { ChannelProps } from '../../types/channel';
+import { ExtendedMessageProps, MessageProps } from '../../types/message';
+import { RoomProps } from '../../types/room';
+import { UserProps } from '../../types/user';
 import { forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ChannelService } from '../channel/channel-service';

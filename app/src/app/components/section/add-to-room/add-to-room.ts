@@ -1,11 +1,12 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { RoomProps, UserProps } from '../../../types';
+import { RoomProps } from '../../../types/room';
+import { UserProps } from '../../../types/user';
 import { LucideAngularModule, X } from 'lucide-angular';
 import { SearchComponent } from '../../main/search/search';
 import { UserService } from '../../../services/user/user-service';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { ChannelService } from '../../../services/channel/channel-service';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-add-to-room',

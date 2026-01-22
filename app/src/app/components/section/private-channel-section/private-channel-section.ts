@@ -1,10 +1,10 @@
 import { Component, effect, inject } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { LucideAngularModule, UserRoundPlus, Volume2, Hash } from 'lucide-angular';
-import { RoomProps } from '../../../types';
+import { RoomProps } from '../../../types/room';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { RoomService } from '../../../services/room/room-service';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ToastService } from '../../../services/toast/toast.service';
 @Component({
   selector: 'app-private-channel-section',
   standalone: true,

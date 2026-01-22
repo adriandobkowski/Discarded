@@ -5,10 +5,10 @@ import { Camera, LucideAngularModule, Plus, X } from 'lucide-angular';
 import { AuthService } from '../../../services/auth/auth-service';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { FileSaverService } from '../../../services/fileSaver/file-saver.service';
-import { ToastService } from '../../../services/toast/toast-service';
 import { trimmedRequired } from '../../../validators/form-validators';
-import { ChannelProps } from '../../../types';
+import { ChannelProps } from '../../../types/channel';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-channel-form',

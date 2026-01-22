@@ -1,59 +1,73 @@
 # App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.13.
+## Uruchomienie (Docker)
 
-## Development server
+Wymagania: zainstalowany Docker + Docker Compose.
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Uruchomienie aplikacji (z katalogu repozytorium, tam gdzie jest `docker-compose.yml`):
 
 ```bash
-ng generate component component-name
+docker compose up
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Po starcie:
 
-```bash
-ng generate --help
-```
+- Frontend: `http://localhost:4200`
+- Mock API (json-server-auth): `http://localhost:3000`
 
-## Building
+Dane w `db.json` są przechowywane w wolumenie Dockera (`json_data`) i nie znikają po restarcie kontenerów.
+Przy pierwszym uruchomieniu, jeśli wolumen jest pusty, `db.json` zostanie automatycznie skopiowany z `app/db.json` do wolumenu.
 
-To build the project run:
+## ✅ Realizacja wymagań projektowych
 
-```bash
-ng build
-```
+### Backend (REST API)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Zarządzanie danymi zalogowanego użytkownika (GET, PUT)
+- Zarządzanie danymi z co najmniej jedną relacją (pełny CRUD)
+- Autoryzacja endpointów:
+  - Endpointy publiczne
+  - Endpointy wymagające zalogowania
 
-## Running unit tests
+### Frontend – Interfejs
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Widok przeglądarkowy i responsywny mobilny (SCSS)
+- Czytelna komunikacja akcji użytkownika (UX „Nie każ mi myśleć”)
+- Nowoczesne standardy stylowania / biblioteka UI
+- Globalny system powiadomień (toast)
+- Potwierdzanie operacji krytycznych (modal)
+- Zmiana motywu kolorystycznego (jasny/ciemny)
 
-```bash
-ng test
-```
+### Frontend – Nawigacja i widoki
 
-## Running end-to-end tests
+- Widok master–detail
+- Edycja i usuwanie w widoku szczegółowym
+- Widok „Page not found”
+- Widoki zabezpieczone autoryzacją
+- Informacja o zalogowanym użytkowniku w navbarze + edycja danych
+- Możliwość zawieszenia/odwieszenia konta
+- Role i uprawnienia (np. admin/user)
 
-For end-to-end (e2e) testing, run:
+### Wyświetlanie danych
 
-```bash
-ng e2e
-```
+- Wyświetlanie wszystkich danych
+- Sortowanie (alfabetyczne, data, liczby)
+- Filtrowanie (min. 3 pola, różne typy)
+- Paginacja + wybór ilości elementów
+- Reaktywna aktualizacja listy
+- Połączenie danych z 2 endpointów z użyciem min. 3 operatorów RxJS
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Formularze
 
-## Additional Resources
+- Wspólny formularz dodawania i edycji
+- Walidacja pól
+- Minimum jeden własny walidator
+- Formularz z zagnieżdżeniem
+- Formularz z FormArray
+- Formularz wieloetapowy (wizard)
+- Dynamiczne pola formularza
+- Obsługa błędów backendu
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Dodatkowe
+
+- Internacjonalizacja (i18n) bez przeładowania strony
+- Zarządzanie stanem NgRx

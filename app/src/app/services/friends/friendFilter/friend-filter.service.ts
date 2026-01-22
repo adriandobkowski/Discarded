@@ -1,5 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { FriendsSortOption, FriendsStatusFilter, UserProps } from '../../../types';
+import { FriendsSortOption, FriendsStatusFilter } from '../../../types/friends';
+import { UserProps } from '../../../types/user';
 import { RouteService } from '../../route/route-service';
 import { FriendStoreService } from '../friendStore/friend-store.service';
 

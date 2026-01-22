@@ -4,12 +4,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export type ToastType = 'success' | 'error' | 'info';
 
 export interface Toast {
-  id: string;
-  type: ToastType;
-  title?: string;
-  message: string;
-  createdAt: number;
-  durationMs: number;
+  readonly id: string;
+  readonly type: ToastType;
+  readonly title?: string;
+  readonly message: string;
+  readonly createdAt: number;
+  readonly durationMs: number;
 }
 
 @Injectable({

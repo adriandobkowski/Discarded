@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Status } from '../../../types';
+import { Status } from '../../../types/user';
 import { LucideAngularModule, CircleUserRound } from 'lucide-angular';
 
 @Component({

@@ -3,8 +3,8 @@ import { ProfileImageComponent } from '../../profile/profile-image/profile-image
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ContactRound } from 'lucide-angular';
 import { UserService } from '../../../services/user/user-service';
-import { ExtendedUserProps } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { ExtendedUserProps } from '../../../types/user';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-chat-section',

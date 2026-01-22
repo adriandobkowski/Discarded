@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, concat, forkJoin, map, of, switchMap, tap, throwError } from 'rxjs';
-import { ChannelProps, ChatProps, ExtendedUserProps, UserProps } from '../../types';
+import { ChannelProps } from '../../types/channel';
+import { ChatProps } from '../../types/chat';
+import { ExtendedUserProps, UserProps } from '../../types/user';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';
 import { v4 as uuidv4 } from 'uuid';

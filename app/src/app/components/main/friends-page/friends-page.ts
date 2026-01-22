@@ -4,12 +4,12 @@ import { ProfileImageComponent } from '../../profile/profile-image/profile-image
 import { LucideAngularModule, MessageCircle, EllipsisVertical } from 'lucide-angular';
 import { RouteService } from '../../../services/route/route-service';
 import { FriendService } from '../../../services/friends/friend/friend-service.service';
-import { UserProps } from '../../../types';
-import { ToastService } from '../../../services/toast/toast-service';
+import { UserProps } from '../../../types/user';
 import { FriendFilterService } from '../../../services/friends/friendFilter/friend-filter.service';
 import { FriendStoreService } from '../../../services/friends/friendStore/friend-store.service';
 import { FriendMenuService } from '../../../services/friends/friendMenu/friend-menu.service';
 import { UserService } from '../../../services/user/user-service';
+import { ToastService } from '../../../services/toast/toast.service';
 @Component({
   selector: 'app-friends-page',
   standalone: true,

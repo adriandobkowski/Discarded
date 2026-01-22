@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { ChatProps, ExtendedMessageProps, MessageProps, UserProps } from '../../types';
+import { ChatProps } from '../../types/chat';
+import { ExtendedMessageProps, MessageProps } from '../../types/message';
+import { UserProps } from '../../types/user';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { url } from '../../../api';
 import { AuthService } from '../auth/auth-service';

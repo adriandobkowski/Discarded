@@ -1,11 +1,11 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { SearchComponent } from '../../main/search/search';
-import { UserProps } from '../../../types';
+import { UserProps } from '../../../types/user';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { LucideAngularModule, X } from 'lucide-angular';
-import { ToastService } from '../../../services/toast/toast-service';
 import { UserService } from '../../../services/user/user-service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-invite-to-channel-modal',

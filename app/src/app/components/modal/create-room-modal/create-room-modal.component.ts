@@ -3,8 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LucideAngularModule, X } from 'lucide-angular';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { RoomService } from '../../../services/room/room-service';
-import { ToastService } from '../../../services/toast/toast-service';
 import { trimmedRequired } from '../../../validators/form-validators';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-create-room-modal',
