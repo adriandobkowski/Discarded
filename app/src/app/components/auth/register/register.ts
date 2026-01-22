@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth-service';
-import { RegisterPayload } from '../../../types/auth';
+import { RegisterForm, RegisterPayload } from '../../../types/auth';
 import { trimmedRequired } from '../../../validators/form-validators';
 import { ToastService } from '../../../services/toast/toast.service';
 
@@ -14,7 +14,7 @@ import { ToastService } from '../../../services/toast/toast.service';
   styleUrl: './register.scss',
 })
 export class RegisterComponent {
-  protected registerForm = new FormGroup({
+  protected registerForm = new FormGroup<RegisterForm>({
     email: new FormControl<string>('', {
       validators: [
         (control) => Validators.required(control),

@@ -1,4 +1,6 @@
+import { FormControl } from '@angular/forms';
 import { UserProps } from './user';
+
 export interface MessageProps {
   readonly id: string;
   readonly userId: string;
@@ -11,4 +13,9 @@ export interface MessageProps {
 export interface ExtendedMessageProps {
   readonly user: UserProps;
   readonly message: MessageProps;
+}
+
+export interface MessageForm {
+  message: FormControl<string>;
+  media: FormControl<string | null>;
 }

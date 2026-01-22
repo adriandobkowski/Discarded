@@ -5,7 +5,7 @@ import { UserProps } from '../../../types/user';
 import { Router, RouterLink } from '@angular/router';
 import { trimmedRequired } from '../../../validators/form-validators';
 import { ToastService } from '../../../services/toast/toast.service';
-import { LoginProps } from '../../../types/auth';
+import { LoginForm, LoginProps } from '../../../types/auth';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { LoginProps } from '../../../types/auth';
   styleUrl: './login.scss',
 })
 export class LoginComponent {
-  protected loginForm = new FormGroup({
+  protected loginForm = new FormGroup<LoginForm>({
     email: new FormControl<string>('', {
       validators: [
         (control) => Validators.required(control),

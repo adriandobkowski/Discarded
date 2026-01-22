@@ -6,7 +6,7 @@ import { AuthService } from '../../../services/auth/auth-service';
 import { ChannelService } from '../../../services/channel/channel-service';
 import { FileSaverService } from '../../../services/fileSaver/file-saver.service';
 import { trimmedRequired } from '../../../validators/form-validators';
-import { ChannelProps } from '../../../types/channel';
+import { ChannelForm, ChannelProps } from '../../../types/channel';
 import { ProfileImageComponent } from '../../profile/profile-image/profile-image';
 import { ToastService } from '../../../services/toast/toast.service';
 
@@ -33,7 +33,7 @@ export class ChannelFormComponent implements OnInit {
 
   private editingId: string | null = null;
 
-  protected channelForm = new FormGroup({
+  protected channelForm = new FormGroup<ChannelForm>({
     img: new FormControl<string>('', { nonNullable: true }),
     name: new FormControl<string>('', {
       validators: [

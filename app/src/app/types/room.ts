@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { MessageProps } from './message';
 
 export interface RoomProps {
@@ -5,4 +6,7 @@ export interface RoomProps {
   readonly name: string;
   readonly type: string;
   readonly messages: MessageProps[];
+}
+export interface RoomForm {
+  name: FormControl<string>;
 }

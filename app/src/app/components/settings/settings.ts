@@ -4,7 +4,7 @@ import { ProfileImageComponent } from '../profile/profile-image/profile-image';
 import { LucideAngularModule, Pencil, UserPen, LogOut, X, Trash } from 'lucide-angular';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user/user-service';
-import { UserProps } from '../../types/user';
+import { UpdateForm, UserProps } from '../../types/user';
 import { Router, RouterLink } from '@angular/router';
 import { trimmedRequired } from '../../validators/form-validators';
 import { FileSaverService } from '../../services/fileSaver/file-saver.service';
@@ -35,11 +35,12 @@ export class SettingsComponent {
 
   protected deleteAccountClicked = this.userService.deleteAccountClicked;
 
-  protected updateForm = new FormGroup({
-    img: new FormControl<string | undefined>(this.user.img, {
+  protected updateForm = new FormGroup<UpdateForm>({
+    img: new FormControl<string>(this.user.img ?? '', {
+      nonNullable: true,
       validators: [trimmedRequired, Validators.minLength(1)],
     }),
-    username: new FormControl<string | undefined>(this.user.username, {
+    username: new FormControl<string>(this.user.username, {
       nonNullable: true,
       validators: [
         (control) => Validators.required(control),
@@ -48,7 +49,8 @@ export class SettingsComponent {
         Validators.maxLength(24),
       ],
     }),
-    email: new FormControl<string | undefined>(this.user.email, {
+    email: new FormControl<string>(this.user.email, {
+      nonNullable: true,
       validators: [
         (control) => Validators.required(control),
         trimmedRequired,

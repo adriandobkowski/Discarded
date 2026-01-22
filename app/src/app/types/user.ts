@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export type Status = 'online' | 'busy' | 'offline';
 
 export interface UserProps {
@@ -15,4 +17,9 @@ export interface UserProps {
 export interface ExtendedUserProps {
   readonly user: UserProps;
   readonly chatId?: string;
+}
+export interface UpdateForm {
+  img: FormControl<string>;
+  username: FormControl<string>;
+  email: FormControl<string>;
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LucideAngularModule, Plus } from 'lucide-angular';
-import { MessageProps } from '../../../types/message';
+import { MessageForm, MessageProps } from '../../../types/message';
 import { RouteService } from '../../../services/route/route-service';
 import { AuthService } from '../../../services/auth/auth-service';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,7 +33,7 @@ export class MessageFooterComponent {
   protected roomId = this.roomService.roomId;
   protected chatId = this.chatService.chatId;
 
-  protected messageForm = new FormGroup(
+  protected messageForm = new FormGroup<MessageForm>(
     {
       message: new FormControl<string>('', {
         validators: [Validators.maxLength(2000)],

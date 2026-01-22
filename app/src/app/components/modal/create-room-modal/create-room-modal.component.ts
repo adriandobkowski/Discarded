@@ -5,6 +5,7 @@ import { ChannelService } from '../../../services/channel/channel-service';
 import { RoomService } from '../../../services/room/room-service';
 import { trimmedRequired } from '../../../validators/form-validators';
 import { ToastService } from '../../../services/toast/toast.service';
+import { RoomForm } from '../../../types/room';
 
 @Component({
   selector: 'app-create-room-modal',
@@ -22,7 +23,7 @@ export class CreateRoomModalComponent {
 
   protected createRoomClicked = this.channelService.createRoomClicked;
 
-  protected roomForm = new FormGroup({
+  protected roomForm = new FormGroup<RoomForm>({
     name: new FormControl<string>('', {
       validators: [
         (control) => Validators.required(control),
